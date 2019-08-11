@@ -2,10 +2,15 @@
 
 use yii\bootstrap\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\Url;
+
+$this->registerJsFile(
+    '@web/js/help-selection.js',
+    ['depends' => [\yii\web\JqueryAsset::className()]]
+);
+
 ?>
 
-<div class="panel" id="formPanel" style="">
+<div class="panel" id="formPanel" style="display: none;">
 
     <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей
         поездки
@@ -16,8 +21,6 @@ use yii\helpers\Url;
 
         <?php $form = ActiveForm::begin([
             'id' => 'form-nostadndatd',
-            'action' => 'requests/help',
-            'enableAjaxValidation' => true,
         ]); ?>
         <div class="tour-selection-wrap-in">
             <div class="bth__inp-block long">

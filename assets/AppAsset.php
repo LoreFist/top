@@ -50,6 +50,7 @@ class AppAsset extends AssetBundle
     public $js = [
         '/js/jquery-3.4.1.min.js',
         '/js/layouts.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.0.2/jquery.sumoselect.min.js'
     ];
 
     public $depends = [

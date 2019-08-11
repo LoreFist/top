@@ -12,7 +12,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "loveorigami/yii2-magnific-popup": "@dev",
         "rmrevin/yii2-fontawesome": "^3.4",
-        "yiisoft/yii2-bootstrap": "^2.0"
+        "yiisoft/yii2-bootstrap": "^2.0",
+        "lightsoft/lib-ui-tour-filter": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0"
@@ -28,12 +29,25 @@
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject",
             "yii\\composer\\Installer::postInstall"
+        ],
+        "post-package-install": [
+            "LibUiTourFilter\\AfterInstallModel::postPackageInstall"
+        ],
+        "post-package-update": [
+            "LibUiTourFilter\\AfterInstallModel::postPackageInstall"
         ]
     },
     "repositories": [
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "vcs",
+            "url": "svn://svn.tophotels.site/th/branches",
+            "trunk-path": false,
+            "branches-path": false,
+            "tags-path": "branches/lsfw"
         }
     ],
     "extra": {

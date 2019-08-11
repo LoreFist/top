@@ -6,7 +6,7 @@ $(document).ready(function () {
     });
 
     //подчеркивание активной табы
-    line = function (obj, pre_tab_selector, obj_line = '.line') {
+    line = function (obj, pre_tab_selector, obj_line = $('.line')) {
         setTimeout(function(){//ждем попап
             var w = obj.width();
             var p = obj.position().left;
