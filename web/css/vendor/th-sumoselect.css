@@ -1,0 +1,137 @@
+
+.SumoSelect:focus > .CaptionCont,
+.SumoSelect:hover > .CaptionCont,
+.SumoSelect.open > .CaptionCont {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.SumoSelect {
+    height: 100%;
+}
+
+.SelectBox {
+    padding: 11px 8px 0px 8px;
+}
+
+.SumoSelect > .CaptionCont > span {
+    margin-bottom: 0;
+    color: #475669 !important;
+    font-size: 16px;
+    margin-top: 1px;
+    font-weight: bold;
+    font-family: 'apercu_pro', sans-serif;
+    padding-right: 13px;
+
+}
+
+.SumoSelect:focus > .CaptionCont,
+.SumoSelect:hover > .CaptionCont, .SumoSelect.open > .CaptionCont {
+
+    border: none;
+}
+
+.SumoSelect > .optWrapper > .options li label {
+    color: #475669;
+}
+
+.SumoSelect > .optWrapper > .options li.opt {
+    padding: 10px 6px;
+    background-color: white;
+}
+
+.SumoSelect.open .search-txt {
+    height: 44px;
+    font-size: 14px;
+    font-family: 'apercu_pro', sans-serif;
+    color: #475669;
+    padding: 6px 8px 8px 8px;
+}
+
+.SumoSelect > .CaptionCont > label {
+    width: 30px;
+    top: 0px;
+}
+
+
+
+.SumoSelect > .CaptionCont > label > i {
+    background-image: none;
+    width: 13px;
+    height: 18px;
+    top: -5px;
+    right: 9px;
+    border-right: none;
+
+    font-style: normal;
+    border-bottom: none;
+    transition: 0.3s;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 19px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    opacity: 1;
+}
+
+.SumoSelect > .CaptionCont > label > i:before {
+    content: "\f107";
+    font-size: 19px;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #ff8e41;
+}
+
+.SumoSelect.open > .search > label {
+    visibility: visible;
+    z-index: 10;
+}
+
+.SumoSelect {
+    height: 50px;
+    padding: 0;
+}
+
+.SumoSelect > .CaptionCont {
+    height: 37px;
+    border-radius: 0;
+}
+
+.SumoSelect:focus > .CaptionCont,
+.SumoSelect:hover > .CaptionCont {
+    box-shadow: none;
+    border-color: #ccc;
+}
+
+.SumoSelect.open > .optWrapper {
+    top: 50px;
+    font-size: 14px;
+    font-family: 'apercu_pro', sans-serif;
+}
+
+.SumoSelect.open > .CaptionCont > label > i {
+    transform: rotate(180deg);
+    top: 0px;
+}
+
+.SumoSelect > .optWrapper.isFloating {
+    position: relative;
+    width: 100%;
+    max-height: 300px;
+    top: 0;
+}
+
+.SumoSelect > .optWrapper.isFloating > .options li.opt {
+    padding: 10px 6px;
+}
+
+.sumoStopScroll {
+    overflow: initial;
+}
+
+@media screen and (max-width: 768px) {
+    .SumoSelect > .CaptionCont > span {
+        width: 90%;
+
+    }
+}

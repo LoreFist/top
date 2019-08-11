@@ -1,0 +1,432 @@
+.page-2018 {
+    padding-bottom: 325px;
+}
+
+.footer {
+    position: absolute;
+    background-color: white;
+    right: 0;
+    left: 0px;
+    bottom: 0;
+}
+
+.footer__line {
+    position: relative;
+    padding: 10px 25px;
+    border-top: 1px solid #f1ebd3;
+}
+
+.footer__line--top {
+    padding: 20px 25px;
+}
+
+.footer__line--mdl {
+    background: #f1ebd3;
+    border-bottom: none;
+    padding: 10px 25px 20px;
+}
+
+.footer__line--bot {
+    border-bottom: none;
+    padding: 10px 25px 15px;
+}
+
+.footer__cnt-wrap {
+    padding-left: 210px;
+}
+
+
+.footer__cnt {
+    font-size: 14px;
+    line-height: 18px;
+    color: #475669;
+    font-family: 'apercu_pro', sans-serif;
+}
+
+.footer__cnt--big {
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.footer__counter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 30px;
+    padding-left: 20px;
+    color: #475669;
+}
+
+.footer__counter-item.rambler {
+    background: url("/i/tophotels/rambler.png") no-repeat 0px 2px ;
+}
+
+.footer__counter-item.mailru {
+    background: url("/i/tophotels/mailru.png") no-repeat 0px 2px ;
+}
+.footer__counter-item.yaca {
+    background: url("/i/tophotels/yaca.png") no-repeat 0px 2px ;
+}
+.footer__counter-item.sw {
+    background: url("/i/tophotels/sw.png") no-repeat 0px 2px ;
+}
+
+.footer__counter-item .counter-img {
+    width: 18px;
+    height: 18px;
+}
+
+.footer__counter-item.mailru .counter-img ,
+.footer__counter-item.yaca .counter-img  {
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+.counter {
+    display: inline-block;
+    margin-right: 3px;
+    font-size: 14px;
+    color: #318cc6;
+}
+
+.footer__stat-block {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+}
+
+.footer__left-stat {
+    position: absolute;
+    left: 25px;
+    top: 20px;
+}
+
+.footer__stat-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 15px;
+    padding-left: 18px;
+}
+
+.footer__stat-item.statistic {
+    background: url("/i/tophotels/icon-stat_999.png") no-repeat 0 2px;
+}
+
+.footer__stat-item.view {
+    background: url("/i/tophotels/eye-grey.png") no-repeat 0 5px;
+}
+
+.footer__nav-list-block {
+    border-bottom: 1px solid #fff;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.footer__nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.footer__nav-item {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 25px;
+}
+
+.footer__btn-item {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 50px;
+}
+
+.footer__btn-item:nth-child(3) {
+    margin-right: 0;
+}
+
+.footer__app,
+.footer__social {
+    margin-top: 14px;
+}
+
+.favourites {
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    border-radius: 3px;
+    margin-top: 14px;
+    padding:  4px 10px 7px 40px;
+    font-size: 18px;
+    color: #fff;
+    font-family: 'apercu_pro', sans-serif;
+    background: #ff8e41  url("/i/tophotels/star-white1.png") no-repeat 8px 8px ;
+}
+
+.favourites:hover {
+    background: #e27200 url("/i/tophotels/star-white1.png") no-repeat 8px 8px ;
+}
+
+.footer__cnt--sm {
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.footer__social-link {
+    display: inline-block;
+    vertical-align: top;
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    background: #215f86 url("/i/tophotels/social-sprite.png") no-repeat;
+    margin-right: 5px;
+}
+
+.footer__social-link:hover {
+    background: #113246 url("/i/tophotels/social-sprite.png") no-repeat;
+}
+
+.footer__social-link.fb {
+    background-position: -52px 0px;
+}
+
+.footer__social-link.vk {
+    background-position: 0px 2px;
+}
+
+.footer__social-link.ok {
+    background-position: -97px 0px;
+}
+
+.footer__social-link.tw {
+    background-position: -145px 0px;
+}
+
+.footer__social-link.insta {
+    background-position: -195px 0px;
+}
+
+.app-block {
+    margin-top: 14px;
+}
+
+.app-btn {
+    display: inline-block;
+    vertical-align: top;
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    margin-right: 5px;
+    background: #444444 url("/i/tophotels/social-sprite.png") no-repeat;
+}
+
+.app-btn:hover {
+    background: #222222 url("/i/tophotels/social-sprite.png") no-repeat;
+}
+
+.app-btn.app-store {
+    background-position: -308px 1px;
+}
+
+.app-btn.google-play {
+    background-position: -255px -1px;
+}
+
+.footer__cnt-link.legal {
+    padding-left: 20px;
+    margin-top: 9px;
+    text-align: right;
+    display: block;
+}
+
+.footer .map-block {
+    display: block;
+    position: absolute;
+    width: 178px;
+    left: 25px;
+    top: 20px;
+    bottom: 20px;
+    text-align: center;
+    background: #fff;
+    padding-top: 10px;
+    background: url("/images/tophotels/map.png");
+}
+
+.footer .map-block .me {
+    color: #00a551;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer .map-block .history {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.footer__cnt-link {
+    font-size: 14px;
+    color: #318cc6;
+    font-family:'apercu_pro', sans-serif;
+    line-height: 22px
+}
+
+.footer__link {
+    display: block;
+    padding: 10px 0 ;
+    font-size: 18px;
+    color: #318cc6;
+    font-family:'apercu_pro', sans-serif;
+    line-height: 22px;
+}
+
+
+.footer__copyright {
+    position: absolute;
+    top: 13px;
+}
+
+.bughanting {
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    background: url("/i/tophotels/bag-green.png");
+    background-size: 16px;
+    margin-left: 12px;
+}
+
+.menu-block {
+    display: inline-block;
+    vertical-align: top;
+    width: 205px;
+    border: 1px solid #ccc;
+    height: 100px;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    margin-right: 15px;
+}
+
+.footer__copyright .copyright {
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 1279px){
+    .footer__nav-item {
+        margin-right: 19px;
+    }
+    .footer__link {
+        font-size: 17px;
+    }
+}
+
+
+@media screen and (max-width: 1023px) {
+    .footer__line {
+        padding: 10px 15px 10px 15px;
+    }
+    .footer__line--top {
+        display: none;
+    }
+    .footer__line--bot {
+        padding: 10px 15px 15px;
+    }
+    .footer__cnt-wrap {
+        padding-left: 0;
+    }
+    .footer__line--top .footer__cnt-wrap {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .footer .map-block {
+        display: none;
+    }
+    .footer__left-stat {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        left: auto;
+        top: auto;
+    }
+    .footer__stat-block {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        right: auto;
+        top: auto;
+    }
+    .footer__stat-item,
+    .bughanting {
+        margin-left: 0;
+        margin-right: 15px;
+    }
+    .footer__copyright {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-bottom: 5px;
+    }
+    .footer__copyright .copyright,
+    .footer__cnt-link.legal {
+        display: inline-block;
+    }
+    .counter {
+        margin-right: 0;
+    }
+    .footer__stat-item {
+        padding-left: 13px;
+    }
+    .footer__stat-item,
+    .footer__cnt {
+        margin-right: 12px;
+    }
+    .bughanting {
+        margin-right: 0;
+    }
+    .footer__btn-item {
+        margin-right: 30px;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .footer__nav-item {
+        display: block;
+    }
+    .footer__link {
+        padding: 6px 0;
+    }
+    .footer__nav-list {
+        display: inline-block;
+        vertical-align: top;
+        width: 240px;
+    }
+    .footer__btn-item {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .footer__left-stat {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .footer__line--bot .footer-text {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 639px) {
+    .footer__line--top {
+        display: none;
+    }
+    .footer__nav-list {
+        width: 100%;
+    }
+    .footer__stat-block {
+        position: absolute;
+        right: 15px;
+        top: 21px;
+    }
+
+}

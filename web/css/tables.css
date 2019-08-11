@@ -1,0 +1,455 @@
+.b-tbl tbody {
+    vertical-align: top;
+    color: #475669;
+}
+
+.b-tbl {
+    width: 100%;
+    margin-top: 12px;
+    font-family: 'apercu_pro', sans-serif;
+}
+
+.b-tbl th {
+    text-align: left;
+    border-bottom: 1px solid #bcbcbc;
+    padding: 7px;
+    color: #999;
+    font-weight: normal;
+}
+
+.circle-ava {
+    border-radius: 50px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+.b-tbl tr td {
+    font-size: 14px;
+    padding: 7px;
+    border-bottom: 1px solid #bcbcbc;
+    max-width: 155px;
+    min-width: 31px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
+    position: relative;
+}
+
+.row-total td {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.b-tbl tr.title-row {
+    background: linear-gradient(90deg, #e4e5ea, #e4e5ea);
+}
+
+.setting-icon {
+    color: #318cc6;
+    font-size: 22px;
+    cursor: pointer;
+}
+.contacts__plus,
+.contacts__minus {
+    position: relative;
+}
+
+.contacts__plus:before {
+    content: '\271A';
+    color: green;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 1px;
+
+}
+
+.b-tbl img {
+    border-radius: 50px;
+}
+
+.contacts__minus:before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 3px;
+    background-color: #da4c4c;
+    left: 1px;
+    top: 8px;
+}
+
+
+.num-small-cell {
+    width: 15px;
+    min-width: 15px;
+    max-width: 15px;
+}
+
+.b-tbl th:last-of-type,
+.b-tbl td:last-of-type {
+    text-align: right;
+}
+
+.b-tbl tr.title-row td {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.b-tbl tbody .rasp {
+    border: none !important;
+    height: 20px;
+}
+
+.b-tbl .rasptd {
+    border: none;
+}
+
+.user-block-info {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.user-block {
+    white-space: nowrap;
+}
+
+.user-block__ava {
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.user-block__info {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.user-block__info-place, .user-block__info-contact {
+    font-size: 12px;
+    font-family: 'apercu_pro', sans-serif;
+    color: #475669;
+    font-weight: normal;
+}
+
+.small-cell {
+    width: 40px;
+}
+
+.user-block__ava img {
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+@media screen and (max-width: 659px) {
+
+    .b-tbl:not(.no-respons-tb) tr td {
+        display: block;
+        width: auto !important;
+        text-align: left;
+        max-width: none;
+        white-space: normal;
+    }
+
+    .b-tbl:not(.no-respons-tb) tr td {
+        display: block;
+        width: auto;
+        text-align: left;
+        max-width: none;
+        border-bottom: none;
+        padding-top: 19px;
+        padding-bottom: 19px;
+        position: relative;
+    }
+
+    .b-tbl:not(.no-respons-tb):not(.big-table) td:nth-child(1) {
+        padding-top: 42px;
+    }
+
+    .b-tbl:not(.no-respons-tb) thead {
+        display: none;
+    }
+
+    .b-tbl tr td:before {
+        display: block;
+        position: absolute;
+        height: 10px;
+        top: -4px;
+        font-weight: normal;
+        font-size: 16px;
+        color: black;
+    }
+
+    .b-tbl tr td:first-of-type:before {
+        top: 22px;
+    }
+
+    .b-tbl td:last-child, table th:last-child {
+        text-align: left;
+    }
+
+    .b-tbl tr td:last-of-type {
+        border-bottom: 1px solid #bcbcbc;
+    }
+
+    .cell-data:before {
+        content: "Дата";
+    }
+
+    .cell-hotel:before {
+        content: "Отель";
+    }
+
+    .cell-num:before {
+        content: "№";
+    }
+
+    .cell-today:before {
+        content: 'Сегодня';
+    }
+
+    .cell-yesterdy:before {
+        content: 'Вчера';
+    }
+
+    .user-cell:before {
+        content: 'Пользователь';
+    }
+
+    .cell-country:before {
+        content: 'Страна';
+    }
+
+    .cell-city:before {
+        content: 'Город';
+    }
+
+}.b-tbl tbody {
+    vertical-align: top;
+    color: #475669;
+}
+
+.b-tbl {
+    width: 100%;
+    margin-top: 12px;
+    font-family: 'apercu_pro', sans-serif;
+}
+
+.b-tbl th {
+    text-align: left;
+    border-bottom: 1px solid #bcbcbc;
+    padding: 7px;
+    color: #999;
+    font-weight: normal;
+}
+
+.circle-ava {
+    border-radius: 50px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+.b-tbl tr td {
+    font-size: 14px;
+    padding: 7px;
+    border-bottom: 1px solid #bcbcbc;
+    max-width: 155px;
+    min-width: 31px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
+    position: relative;
+}
+
+.row-total td {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.b-tbl tr.title-row {
+    background: linear-gradient(90deg, #e4e5ea, #e4e5ea);
+}
+
+.setting-icon {
+    color: #318cc6;
+    font-size: 22px;
+    cursor: pointer;
+}
+.contacts__plus,
+.contacts__minus {
+    position: relative;
+}
+
+.contacts__plus:before {
+    content: '\271A';
+    color: green;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 1px;
+
+}
+
+.b-tbl img {
+    border-radius: 50px;
+}
+
+.contacts__minus:before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 3px;
+    background-color: #da4c4c;
+    left: 1px;
+    top: 8px;
+}
+
+
+.num-small-cell {
+    width: 15px;
+    min-width: 15px;
+    max-width: 15px;
+}
+
+.b-tbl th:last-of-type,
+.b-tbl td:last-of-type {
+    text-align: right;
+}
+
+.b-tbl tr.title-row td {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.b-tbl tbody .rasp {
+    border: none !important;
+    height: 20px;
+}
+
+.b-tbl .rasptd {
+    border: none;
+}
+
+.user-block-info {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.user-block {
+    white-space: nowrap;
+}
+
+.user-block__ava {
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.user-block__info {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.user-block__info-place, .user-block__info-contact {
+    font-size: 12px;
+    font-family: 'apercu_pro', sans-serif;
+    color: #475669;
+    font-weight: normal;
+}
+
+.small-cell {
+    width: 40px;
+}
+
+.user-block__ava img {
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+@media screen and (max-width: 659px) {
+
+    .b-tbl:not(.no-respons-tb) tr td {
+        display: block;
+        width: auto !important;
+        text-align: left;
+        max-width: none;
+        white-space: normal;
+    }
+
+    .b-tbl:not(.no-respons-tb) tr td {
+        display: block;
+        width: auto;
+        text-align: left;
+        max-width: none;
+        border-bottom: none;
+        padding-top: 19px;
+        padding-bottom: 19px;
+        position: relative;
+    }
+
+    .b-tbl:not(.no-respons-tb):not(.big-table) td:nth-child(1) {
+        padding-top: 42px;
+    }
+
+    .b-tbl:not(.no-respons-tb) thead {
+        display: none;
+    }
+
+    .b-tbl tr td:before {
+        display: block;
+        position: absolute;
+        height: 10px;
+        top: -4px;
+        font-weight: normal;
+        font-size: 16px;
+        color: black;
+    }
+
+    .b-tbl tr td:first-of-type:before {
+        top: 22px;
+    }
+
+    .b-tbl td:last-child, table th:last-child {
+        text-align: left;
+    }
+
+    .b-tbl tr td:last-of-type {
+        border-bottom: 1px solid #bcbcbc;
+    }
+
+    .cell-data:before {
+        content: "Дата";
+    }
+
+    .cell-hotel:before {
+        content: "Отель";
+    }
+
+    .cell-num:before {
+        content: "№";
+    }
+
+    .cell-today:before {
+        content: 'Сегодня';
+    }
+
+    .cell-yesterdy:before {
+        content: 'Вчера';
+    }
+
+    .user-cell:before {
+        content: 'Пользователь';
+    }
+
+    .cell-country:before {
+        content: 'Страна';
+    }
+
+    .cell-city:before {
+        content: 'Город';
+    }
+
+}

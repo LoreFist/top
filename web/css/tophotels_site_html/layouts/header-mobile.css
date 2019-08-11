@@ -1,0 +1,811 @@
+
+.headerMobile__select {
+    display: none;
+}
+
+.headerMobile {
+    display: none;
+}
+
+@media screen and (max-width: 1023px) {
+    .headerMobile__cross {
+        display: none;
+        top: 22px;
+        width: 30px;
+        height: 30px;
+        background-size: cover;
+        background-image: url(/i//close-mb.svg);
+        background-repeat: no-repeat;
+        right: 15px;
+        position: absolute;
+    }
+
+
+    .headerMobile__user {
+        background-color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        display: inline-block;
+        text-align: center;
+        width: 60px;
+        vertical-align: top;
+        height: 50px;
+        box-sizing: border-box;
+        margin-right: 5px;
+        padding: 5px;
+    }
+
+    .headerMobile__select {
+        display: block;
+    }
+
+    .header-lang__lang {
+        padding-left: 17px;
+    }
+
+    .header-lang__dropdown {
+        top: 39px;
+    }
+
+    .header-lang__block {
+        position: relative;
+        padding: 17px 10px;
+        padding-left: 15px;
+        height: 50px;
+        box-sizing: border-box;
+        cursor: pointer;
+        background: #faf6e5;
+        border-radius: 5px
+    }
+
+    .headerMobile .header-lang__dropdown {
+        display: none;
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 44px;
+        background: #fff;
+        width: 100%;
+        box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.11);
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .headerMobile .header-lang__arr {
+        font-size: 14px;
+        color: #ff8e41;
+        transition: 0.3s;
+    }
+
+    .headerMobile .headerMobile__user img {
+        height: 40px;
+        width: 40px;
+        border-radius: 50px;
+    }
+
+    .headerMobile .header-lang .header-lang__dropdown.active {
+        display: block;
+    }
+
+    .headerMobile .header-lang__arr.active {
+        transform: rotate(180deg);
+    }
+
+    .headerMobile .header-lang__lang {
+        padding: 13px 25px 12px 16px;
+        font-size: 13px;
+        font-family: 'apercu_pro', sans-serif;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+        color: #475669;
+        text-transform: uppercase;
+        background: #faf6e5;
+        font-weight: bold;
+    }
+
+    .headerMobile .header-lang__cnt {
+        display: inline-block;
+        min-width: 26px;
+        font-size: 13px;
+        text-transform: uppercase;
+        color: #ff8e41;
+        font-weight: bold;
+        font-family: 'apercu_pro', sans-serif;
+        margin-right: 2px;
+    }
+
+    .headerMobile {
+        font-family: 'apercu_pro', sans-serif;
+        display: block;
+    }
+
+    .headerMobile__flex {
+        display: flex;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+
+        align-items: flex-end;
+        -webkit-box-align: flex-end;;
+        -webkit-align-items: flex-end;;
+        -ms-flex-align: flex-end;;
+
+        justify-content: space-between;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        padding: 10px 15px;
+    }
+
+    .headerMobile__right {
+        position: relative;
+    }
+
+    .headerMobile__right > div {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .headerMobile__line {
+        background-color: #f2eacb;
+        padding: 10px 15px;
+        position: relative;
+        display: flex;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+
+        justify-content: space-between;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+    }
+
+    .headerMobile__bth {
+        background-color: white;
+        border-radius: 5px;
+        padding: 15px 12px;
+        cursor: pointer;
+        display: inline-block;
+        text-align: center;
+        width: 60px;
+        vertical-align: top;
+        height: 50px;
+        box-sizing: border-box;
+    }
+
+    .headerMobile__bth i {
+        color: #ff8e41;
+        font-size: 20px;
+    }
+
+    .headerMobile__key {
+        background-image: url("/i/key-orange.svg");
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+    }
+
+    .headerMobile__bth--auth.active .headerMobile__key {
+        background-image: url("/i/key.svg");
+
+    }
+
+    .headerMobile__burger {
+        background-image: url("/i/menu-button.svg");
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        background-position-y: -2px;
+    }
+
+    .headerMobile__burger.active {
+        background-image: url("/i/menu-button-grey.svg");
+
+    }
+
+    .headerMobile__search--menu__burger {
+        background-image: url(/i/menu-button-grey.svg);
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 40px;
+        position: absolute;
+        margin-top: 5px;
+        background-color: #faf6e5;
+        height: 40px;
+        top: -10px;
+        left: -10px;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        background-position-x: center;
+        background-position-y: center;
+    }
+
+    .headerMobile__bottom {
+        border-bottom: 1px solid #f2eacb;
+    }
+
+    .headerMobile__line.active {
+        justify-content: start;
+    }
+
+    .headerMobile__msg-icon {
+        display: inline-block;
+        position: relative;
+        font-weight: bold;
+        vertical-align: middle;
+        font-size: 13px;
+        width: 30px;
+        height: 30px;
+        border-radius: 29px;
+        text-align: center;
+        background-color: #e03a3a;
+        color: white;
+
+    }
+
+    .headerMobile__right-noAuth {
+        color: #475669;
+        font-size: 16px;
+    }
+
+    .headerMobile__flex .headerMobile__right i {
+        font-size: 23px;
+        margin-right: 15px;
+        color: #e03a3a;
+        display: inline-block;
+        vertical-align: middle
+    }
+
+    .headerMobile__msg-icon span {
+        padding-top: 7px;
+        display: inline-block;
+    }
+
+    .headerMobile__msg-icon::before {
+        content: '';
+        position: absolute;
+        border-left: 12px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 9px solid #e03a3a;
+        right: 24px;
+        top: 11px;
+    }
+
+    .headerMobile__search-ttl {
+        display: none;
+        font-size: 16px;
+        padding-left: 15px;
+        color: #475669;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .headerMobile__search-ttl.active {
+        display: inline-block;
+    }
+
+    .headerMobile__search--menu {
+        max-width: 330px !important;
+        position: static !important;
+    }
+
+    .headerMobile__search--menu .relative {
+
+        padding-left: 43px !important;
+        height: 100%;
+    }
+
+    .headerMobile__search--menu input {
+        text-transform: uppercase;
+        font-size: 15px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .headerMobile__bottom-arr {
+        margin-right: 10px;
+        position: relative;
+        margin-left: 20px;
+        font-size: 14px;
+    }
+
+    .headerMobile__bottom-arr::before {
+        position: absolute;
+        top: 0;
+        left: -20px;
+        content: '\2190';
+    }
+
+    .headerMobile .header-lang {
+        display: block;
+        position: relative;
+        right: 0;
+        top: 0;
+    }
+
+    .headerMobile .lang-block__dropdown {
+        top: 39px;
+    }
+
+    .headerMobile .lang-block__lang {
+        padding: 10px 15px;
+    }
+
+    .headerMobile .header-lang .lang-block {
+        padding: 10px 15px
+    }
+
+    .headerMobile .lang-block__cnt {
+        margin-right: 0;
+    }
+
+    .headerMobile .lang-block__dropdown.active {
+        display: block;
+    }
+
+    /*Селект*/
+    .headerMobile__select {
+        position: relative;
+        padding: 12px 0;
+        border-radius: 2px;
+        display: block;
+        cursor: pointer;
+        font-family: 'apercu_pro', sans-serif;
+        color: #318cc6;
+        font-size: 15px;
+        text-transform: uppercase;
+        border-bottom: 2px solid #f1ebd3;
+        min-width: 200px;
+    }
+
+    .headerMobile__select-arr {
+        background-image: url("/i/down-filterArrow-blue.svg");
+        width: 17px;
+        height: 15px;
+        display: inline-block;
+        position: absolute;
+        background-repeat: no-repeat;
+        right: 15px;
+        transition: 0.3s;
+        top: 14px;
+    }
+
+    .headerMobile__select-arr.active {
+        transform: rotate(180deg);
+    }
+
+    .headerMobile__select-drop {
+        position: static;
+        z-index: 10;
+        width: 100%;
+        left: -1px;
+        margin-top: 11px;
+        background: white;
+        display: none;
+        border-top: 0;
+        top: 26px;
+    }
+
+    .headerMobile__select-drop .headerMobile__select-drop-li {
+        border-top: 1px solid #ccc;
+        cursor: pointer;
+
+        display: block;
+        padding: 12.5px 15px;
+        font-size: 15px;
+    }
+
+    .headerMobile__select-choice {
+        padding: 0 15px;
+        color: #475669;
+    }
+
+    .headerMobile__select-drop .headerMobile__select-drop-li:last-of-type {
+        padding-bottom: 0;
+    }
+
+    .headerMobile__select-drop .headerMobile__select-drop-li:hover {
+        color: #ff8e41;
+    }
+
+    /*фиксирующийся блок*/
+    .headerMobile__fixed-topline {
+        display: none;
+    }
+
+    .headerMobile__fixed-arr {
+        background-image: url(/i/arrow-circle-up-solid.svg);
+        float: right;
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        background-size: contain;
+    }
+
+    .headerMobile__fixed-topline.active {
+        display: block;
+        position: fixed;
+        z-index: 15;
+        background-color: white;
+        width: 100%;
+        font-family: 'apercu_pro', sans-serif;
+        color: #475669;
+        top: 0;
+        text-transform: uppercase;
+        font-size: 15px;
+        margin-top: 0;
+        height: 45px;
+        border-bottom: 2.5px solid #f1ebd3;
+        padding: 12px 15px;
+        box-sizing: border-box;
+    }
+
+    .headerMobile__fixed-topline span {
+        width: 77%;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        vertical-align: bottom;
+    }
+
+    .headerMobile__fixed-topline i {
+        color: #ff8e41;
+        font-size: 19px;
+    }
+
+    .headerMobile__fixed-topline .fa-bars {
+
+        font-size: 17px;
+        width: 24px;
+    }
+
+    .headerMobile__fixed-topline .fa-sliders {
+
+        float: right;
+    }
+
+    /*фиксирующийся блок*/
+    /*селект*/
+    /*поиск*/
+    .headerMobile__search {
+        display: none;
+        padding: 10px 15px;
+        position: relative;
+        background-color: #faf6e5;
+    }
+
+    .js-show-search.active i {
+        color: #475669;
+    }
+
+    .headerMobile__search .headerMobile__search-inp {
+        background-color: white;
+        border-radius: 5px;
+
+        z-index: 1;
+        border: none;
+        width: 100%;
+        box-sizing: border-box;
+        position: relative;
+        padding: 10px;
+        font-size: 14px;
+        font-family: 'apercu_pro', sans-serif;
+        color: #475669;
+    }
+
+    /*поиск*/
+    /*форма авторизации*/
+    .headerMobile .registration-form {
+        padding: 20px 15px;
+        display: none;
+        background: #faf6e5;
+
+    }
+
+    .headerMobile .registration-form .tabs-bar {
+        border-color: white;
+        padding-top: 0;
+    }
+
+    .headerMobile .registration-form .registration__line {
+        display: block;
+        margin-top: 30px;
+    }
+
+    .headerMobile .registration-form .bth__inp-block {
+        border: 1px solid #f1ebd3;
+        width: 60%;
+    }
+
+    .headerMobile .registration {
+        position: relative;
+    }
+
+    .headerMobile .registration-form .registration__btn {
+        background: #ff8e41;
+        width: 60%;
+        color: #fff;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .headerMobile .registration-form .registration__btn.registration__btn--count {
+        background: white;
+        color: #ff8e41;
+        display: inline-block;
+        margin-right: 10px;
+        position: absolute;
+        bottom: -85px;
+        left: 0;
+
+    }
+
+    .headerMobile .registration-form .tab--reg {
+        display: inline-block;
+        width: auto;
+    }
+
+    .headerMobile .registration-form .line--reg {
+        display: inline-block;
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 113px;
+        height: 3px;
+        background: #475669;
+    }
+
+    .headerMobile__stat {
+        background-color: #f2eacb;
+        padding: 10px 15px;
+        position: relative;
+        display: none;
+        font-size: 18px;
+    }
+
+    .headerMobile__stat-icon {
+
+        display: inline-block;
+        vertical-align: middle;
+        border-radius: 3px 0 0 3px;
+        width: 55px;
+        position: absolute;
+        height: 100%;
+        background: #faf6e5;
+        top: 0;
+        left: 0;
+        background-image: url(/i/tophotels/group-grey.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 25px;
+    }
+
+    .headerMobile__stat-block {
+        background-color: white;
+        padding: 8px;
+        padding-left: 70px;
+        width: 100%;
+        box-sizing: border-box;
+        position: relative;
+        border-radius: 5px;
+
+    }
+
+    /*рега*/
+    .headerMobile__registration {
+        padding: 15px;
+        display: none;
+        background: #faf6e5;
+    }
+
+    .headerMobile__registration .tabs-bar {
+        border-color: white;
+        padding-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .headerMobile__registration .line--reg {
+        display: inline-block;
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 34px;
+        height: 3px;
+        background: #475669;
+    }
+
+    .headerMobile__registration-line {
+        display: block;
+        margin-top: 30px;
+    }
+
+    .headerMobile__registration .bth__inp {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .headerMobile__registration .bth__inp-block {
+        border: 1px solid #f1ebd3;
+        width: 60%;
+        height: 55px;
+    }
+
+    .headerMobile__registration .bth__btn {
+        width: 60%;
+        margin-top: 20px;
+    }
+
+    .headerMobile__registration-text-abs {
+        position: absolute;
+        left: 0;
+        z-index: 2;
+        bottom: -45px;
+    }
+
+    .headerMobile__registration-abs-btn {
+        display: inline-block;
+        margin-right: 10px;
+        position: absolute;
+        bottom: -85px;
+        left: 0;
+    }
+
+    .headerMobile__registration-line--border {
+        border-top: 1px solid #fff;
+        margin-top: 17px;
+        padding-top: 25px;
+    }
+
+    .headerMobile__registration-eye {
+        position: absolute;
+        top: 23px;
+        cursor: pointer;
+        display: block;
+        z-index: 1;
+        width: 20px;
+        height: 8px;
+        right: 10px;
+        background: url(/i/closed-eye-fine.png) no-repeat;
+    }
+
+    .headerMobile__registration-eye.active {
+        background: url(/i/opened-eye-fine.png) no-repeat;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /*фиксировнный блок*/
+    .tabs-block--hotelDescr .tabs-bar.fixed {
+        position: fixed;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin: auto;
+        top: 0;
+        background: #fff;
+        z-index: 10;
+        padding-top: 16px;
+        max-width: 1260px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .tabs-block--hotelDescr .tabs-bar.fixed .tabs-bar__ava {
+        display: block;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        right: 10px;
+        top: 9px;
+    }
+
+    .tabs-block--hotelDescr .tabs-bar.fixed .tabs-bar__ava img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50px;
+    }
+
+    .tabs-block--hotelDescr .tabs-bar.fixed .tabs-bar__ava img {
+
+    }
+
+    .tabs-bar__ava-noAuth {
+        position: relative;
+        display: none;
+    }
+
+    .tabs-bar__ava-noAuth::before {
+        background-image: url(/i/travel_crm/key-orange.svg);
+        background-repeat: no-repeat;
+        width: 36px;
+        height: 37px;
+        content: '';
+        background-size: 24px;
+        background-position: center;
+        background-color: white;
+        display: block;
+        position: relative;
+        top: -36px;
+    }
+
+    .tabs-block--hotelDescr .tabs-bar.fixed .tab:not(:first-of-type) {
+        display: none;
+        padding-top: 5px;
+        position: relative;
+    }
+
+    .tabs-block--hotelDescr .tabs-bar.fixed .tab {
+        color: #318CC6;
+    }
+
+    .tabs-block--hotelDescr .tabs-bar.fixed .tabs-bar__burger {
+        background-image: url(/i/tophotels/menu-button.svg);
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 14px;
+        left: 16px;
+    }
+
+    /*фиксировнный блок*/
+    /*рега*/
+    .headerMobile__registration .tabs-bar > .tab {
+        display: inline-block;
+        width: auto;
+    }
+
+    .headerMobile__registration .bth__inp-block,
+    .headerMobile__registration .bth__btn {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 646px) {
+    .headerMobile__registration-text-abs {
+        bottom: -62px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .header-nav-list {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 425px) {
+
+    .headerMobile__stat-block {
+        width: auto;
+    }
+
+    .headerMobile .registration-form .bth__inp-block,
+    .header-nav-list {
+        width: 100%;
+    }
+
+    .headerMobile .registration-form .registration__btn {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 417px) {
+
+    .headerMobile__bottom-searches {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 374px) {
+    .headerMobile__registration-text-abs {
+        bottom: -79px;
+    }
+}
+

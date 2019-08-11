@@ -1,0 +1,124 @@
+.formDirections.formDirections--durability .formDirections__wrap {
+    min-width: 310px;
+}
+
+.form-durability__select {
+    position: absolute;
+    left: 0;
+    background: #fff;
+    font-family: 'Open Sans', 'Roboto', sans-serif;
+    z-index: 101;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.5);
+    display: none;
+    width: 495px;
+    padding: 20px;
+    border: 1px solid #dfdfdf;
+    box-sizing: border-box;
+}
+
+.form-durability__durability {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Open Sans', 'Roboto', sans-serif;
+
+    margin: 0px auto;
+}
+
+.form-durability__select-row:last-child {
+    text-align: right;
+}
+
+.form-durability__durability .form-durability__select-row {
+    display: inline-block;
+    margin-bottom: -6px;
+}
+
+.form-durability__link {
+    font-size: 13px;
+    color: #999;
+    font-weight: normal;
+}
+
+.form-durability__durability .form-durability__select-item {
+    display: table-cell;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: 3px;
+    border-bottom: none;
+    font-size: 14px !important;
+    color: #475669;
+    font-weight: bold;
+}
+
+.formDirections .form-durability__select .form-durability__durability .form-durability__select-row:last-of-type .form-durability__select-item {
+    border-bottom: 1px solid #ccc;
+}
+
+.form-durability__durability .form-durability__select-item:hover span,
+.form-durability__durability .form-durability__select-item.selected span {
+    background-color: #c2dcef;
+
+}
+
+.form-durability__durability .form-durability__select-item.start, .form-durability__durability .form-durability__select-item.end {
+
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}
+
+.formDirections__bottom-item-durability {
+    cursor: pointer;
+    padding: 15px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-durability__durability .form-durability__select-item span {
+    padding-top: 9px;
+    width: 33px;   line-height: 18px;
+    height: 33px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 3px;
+
+}
+
+.form-durability__durability .form-durability__select-item.end span,
+.form-durability__durability .form-durability__select-item.start span {
+    background-color: #038cd6;
+
+
+}
+
+@media screen and (max-width: 700px) {
+    .formDirections.formDirections--durability .formDirections__wrap {
+        min-width: auto;
+    }
+}
+@media screen and (max-width: 370px) {
+    .form-durability__select {
+        width: 100%;
+    }
+
+
+    .form-durability__durability .form-durability__select-item {
+        width: 36px;
+        height: 36px;
+    }
+
+    .form-durability__durability .form-durability__select-item span {
+        width: 28px;
+        padding-top: 6px;
+
+        height: 28px;
+    }
+}

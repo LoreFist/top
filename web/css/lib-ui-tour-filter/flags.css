@@ -1,0 +1,258 @@
+.lsfw-flag {
+    background-image: url(/i/lib-ui-tour-filter/flags-sprite.png);
+    background-size: cover;
+    width: 70px;
+    height: 40px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    position: relative;background-position-x: -5px;
+    vertical-align: top;
+}
+.list-flags-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+.lsfw-flag.lsfw-flag--50w {
+    width: 50px;
+    height: 33px;
+}
+.lsfw-flag.lsfw-flag--20w{
+    width: 32px;
+    background-position-x: 0;
+    height: 21px;
+}
+.lsfw-flag.lsfw-flag--30w {
+    width: 40px;background-position-x: 0;
+    height: 28px;
+}
+.lsfw-flag:hover .hint{
+    display: block;
+}
+.lsfw-flag.lsfw-flag-1 {background-position-y: 0.02%}
+.lsfw-flag.lsfw-flag-2 {background-position-y:0.469%;}
+.lsfw-flag.lsfw-flag-3 {background-position-y: 0.92%;}
+.lsfw-flag.lsfw-flag-4 {background-position-y: 1.367%;}
+.lsfw-flag.lsfw-flag-5 {background-position-y:1.818%;}
+.lsfw-flag.lsfw-flag-7 {background-position-y:2.26%}
+.lsfw-flag.lsfw-flag-6 {background-position-y:1.818%;}
+.lsfw-flag.lsfw-flag-8 {background-position-y: 2.71%;}
+.lsfw-flag.lsfw-flag-9 {background-position-y: 3.159%;}
+.lsfw-flag.lsfw-flag-11 {background-position-y:3.61%;}
+.lsfw-flag.lsfw-flag-12 {background-position-y: 4.055%;}
+.lsfw-flag.lsfw-flag-14 {background-position-y: 4.507%}
+.lsfw-flag.lsfw-flag-15 {background-position-y: 4.95%;}
+.lsfw-flag.lsfw-flag-16 {background-position-y: 5.4%;}
+.lsfw-flag.lsfw-flag-17 {background-position-y: 5.849%}
+.lsfw-flag.lsfw-flag-19 {background-position-y: 6.3%}
+.lsfw-flag.lsfw-flag-20 {background-position-y: 6.745%}
+.lsfw-flag.lsfw-flag-21 {background-position-y:7.19%}
+.lsfw-flag.lsfw-flag-22 {background-position-y:7.64%}
+.lsfw-flag.lsfw-flag-23 {background-position-y: 8.089%}
+.lsfw-flag.lsfw-flag-24 {background-position-y: 8.539%}
+.lsfw-flag.lsfw-flag-25 {background-position-y: 8.988%}
+.lsfw-flag.lsfw-flag-26 {background-position-y: 9.426%}
+.lsfw-flag.lsfw-flag-27 {background-position-y: 9.87%;}
+.lsfw-flag.lsfw-flag-28 {background-position-y: 10.329%}
+.lsfw-flag.lsfw-flag-29 {background-position-y: 10.77%;}
+.lsfw-flag.lsfw-flag-30 {background-position-y:11.223%}
+.lsfw-flag.lsfw-flag-31 {background-position-y: 11.677%}
+.lsfw-flag.lsfw-flag-32 {background-position-y: 12.12%;}
+.lsfw-flag.lsfw-flag-34 {background-position-y: 12.57%;}
+.lsfw-flag.lsfw-flag-35 {background-position-y:13.02% ;}
+.lsfw-flag.lsfw-flag-36 {background-position-y:13.47% ;}
+.lsfw-flag.lsfw-flag-37 {background-position-y:13.918%;}
+.lsfw-flag.lsfw-flag-38 {background-position-y:14.36% ;}
+.lsfw-flag.lsfw-flag-39 {background-position-y: 14.81%;}
+.lsfw-flag.lsfw-flag-40 {background-position-y:15.26% ;}
+.lsfw-flag.lsfw-flag-41 {background-position-y: 15.71%;}
+.lsfw-flag.lsfw-flag-42 {background-position-y: 16.158%;}
+.lsfw-flag.lsfw-flag-43 {background-position-y: 16.6%;}
+.lsfw-flag.lsfw-flag-44 {background-position-y: 17.05%;}
+.lsfw-flag.lsfw-flag-45 {background-position-y:17.50% ;}
+.lsfw-flag.lsfw-flag-46 {background-position-y: 17.93%}
+.lsfw-flag.lsfw-flag-47 {background-position-y:18.38%}
+.lsfw-flag.lsfw-flag-48 {background-position-y: 18.83%}
+.lsfw-flag.lsfw-flag-49 {background-position-y: 19.28%}
+.lsfw-flag.lsfw-flag-50 {background-position-y: 19.729%}
+.lsfw-flag.lsfw-flag-51 {background-position-y: 20.177%}
+.lsfw-flag.lsfw-flag-52 {background-position-y: 20.62%}
+.lsfw-flag.lsfw-flag-53 {background-position-y: 21.07%}
+.lsfw-flag.lsfw-flag-54 {background-position-y: 21.52%}
+.lsfw-flag.lsfw-flag-55 {background-position-y: 21.97%}
+.lsfw-flag.lsfw-flag-56 {background-position-y: 22.418%}
+.lsfw-flag.lsfw-flag-57 {background-position-y: 22.86%}
+.lsfw-flag.lsfw-flag-58 {background-position-y: 23.33%}
+.lsfw-flag.lsfw-flag-59 {background-position-y: 23.78%}
+.lsfw-flag.lsfw-flag-60 {background-position-y: 24.23%}
+.lsfw-flag.lsfw-flag-61 {background-position-y:24.67%}
+.lsfw-flag.lsfw-flag-62 {background-position-y: 25.12%}
+.lsfw-flag.lsfw-flag-63 {background-position-y: 25.57%}
+.lsfw-flag.lsfw-flag-64 {background-position-y: 26.02%}
+.lsfw-flag.lsfw-flag-65 {background-position-y:26.46%}
+.lsfw-flag.lsfw-flag-66 {background-position-y: 26.92%}
+.lsfw-flag.lsfw-flag-67 {background-position-y:27.37%}
+.lsfw-flag.lsfw-flag-68 {background-position-y: 27.812%}
+.lsfw-flag.lsfw-flag-69 {background-position-y: 28.26%}
+.lsfw-flag.lsfw-flag-70 {background-position-y:28.70%}
+.lsfw-flag.lsfw-flag-71 {background-position-y:29.15%}
+.lsfw-flag.lsfw-flag-72 {background-position-y: 29.6%}
+.lsfw-flag.lsfw-flag-73 {background-position-y: 30.05%}
+.lsfw-flag.lsfw-flag-74 {background-position-y: 30.499%}
+.lsfw-flag.lsfw-flag-75 {background-position-y:30.948%}
+.lsfw-flag.lsfw-flag-76 {background-position-y: 31.39%}
+.lsfw-flag.lsfw-flag-77 {background-position-y: 31.84%}
+.lsfw-flag.lsfw-flag-78 {background-position-y: 32.292%}
+.lsfw-flag.lsfw-flag-79 {background-position-y: 32.74%}
+.lsfw-flag.lsfw-flag-80 {background-position-y:  33.188%}
+.lsfw-flag.lsfw-flag-81 {background-position-y: 33.63%}
+.lsfw-flag.lsfw-flag-82 {background-position-y: 34.09%}
+.lsfw-flag.lsfw-flag-83 {background-position-y: 34.53%}
+.lsfw-flag.lsfw-flag-84 {background-position-y: 34.99%}
+.lsfw-flag.lsfw-flag-85 {background-position-y: 35.43%}
+.lsfw-flag.lsfw-flag-86 {background-position-y: 35.88%}
+.lsfw-flag.lsfw-flag-87 {background-position-y: 36.33%}
+.lsfw-flag.lsfw-flag-89 {background-position-y: 36.78%}
+.lsfw-flag.lsfw-flag-90 {background-position-y:37.223%}
+.lsfw-flag.lsfw-flag-93 {background-position-y: 37.676%}
+.lsfw-flag.lsfw-flag-96 {background-position-y: 38.12%}
+.lsfw-flag.lsfw-flag-100 {background-position-y: 38.57%}
+.lsfw-flag.lsfw-flag-103 {background-position-y: 39.02%}
+.lsfw-flag.lsfw-flag-107 {background-position-y: 39.46%}
+.lsfw-flag.lsfw-flag-109 {background-position-y: 39.91%}
+.lsfw-flag.lsfw-flag-110 {background-position-y: 40.358%}
+.lsfw-flag.lsfw-flag-113 {background-position-y: 40.8%}
+.lsfw-flag.lsfw-flag-114 {background-position-y: 41.25%}
+.lsfw-flag.lsfw-flag-116 {background-position-y: 41.7%}
+.lsfw-flag.lsfw-flag-117 {background-position-y: 42.15%}
+.lsfw-flag.lsfw-flag-118 {background-position-y: 42.598%}
+.lsfw-flag.lsfw-flag-119 {background-position-y: 43.047%}
+
+
+.lsfw-flag.lsfw-flag-120 {background-position-y: 43.49%}
+.lsfw-flag.lsfw-flag-122 {background-position-y: 43.939%}
+.lsfw-flag.lsfw-flag-123 {background-position-y: 44.41%}
+.lsfw-flag.lsfw-flag-124 {background-position-y: 44.84%}
+.lsfw-flag.lsfw-flag-126 {background-position-y: 45.288%}
+.lsfw-flag.lsfw-flag-127 {background-position-y: 45.73%}
+.lsfw-flag.lsfw-flag-128 {background-position-y: 46.18%}
+.lsfw-flag.lsfw-flag-129 {background-position-y: 46.63%}
+.lsfw-flag.lsfw-flag-130 {background-position-y:47.08%}
+.lsfw-flag.lsfw-flag-132 {background-position-y: 47.522%}
+.lsfw-flag.lsfw-flag-133 {background-position-y: 47.97%}
+.lsfw-flag.lsfw-flag-134 {background-position-y: 48.42%}
+.lsfw-flag.lsfw-flag-135 {background-position-y: 48.87%}
+.lsfw-flag.lsfw-flag-136 {background-position-y: 49.32%}
+.lsfw-flag.lsfw-flag-137 {background-position-y: 49.77%}
+.lsfw-flag.lsfw-flag-139 {background-position-y: 50.21%}
+.lsfw-flag.lsfw-flag-140 {background-position-y:50.66%}
+.lsfw-flag.lsfw-flag-141 {background-position-y: 51.109%}
+.lsfw-flag.lsfw-flag-142 {background-position-y: 51.56%}
+.lsfw-flag.lsfw-flag-143 {background-position-y: 52.01%}
+.lsfw-flag.lsfw-flag-144 {background-position-y:52.455%}
+.lsfw-flag.lsfw-flag-145 {background-position-y: 52.9%}
+.lsfw-flag.lsfw-flag-146 {background-position-y: 53.35%}
+.lsfw-flag.lsfw-flag-147 {background-position-y: 53.8%}
+.lsfw-flag.lsfw-flag-148 {background-position-y: 54.25%}
+.lsfw-flag.lsfw-flag-149 {background-position-y: 54.686%}
+.lsfw-flag.lsfw-flag-150 {background-position-y: 55.145%}
+.lsfw-flag.lsfw-flag-151 {background-position-y: 55.59%}
+.lsfw-flag.lsfw-flag-152 {background-position-y: 56.04%}
+.lsfw-flag.lsfw-flag-153 {background-position-y: 56.49%}
+.lsfw-flag.lsfw-flag-155 {background-position-y: 56.936%}
+.lsfw-flag.lsfw-flag-156 {background-position-y: 57.388%}
+.lsfw-flag.lsfw-flag-157 {background-position-y: 57.83%}
+.lsfw-flag.lsfw-flag-158 {background-position-y: 58.28%}
+.lsfw-flag.lsfw-flag-159 {background-position-y: 58.73%}
+.lsfw-flag.lsfw-flag-160 {background-position-y: 59.18%}
+.lsfw-flag.lsfw-flag-161 {background-position-y: 59.627%}
+.lsfw-flag.lsfw-flag-162 {background-position-y: 60.07%}
+.lsfw-flag.lsfw-flag-163 {background-position-y: 60.52%;}
+.lsfw-flag.lsfw-flag-164 {background-position-y: 60.98%}
+.lsfw-flag.lsfw-flag-165 {background-position-y: 61.42%}
+.lsfw-flag.lsfw-flag-166 {background-position-y: 61.87%}
+.lsfw-flag.lsfw-flag-167 {background-position-y: 62.32%}
+.lsfw-flag.lsfw-flag-168 {background-position-y: 62.77%}
+.lsfw-flag.lsfw-flag-169 {background-position-y: 63.22%}
+.lsfw-flag.lsfw-flag-170 {background-position-y: 63.66%}
+.lsfw-flag.lsfw-flag-171 {background-position-y: 64.11%}
+.lsfw-flag.lsfw-flag-172 {background-position-y: 64.56%}
+.lsfw-flag.lsfw-flag-173 {background-position-y: 65.0%}
+.lsfw-flag.lsfw-flag-174 {background-position-y: 65.45%}
+.lsfw-flag.lsfw-flag-175 {background-position-y:65.9%}
+.lsfw-flag.lsfw-flag-176 {background-position-y:66.35%}
+.lsfw-flag.lsfw-flag-177 {background-position-y: 66.799%}
+.lsfw-flag.lsfw-flag-178 {background-position-y: 67.245%}
+.lsfw-flag.lsfw-flag-179 {background-position-y: 67.69%}
+.lsfw-flag.lsfw-flag-180 {background-position-y:68.14%}
+.lsfw-flag.lsfw-flag-182 {background-position-y: 68.59%}
+.lsfw-flag.lsfw-flag-183 {background-position-y: 69.04%}
+.lsfw-flag.lsfw-flag-184 {background-position-y: 69.486%}
+.lsfw-flag.lsfw-flag-185 {background-position-y: 69.93%;}
+.lsfw-flag.lsfw-flag-186 {background-position-y:70.38%}
+.lsfw-flag.lsfw-flag-187 {background-position-y: 70.83%}
+.lsfw-flag.lsfw-flag-188 {background-position-y: 71.28%}
+.lsfw-flag.lsfw-flag-189 {background-position-y: 71.723%}
+.lsfw-flag.lsfw-flag-190 {background-position-y: 72.17%}
+.lsfw-flag.lsfw-flag-191 {background-position-y: 72.62%}
+.lsfw-flag.lsfw-flag-192 {background-position-y: 73.07%}
+.lsfw-flag.lsfw-flag-193 {background-position-y:73.52%}
+.lsfw-flag.lsfw-flag-194 {background-position-y: 73.968%}
+.lsfw-flag.lsfw-flag-195 {background-position-y: 74.412%}
+.lsfw-flag.lsfw-flag-196 {background-position-y: 74.86%}
+.lsfw-flag.lsfw-flag-197 {background-position-y: 75.31%}
+.lsfw-flag.lsfw-flag-198 {background-position-y:75.76%}
+.lsfw-flag.lsfw-flag-200 {background-position-y: 76.21%}
+.lsfw-flag.lsfw-flag-201 {background-position-y: 76.658%}
+.lsfw-flag.lsfw-flag-202 {background-position-y: 77.1%}
+.lsfw-flag.lsfw-flag-203 {background-position-y:77.55%}
+.lsfw-flag.lsfw-flag-204 {background-position-y: 78.0%}
+.lsfw-flag.lsfw-flag-205 {background-position-y: 78.446%}
+.lsfw-flag.lsfw-flag-206 {background-position-y: 78.899%}
+.lsfw-flag.lsfw-flag-207 {background-position-y: 79.345%}
+.lsfw-flag.lsfw-flag-208 {background-position-y: 79.79%}
+.lsfw-flag.lsfw-flag-209 {background-position-y: 80.24%}
+.lsfw-flag.lsfw-flag-210 {background-position-y:80.69%}
+.lsfw-flag.lsfw-flag-211 {background-position-y: 81.14%}
+.lsfw-flag.lsfw-flag-212 {background-position-y: 81.588%}
+.lsfw-flag.lsfw-flag-213 {background-position-y: 82.03%}
+.lsfw-flag.lsfw-flag-214 {background-position-y: 82.48%}
+.lsfw-flag.lsfw-flag-215 {background-position-y: 82.93%}
+.lsfw-flag.lsfw-flag-216 {background-position-y: 83.38%}
+.lsfw-flag.lsfw-flag-217 {background-position-y:83.822%}
+.lsfw-flag.lsfw-flag-218 {background-position-y: 84.27%}
+.lsfw-flag.lsfw-flag-219 {background-position-y: 84.72%}
+.lsfw-flag.lsfw-flag-220 {background-position-y:85.17%}
+.lsfw-flag.lsfw-flag-222 {background-position-y:85.62%}
+.lsfw-flag.lsfw-flag-242 {background-position-y: 86.07%}
+.lsfw-flag.lsfw-flag-247 {background-position-y: 86.52%}
+.lsfw-flag.lsfw-flag-248 {background-position-y:86.97%}
+.lsfw-flag.lsfw-flag-252 {background-position-y: 87.41%}
+.lsfw-flag.lsfw-flag-255 {background-position-y: 87.86%}
+.lsfw-flag.lsfw-flag-256 {background-position-y: 88.31%}
+.lsfw-flag.lsfw-flag-257 {background-position-y: 88.756%}
+.lsfw-flag.lsfw-flag-259 {background-position-y: 89.2%}
+.lsfw-flag.lsfw-flag-260 {background-position-y: 89.65%}
+.lsfw-flag.lsfw-flag-261 {background-position-y: 90.1%}
+.lsfw-flag.lsfw-flag-267 {background-position-y: 90.55%}
+.lsfw-flag.lsfw-flag-269 {background-position-y: 91.05%}
+.lsfw-flag.lsfw-flag-270 {background-position-y: 91.44%}
+.lsfw-flag.lsfw-flag-271 {background-position-y: 91.89%}
+.lsfw-flag.lsfw-flag-272 {background-position-y: 92.34%}
+.lsfw-flag.lsfw-flag-273 {background-position-y:92.79%}
+.lsfw-flag.lsfw-flag-274 {background-position-y: 93.24%}
+.lsfw-flag.lsfw-flag-275 {background-position-y: 93.688%}
+.lsfw-flag.lsfw-flag-282 {background-position-y: 94.13%}
+.lsfw-flag.lsfw-flag-284 {background-position-y: 94.58%}
+.lsfw-flag.lsfw-flag-285 {background-position-y: 95.03%}
+.lsfw-flag.lsfw-flag-288 {background-position-y: 95.48%}
+.lsfw-flag.lsfw-flag-289 {background-position-y: 95.922%}
+.lsfw-flag.lsfw-flag-290 {background-position-y: 96.37%}
+.lsfw-flag.lsfw-flag-291 {background-position-y: 96.82%}
+.lsfw-flag.lsfw-flag-292 {background-position-y: 97.26%}
+.lsfw-flag.lsfw-flag-293 {background-position-y: 97.72%}
+.lsfw-flag.lsfw-flag-294 {background-position-y:98.166%}
+.lsfw-flag.lsfw-flag-295 {background-position-y: 98.62%}
+.lsfw-flag.lsfw-flag-296 {background-position-y: 99.06%}
+.lsfw-flag.lsfw-flag-297 {background-position-y: 99.51%}
+.lsfw-flag.lsfw-flag-298 {background-position-y:99.96%}
+

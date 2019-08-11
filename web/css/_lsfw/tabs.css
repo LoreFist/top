@@ -1,0 +1,76 @@
+.tabs-bar {
+    position: relative;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    font-family: 'apercu_pro', sans-serif;
+}
+
+.tabs-bar .lsfw-tab {
+    display: inline-block;
+    width: auto;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+    padding: 0px 0px 15px 0px;
+    margin-right: 20px;
+    color: #318cc6;
+}
+
+.tabs-bar .lsfw-tab:hover {
+
+    color: #215f86;
+}
+
+.tabs-bar .lsfw-tab.active {
+    color: #475669;
+}
+
+.tabs-bar .lsfw-line {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 108px;
+    height: 3px;
+    background: #475669;
+}
+
+.tabs-bar .tab {
+    display: inline-block;
+    width: auto;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+    padding: 0px 0px 15px 0px;
+    margin-right: 20px;
+    color: #318cc6;
+}
+
+.tabs-bar .tab.active {
+    color: #475669;
+}
+
+.line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 108px;
+    height: 3px;
+    background: #475669;
+}
+
+@media screen and (max-width: 1023px) {
+
+    .tabs-bar .line {
+        display: none;
+    }
+
+    .tabs-bar .lsfw-line {
+        display: none;
+    }
+
+}
+

@@ -1,0 +1,89 @@
+/*новое левое меню на адаптиве*/
+.left-nav-mobile {
+    display: none;
+}
+
+@media screen and (max-width: 1023px) {
+    .left-nav-mobile {
+        display: block;
+        margin-top: -10px;
+    }
+
+    .left-nav-mobile__ul {
+        position: relative;
+    }
+
+    .left-nav-mobile__ul::before {
+        content: '';
+        border-bottom: 2.5px solid #f1ebd3;
+        width: calc(100% + 30px);
+        bottom: 0px;
+        z-index: 1;
+        position: absolute;
+        left: -15px;
+    }
+
+    .left-nav-mobile__li {
+        position: relative;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        font-size: 15px;
+        text-transform: uppercase;
+        width: 100%;
+        font-family: 'apercu_pro', sans-serif;
+        line-height: 20px;
+    }
+
+    .left-nav-mobile__li::before {
+        content: '';
+        border-bottom: 1px solid #ccc;
+        width: calc(100% + 30px);
+        bottom: 0;
+        position: absolute;
+        left: -15px;
+    }
+
+    .left-nav-mobile__li.active::after {
+        background-image: url(/i/down-filterArrow-blue.svg);
+        width: 17px;
+        height: 15px;
+        display: inline-block;
+        position: absolute;
+        background-repeat: no-repeat;
+        right: 0px;
+        transition: 0.3s;
+        top: 14px;
+        content: '';
+    }
+
+    .left-nav-mobile__li.left-nav-mobile__li-arr-hide::after {
+        content: none;
+    }
+
+    .left-nav-mobile__li.active.rotate::after {
+        transform: rotate(180deg);
+    }
+
+    .left-nav-mobile__li:not(.active) {
+        display: none;
+    }
+
+    .left-nav-mobile__li.active a {
+
+        color: #475669;
+    }
+
+    .left-nav-mobile__ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .left-nav-mobile__li:not(.active) {
+        order: 2;
+    }
+
+    .left-nav-mobile__li.active {
+        order: 1;
+    }
+
+}
