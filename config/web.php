@@ -64,7 +64,9 @@ $config = [
                 'encryption' => 'tls',
             ],
         ],
-        'db'           => $db,
+        'db'           => $db['localhost'],
+        'dict'         => $db['dict'],
+
     ],
     'params'     => $params,
 ];

@@ -1,3 +1,6 @@
+.formDirections .SumoSelect.open .search-txt{
+    position: absolute!important;
+}
 html,
 body {
     height: 100%;

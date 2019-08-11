@@ -1,12 +1,14 @@
 <?php
 /* @var $this yii\web\View */
 
+
 use yii\widgets\ActiveForm;
 
 $this->registerJsFile(
     '@web/js/help-extend.js',
     ['depends' => [\yii\web\JqueryAsset::className()]]
 );
+
 ?>
 
 <div class="panel" id="step1Panel" style="">
@@ -45,8 +47,9 @@ $this->registerJsFile(
         <div class=" js-types-search-tours-blocks">
             <div class="tour-selection-wrap-in tour-selection-wrap-flex">
 
+
                 <?php echo $this->context->renderPartial('partial/extend_country'); ?>
-                <?php echo $this->context->renderPartial('partial/extend__'); ?>
+<!--                --><?php //echo $this->context->renderPartial('partial/extend__'); ?>
 
                 <span class=" tour-selection-plus  hide-1023 js-add-field">
                             <i class="fas fa-plus"></i>
