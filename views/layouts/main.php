@@ -51,9 +51,14 @@ use yii\helpers\Html;
     ?>
 </div>
 <?php AppAsset::register($this); ?>
+<?php
+$this->registerJsFile(
+    '@web/js/jquery.sumoselect.js',
+    ['depends' => [\yii\web\JqueryAsset::className()]]
+);
+?>
 <?php $this->endBody() ?>
 </body>
-
 </html>
 <?php $this->endPage() ?>
 

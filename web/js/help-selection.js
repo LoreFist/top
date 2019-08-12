@@ -72,15 +72,15 @@ $(document).ready(function () {
             $.ajax({
                     type: 'post',
                     dataType: 'json',
-                    url: '/',
+                    url: '/savenostandard',
                     data: $('#form-nostadndatd').serializeArray()
                 }
             )
-                .done(function (data) {
-                    if (data['code'] == 1) {
-                        $('#formPanel').html($('#thx').html());
-                    }
-                })
+            .done(function (data) {
+                if (data['code'] == 1) {
+                    $('#formPanel').html($('#thx').html());
+                }
+            })
 
         }
     });

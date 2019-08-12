@@ -48,9 +48,9 @@ $this->registerJsFile(
             <div class="tour-selection-wrap-in tour-selection-wrap-flex">
 
 
-                <?php echo $this->context->renderPartial('partial/extend_country'); ?>
-                <?php echo $this->context->renderPartial('partial/extend_city'); ?>
-                <?php echo $this->context->renderPartial('partial/extend_department'); ?>
+                <?php echo $this->context->renderPartial('partial/extend_country', ['model'=>$model, 'form'=>$form, 'items_dict_country'=>$items_dict['country']]); ?>
+                <?php echo $this->context->renderPartial('partial/extend_city', ['model'=>$model, 'form'=>$form,]); ?>
+                <?php echo $this->context->renderPartial('partial/extend_department', ['model'=>$model, 'form'=>$form, 'items_city_deprt'=>$items_dict['city_deprt']]); ?>
 <!--                --><?php //echo $this->context->renderPartial('partial/extend__'); ?>
 
                 <span class=" tour-selection-plus  hide-1023 js-add-field">

@@ -15,31 +15,7 @@
             </div>
 
             <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-
-                    <select id="sumo-department" class="SumoUnder" tabindex="-1">
-
-                        <option value="Москва">Москва</option>
-                        <option value="Санкт-Петербург">Санкт-Петербург</option>
-                        <option value="Абакан">Абакан</option>
-                        <option value="Агзу">Агзу</option>
-                        <option value="Абакан">Абакан</option>
-                        <option value="Агзу">Агзу</option>
-                        <option value="Абакан">Абакан</option>
-                        <option value="Агзу">Агзу</option>
-                        <option value="Абакан">Абакан</option>
-                        <option value="Агзу">Агзу</option>
-                        <option value="Москва">Москва</option>
-                        <option value="Санкт-Петербург">Санкт-Петербург</option>
-                        <option value="Абакан">Абакан</option>
-                        <option value="Агзу">Агзу</option>
-                        <option value="Абакан">Абакан</option>
-                        <option value="Агзу">Агзу</option>
-                        <option value="Абакан">Абакан</option>
-                        <option value="Агзу">Агзу</option>
-                        <option value="Абакан">Абакан</option>
-                        <option value="Агзу">Агзу</option>
-
-                    </select>
+                <?= $form->field($model, 'direct_department')->dropDownList($items_city_deprt,['id'=>"sumo-department", 'empty'=>'Не важно'])->label(false); ?>
             </div>
 
         </div>

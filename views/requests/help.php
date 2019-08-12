@@ -10,7 +10,7 @@ use lo\widgets\magnific\MagnificPopup;
             <div id="tabnostandard" class="line" style="overflow: hidden;left: 141.016px; width: 186.828px;"></div>
         </div>
 
-        <?php echo $this->context->renderPartial('partial/extend', ['model'=>$model]); ?>
+        <?php echo $this->context->renderPartial('partial/extend', ['model'=>$model, 'items_dict'=>$items_dict]); ?>
         <?php echo $this->context->renderPartial('partial/nonstandard', ['model'=>$model]); ?>
     </div>
 </div>

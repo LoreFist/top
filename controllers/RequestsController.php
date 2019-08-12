@@ -2,20 +2,63 @@
 
 namespace app\controllers;
 
+use app\models\CityCountry;
+use app\models\DictCity;
+use app\models\DictCountry;
 use app\models\Requests;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 class RequestsController extends \yii\web\Controller
 {
 
-    /**
-     * Creates a new Requests model.
-     * If creation is successful, the send email and alert
-     *
-     * @return mixed
-     */
+    private function _dict_get_city($id)
+    {
+        return DictCity::find()
+            ->select('id, name')
+            ->where(['active' => true])
+            ->andWhere(['trash' => false])
+            ->andWhere(['country' => $id])
+            ->orderBy(['id' => SORT_ASC])
+            ->all();
+    }
 
+    /**
+     * Создание модели помощь в подборе
+     * Подгрузка справочника стран и городов России
+     *
+     * @return рендер view help
+     */
     public function actionHelp()
+    {
+        $model = new Requests();
+
+        $dict_country = DictCountry::find()
+            ->select('id, name')
+            ->where(['active' => true])
+            ->andWhere(['trash' => false])
+            ->orderBy(['name' => SORT_ASC])
+            ->all();
+
+        $dict_city_deprt = $this->_dict_get_city(1);
+
+        $items_dict_country = ArrayHelper::map($dict_country, 'id', 'name');
+        $items_dict_deprt   = ArrayHelper::map($dict_city_deprt, 'id', 'name');
+
+        return $this->render(
+            'help',
+            ['model'      => $model,
+             'items_dict' => ['country'    => $items_dict_country,
+                              'city_deprt' => $items_dict_deprt]]
+        );
+    }
+
+    /**
+     * Сохранение модели не стандартного запроса
+     *
+     * @return Json
+     */
+    public function actionSavenostandard()
     {
         $model = new Requests();
 
@@ -64,8 +107,27 @@ class RequestsController extends \yii\web\Controller
                 );
             }
         }
+    }
 
-        return $this->render('help', ['model' => $model]);
+    /**
+     * Получение справочника городов
+     *
+     * @return mixed
+     */
+    public function actionGetcity()
+    {
+        if ($id = Yii::$app->request->post('id')) {
+            $dict_city = $this->_dict_get_city($id);
+            $items = '';
+
+            foreach ($dict_city as $item) {
+                $items .= "<option value='" . $item->id . "'>" . $item->name . "</option>";
+            }
+
+            return $this->renderPartial('partial/extend_city_select_option', [
+                'items'     => $items,
+            ]);
+        }
     }
 
 }
