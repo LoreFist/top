@@ -3,8 +3,6 @@
         <span class="bth__inp-lbl ">Страна поездки</span>
         <div class="bth__inp tour-selection__country  js-show-formDirections">
         </div>
-
-
         <div class="formDirections w100p" style="display: none;">
             <div class="formDirections__wrap w100p">
 
@@ -18,7 +16,6 @@
 
                     <select id="sumo-direction">
 
-
                         <option>Россия</option>
                         <option>Украина</option>
                         <option>Беларуссия</option>
@@ -26,7 +23,6 @@
                         <option>Доминикана</option>
                         <option>Турция</option>
                         <option>Египет</option>
-
 
                     </select>
                 </div>

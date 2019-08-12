@@ -49,6 +49,8 @@ $this->registerJsFile(
 
 
                 <?php echo $this->context->renderPartial('partial/extend_country'); ?>
+                <?php echo $this->context->renderPartial('partial/extend_city'); ?>
+                <?php echo $this->context->renderPartial('partial/extend_department'); ?>
 <!--                --><?php //echo $this->context->renderPartial('partial/extend__'); ?>
 
                 <span class=" tour-selection-plus  hide-1023 js-add-field">

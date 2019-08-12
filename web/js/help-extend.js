@@ -37,4 +37,20 @@ $(document).ready(function () {
     });
     _sumoselect_country.parent().addClass('open');
     _sumoselect_country.next().next().css('top', '0').css('position', 'relative');
+
+    var _sumoselect_city = $('#sumo-direction-city')
+    _sumoselect_city.SumoSelect({
+        search: true,
+        forceCustomRendering: true
+    });
+    _sumoselect_city.parent().addClass('open');
+    _sumoselect_city.next().next().css('top', '0').css('position', 'relative');
+
+    var _sumoselect_department = $('#sumo-department')
+    _sumoselect_department.SumoSelect({
+        search: true,
+        forceCustomRendering: true
+    });
+    _sumoselect_department.parent().addClass('open');
+    _sumoselect_department.next().next().css('top', '0').css('position', 'relative');
 });
