@@ -1,7 +1,7 @@
 <div class="tour-selection-field tour-selection-field--200">
     <div class="bth__inp-block js-show-formDirections ">
-        <span class="bth__inp-lbl ">Город вылета</span>
-        <span class="bth__inp uppercase"></span>
+        <span class="bth__inp-lbl --center active">Город вылета</span>
+        <span class="bth__inp " id="city_department-<?=$data_id?>">Не важно</span>
     </div>
 
 
@@ -15,7 +15,15 @@
             </div>
 
             <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-                <?= $form->field($model, 'direct_department')->dropDownList($items_city_deprt,['id'=>"sumo-department", 'empty'=>'Не важно'])->label(false); ?>
+                <?= $form->field($model, 'direct_department[]')->dropDownList(
+                        $items_city_deprt,
+                        [
+                                'id'=>"sumo-department-".$data_id,
+                                'class'=>"sumo-department",
+                                'data_id'=>$data_id
+
+                        ])
+                    ->label(false); ?>
             </div>
 
         </div>
