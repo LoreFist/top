@@ -1,7 +1,6 @@
 <?php
 /* @var $this yii\web\View */
 
-
 use yii\widgets\ActiveForm;
 
 $this->registerJsFile(
@@ -49,31 +48,28 @@ $this->registerJsFile(
                 <?php $data_id = 0; ?>
                 <?php echo $this->context->renderPartial('partial/extend_country', ['model'=>$model, 'form'=>$form, 'items_dict_country'=>$items_dict['country'], 'data_id'=>$data_id]); ?>
                 <?php echo $this->context->renderPartial('partial/extend_city', ['model'=>$model, 'form'=>$form, 'data_id'=>$data_id]); ?>
-                <?php echo $this->context->renderPartial('partial/extend_department', ['model'=>$model, 'form'=>$form, 'items_city_deprt'=>$items_dict['city_deprt'], 'data_id'=>$data_id]); ?>
+                <?php echo $this->context->renderPartial('partial/extend_departure', ['model'=>$model, 'form'=>$form, 'items_city_deprt'=>$items_dict['city_deprt'], 'data_id'=>$data_id]); ?>
 <!--                --><?php //echo $this->context->renderPartial('partial/extend__'); ?>
 
-                <span class=" tour-selection-plus  hide-1023 js-add-field"><i class="fas fa-plus"></i></span>
+                <span class=" tour-selection-plus  hide-1023 js-add-field" data_id=<?=$data_id?> ><i class="fas fa-plus"></i></span>
             </div>
 
-            <div class="tour-selection-wrap-in tour-selection-wrap-flex js-show-added-field" style="display: none">
-                <?php $data_id = 1; ?>
+            <?php $data_id = 1; //ид элемента, чтобы невозникло конфликто между элементами?>
+            <div class="tour-selection-wrap-in tour-selection-wrap-flex js-show-added-field js-hide-dell-field-<?=$data_id?>" style="display: none">
                 <?php echo $this->context->renderPartial('partial/extend_country', ['model'=>$model, 'form'=>$form, 'items_dict_country'=>$items_dict['country'], 'data_id'=>$data_id]); ?>
                 <?php echo $this->context->renderPartial('partial/extend_city', ['model'=>$model, 'form'=>$form, 'data_id'=>$data_id]); ?>
-                <?php echo $this->context->renderPartial('partial/extend_department', ['model'=>$model, 'form'=>$form, 'items_city_deprt'=>$items_dict['city_deprt'], 'data_id'=>$data_id]); ?>
-
-                <span class=" tour-selection-plus js-del-field"><i class="fas fa-minus"></i></span>
+                <?php echo $this->context->renderPartial('partial/extend_departure', ['model'=>$model, 'form'=>$form, 'items_city_deprt'=>$items_dict['city_deprt'], 'data_id'=>$data_id]); ?>
+                <span class="tour-selection-plus js-del-field" data_id=<?=$data_id?> ><i class="fas fa-minus"></i></span>
             </div>
 
-            <div class="tour-selection-wrap-in tour-selection-wrap-flex js-show-added-field" style="display: none">
-                <?php $data_id = 2; ?>
+            <?php $data_id = 2; //ид элемента, чтобы невозникло конфликто между элементами?>
+            <div class="tour-selection-wrap-in tour-selection-wrap-flex js-show-added-field js-hide-dell-field-<?=$data_id?>" style="display: none">
                 <?php echo $this->context->renderPartial('partial/extend_country', ['model'=>$model, 'form'=>$form, 'items_dict_country'=>$items_dict['country'], 'data_id'=>$data_id]); ?>
                 <?php echo $this->context->renderPartial('partial/extend_city', ['model'=>$model, 'form'=>$form, 'data_id'=>$data_id]); ?>
-                <?php echo $this->context->renderPartial('partial/extend_department', ['model'=>$model, 'form'=>$form, 'items_city_deprt'=>$items_dict['city_deprt'], 'data_id'=>$data_id]); ?>
-
-                <span class=" tour-selection-plus js-del-field"><i class="fas fa-minus"></i></span>
+                <?php echo $this->context->renderPartial('partial/extend_departure', ['model'=>$model, 'form'=>$form, 'items_city_deprt'=>$items_dict['city_deprt'], 'data_id'=>$data_id]); ?>
+                <span class="tour-selection-plus js-del-field" data_id=<?=$data_id?> ><i class="fas fa-minus"></i></span>
             </div>
         </div>
-
 
         <div class=" js-types-search-hotel-blocks" style="display: none">
             <div class="tour-selection-wrap-in tour-selection-wrap-flex ">
@@ -94,7 +90,7 @@ $this->registerJsFile(
                             </div>
 
                             <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-                                <div class="SumoSelect open" tabindex="0"><select id="sumo-department" class="SumoUnder" tabindex="-1">
+                                <div class="SumoSelect open" tabindex="0"><select id="sumo-departure" class="SumoUnder" tabindex="-1">
 
                                         <option value="Москва">Москва</option>
                                         <option value="Санкт-Петербург">Санкт-Петербург</option>
@@ -128,8 +124,7 @@ $this->registerJsFile(
                     <div class="bth__inp-block js-show-formDirections">
 
                         <span class="bth__inp-lbl ">Питание</span>
-                        <span class="bth__inp">
-                                </span>
+                        <span class="bth__inp"></span>
                     </div>
                     <div class="formDirections" style="display: none;">
 
@@ -139,7 +134,6 @@ $this->registerJsFile(
                                 Питание
                             </div>
                         </div>
-
 
                         <div class="formDirections__wrap">
 
@@ -195,15 +189,10 @@ $this->registerJsFile(
                                     <div class="formDirections__static-btn js-close-formDirections">Применить
                                     </div>
 
-
                                 </div>
-
                             </div>
-
-
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="tour-selection-wrap-in tour-selection-wrap-flex ">
@@ -223,7 +212,6 @@ $this->registerJsFile(
                                     Добавить отель
                                 </div>
                             </div>
-
 
                             <div class="formDirections__bottom">
 
@@ -308,12 +296,10 @@ $this->registerJsFile(
                                         </div>
                                         <span class="formDirections__count">Никитари</span>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <span class="tour-selection-plus hide-1023 js-add-hotel"><i class="fas fa-plus"></i></span>
             </div>
@@ -335,7 +321,6 @@ $this->registerJsFile(
                                 </div>
                             </div>
 
-
                             <div class="formDirections__bottom">
 
                                 <div class="formDirections__search">
@@ -424,16 +409,10 @@ $this->registerJsFile(
                             </div>
                         </div>
                     </div>
-
-
                 </div>
                 <span class=" tour-selection-plus  js-del-hotel"><i class="fas fa-minus"></i></span>
             </div>
-
-
         </div>
-
-
         <div class="tour-selection-wrap-in">
             <div class="bth__ta-resizable-wrap">
                 <div class="bth__ta-resizable" contenteditable="" id="optional"></div>
@@ -452,10 +431,7 @@ $this->registerJsFile(
                     <i class="fas fa-circle"></i>
                 </div>
             </div>
-
-
         </div>
     </div>
     <?php ActiveForm::end(); ?>​
-
 </div>

@@ -101,7 +101,6 @@ use yii\helpers\Html;
             </div>
         </div>
 
-
         <div class="exit__block">
             <div class="header__exit">Выйти</div>
         </div>

@@ -1,4 +1,37 @@
 $(document).ready(function () {
+    var _countTourPach = 3; //количество направлений в турпакете
+    var _sumoselect_country = $('.sumo-direction-country'); //селект поиска страны в турпакете
+    var _sumoselect_departure = $('.sumo-departure'); //селект поиска город вылета в турпакете
+    var _sumoselect_city= $('.sumo-direction-city'); //селект поиска города в турпакете
+
+    //формирование отображение страны поездки
+    _sumoselect_country.SumoSelect({
+        search: true,
+        forceCustomRendering: true,
+        searchText: 'Искать...',
+        noMatch: 'Нет совпадений для "{0}"',
+        searchFn: function (haystack, needle) {
+            return needle.length > 3 && haystack.toLowerCase().indexOf(needle.toLowerCase()) < 0;
+        }
+
+    });
+    _sumoselect_country.parent().addClass('open');
+    _sumoselect_country.next().next().css('top', '0').css('position', 'relative');
+
+    //формирование отображение города вылета
+    _sumoselect_departure.SumoSelect({
+        search: true,
+        forceCustomRendering: true,
+        searchText: 'Искать...',
+        noMatch: 'Нет совпадений для "{0}"',
+        searchFn: function (haystack, needle) {
+            return needle.length > 3 && haystack.toLowerCase().indexOf(needle.toLowerCase()) < 0;
+        }
+    });
+    _sumoselect_departure.parent().addClass('open');
+    _sumoselect_departure.next().next().css('top', '0').css('position', 'relative');
+
+    //сабмит формы турпакет
     $('#extend_submit').on('click', function () {
 
         $('#requests-optional').val($('#optional').html()); //копируем значение из div в наш инпут-optional
@@ -7,8 +40,12 @@ $(document).ready(function () {
 
         var _form_data = $('#form-extend').serializeArray();
 
-        _form_data.push({'name': 'country_direction', 'value': $('#country_direction').html()});
-        _form_data.push({'name': 'city_direction', 'value':  $('#city_direction').html()});
+        for(var i=0; i<_countTourPach; i++) {
+            _form_data.push({'name':'city_id[]', 'value': $('#city_direction-'+i).html()});
+            _form_data.push({'name':'country_id[]', 'value': $('#country_direction-'+i).html()});
+            _form_data.push({'name':'departure_id[]', 'value': $('#direct_departure-'+i).html()});
+        }
+
         $.ajax({
                 type: 'post',
                 dataType: 'json',
@@ -16,11 +53,11 @@ $(document).ready(function () {
                 data: _form_data
             }
         )
-            .done(function (data) {
-                if (data['code'] == 1) {
-                    $('#formPanel').html($('#thx').html());
-                }
-            })
+        .done(function (data) {
+            if (data['code'] == 1) {
+                $('#formPanel').html($('#thx').html());
+            }
+        })
     });
 
     //отктыртие инпута, закрытие отсльных
@@ -40,25 +77,18 @@ $(document).ready(function () {
         $(this).closest('.formDirections').removeClass('d-ib');
     });
 
-
-    var _sumoselect_country = $('.sumo-direction-country');
-    var _sumoselect_department = $('.sumo-department');
-    var _sumoselect_city= $('.sumo-direction-city');
-
-    //формирование отображение страны поездки
-        _sumoselect_country.SumoSelect({
-        search: true,
-        forceCustomRendering: true,
-        searchText: 'Искать...',
-        noMatch: 'Нет совпадений для "{0}"',
-        searchFn: function (haystack, needle) {
-            return needle.length > 3 && haystack.toLowerCase().indexOf(needle.toLowerCase()) < 0;
+    //очистка города поездки
+    function sumoselectCityClear(_sumoselect_city, _id){
+        if (_sumoselect_city.hasClass('SumoUnder')) {
+            _sumoselect_city[0].sumo.unload();
+            _sumoselect_city.removeClass('SumoUnder');
         }
 
-    });
-
-    _sumoselect_country.parent().addClass('open');
-    _sumoselect_country.next().next().css('top', '0').css('position', 'relative');
+        $('#city_direction-'+_id).html('Не важно');
+        $('#text-city-select-'+_id).html('Укажите страну');
+        _sumoselect_city.html(' ');
+        _sumoselect_city    .hide();
+    }
 
     //выбор страны поездки, установка флага и значения
     _sumoselect_country.change(function (event) {
@@ -69,10 +99,7 @@ $(document).ready(function () {
         $('#country_direction-'+_id).html(_text_select_city);
         $(this).closest('.formDirections').removeClass('d-ib');
 
-        if (_sumoselect_city.hasClass('SumoUnder')) {
-            _sumoselect_city[0].sumo.unload();
-            $('#city_direction').html('Не важно');
-        }
+        sumoselectCityClear(_sumoselect_city, _id);
 
         $('#country_direction_Flag-'+_id).attr('class', 'tour-selection__flag');
         $('#country_direction_Flag-'+_id).addClass('lsfw-flag lsfw-flag-' + $(this).val());
@@ -113,23 +140,10 @@ $(document).ready(function () {
         $(this).closest('.formDirections').hide();
     });
 
-    //формирование отображение города вылета
-    _sumoselect_department.SumoSelect({
-        search: true,
-        forceCustomRendering: true,
-        searchText: 'Искать...',
-        noMatch: 'Нет совпадений для "{0}"',
-        searchFn: function (haystack, needle) {
-            return needle.length > 3 && haystack.toLowerCase().indexOf(needle.toLowerCase()) < 0;
-        }
-    });
-    _sumoselect_department.parent().addClass('open');
-    _sumoselect_department.next().next().css('top', '0').css('position', 'relative');
-
     //выбор города вылета
-    _sumoselect_department.change(function (event) {
+    _sumoselect_departure.change(function (event) {
         var _id = $(this).attr('data_id');
-        $('#city_department-'+_id).html($(this).find('option:selected').html());
+        $('#direct_departure-'+_id).html($(this).find('option:selected').html());
         $(this).closest('.formDirections').hide();
     });
 
@@ -142,13 +156,18 @@ $(document).ready(function () {
             }
         });
     });
-
     $('.js-del-field').on('click', function () {
-        $('.js-show-added-field').each(function () {
-            if ($(this).is(":visible")) {
-                $(this).hide();
-                return false;
-            }
-        });
+        var _id = $(this).attr('data_id');
+        _sumoselect_city = $('#sumo-direction-city-'+_id);
+        $('.js-hide-dell-field-'+_id).hide();
+
+        sumoselectCityClear(_sumoselect_city, _id);
+
+        $('#city_direction-'+_id).html('Не важно');
+        $('#direct_departure-'+_id).html('Не важно');
+        $('#country_direction-'+_id).html('Не важно');
+        $('#country_direction_Flag-'+_id).attr('class', 'tour-selection__flag');
+
+        return false;
     });
 });

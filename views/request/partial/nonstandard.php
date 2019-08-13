@@ -7,7 +7,6 @@ $this->registerJsFile(
     '@web/js/help-selection.js',
     ['depends' => [\yii\web\JqueryAsset::className()]]
 );
-
 ?>
 
 <div class="panel" id="formPanel" style="display: none;">
@@ -15,7 +14,6 @@ $this->registerJsFile(
     <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей
         поездки
     </div>
-
 
     <div class="tour-selection-wrap">
 
@@ -40,7 +38,6 @@ $this->registerJsFile(
                 </label>
             </div>
         </div>
-
 
         <div class="tour-selection-wrap-in tour-selection-wrap-flex">
             <div class="tour-selection-field tour-selection-field--30p">
@@ -128,6 +125,7 @@ $this->registerJsFile(
                 'id'=>'create_at'
             ]
         ) ?>
+
         <div class="tour-selection-wrap-in">
             <div class=" bth__btn  bth__btn--fill bth__loader" id='nonstandard_submit'>
                 Отправить заявку*
@@ -150,7 +148,6 @@ $this->registerJsFile(
 
         <?php ActiveForm::end(); ?>
     </div>
-
 
 </div>
 <div class="panel" id="thx" style="display:none">

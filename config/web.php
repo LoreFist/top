@@ -2,6 +2,7 @@
 
 $params = require __DIR__.'/params.php';
 $db     = require __DIR__.'/db.php';
+$dict   = require __DIR__.'/dict.php';
 
 $config = [
     'id'         => 'basic',
@@ -38,9 +39,10 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,
             'rules'           => [
-                '/'                                     => 'requests/help',
-                '/savenostandard'                       => 'requests/savenostandard',
-                '/getcity'                              => 'requests/getcity',
+                '/'                                     => 'request/help',
+                '/savenostandard'                       => 'request/savenostandard',
+                '/saveextend'                           => 'request/saveextend',
+                '/getcity'                              => 'request/getcity',
                 '/admin/page/<page:\d+>/<per-page:\d+>' => 'admin/index',
                 '/admin/<id:\d+>'                       => 'admin/view',
                 '/admin'                                => 'admin/index',
@@ -65,8 +67,8 @@ $config = [
                 'encryption' => 'tls',
             ],
         ],
-        'db'           => $db['localhost'],
-        'dict'         => $db['dict'],
+        'db'           => $db,
+        'dict'         => $dict,
 
     ],
     'params'     => $params,

@@ -3,8 +3,6 @@ namespace app\assets;
 
 use yii\web\AssetBundle;
 
-
-
 /**
  * Admin asset bundle.
  */

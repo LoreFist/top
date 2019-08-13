@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\Requests;
+use app\models\Request;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
 
@@ -10,14 +10,14 @@ class AdminController extends \yii\web\Controller
 {
 
     /**
-     * Lists all Requests models.
+     * Отображение в виде бутсрап таблицы всех заявок
      *
      * @return mixed
      */
     public function actionIndex()
     {
 
-        $query   = Requests::find()->orderBy(['id' => SORT_DESC]);
+        $query   = Request::find()->orderBy(['id' => SORT_DESC]);
         $columns = [
             [
                 'header'    => 'Id заявки',
@@ -66,7 +66,7 @@ class AdminController extends \yii\web\Controller
     }
 
     /**
-     * Displays a single Requests model.
+     * Отоборажение конкретной заявки
      *
      * @param  string  $id
      *
@@ -78,7 +78,7 @@ class AdminController extends \yii\web\Controller
         return $this->render(
             'view',
             [
-                'model' => Requests::findOne($id),
+                'model' => Request::findOne($id),
             ]
         );
     }

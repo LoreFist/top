@@ -2,7 +2,7 @@
 use LibUiTourFilter\widgets\WPrice;
 ?>
 
-<?= $form->field($model, 'price')->widget(WPrice::className(),[
+<?= $form->field($model, 'currency')->widget(WPrice::className(),[
     'name' => 'price',
 
     // если нужно несколько одинаковых виджетов то это поле должно быть разным для них

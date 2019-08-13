@@ -1,8 +1,6 @@
 <?php
 namespace app\controllers;
 
-//
-
 /**
  * Class SiteController
  * @package app\controllers

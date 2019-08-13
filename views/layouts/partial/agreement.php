@@ -1,15 +1,11 @@
     <div id="p-agreement-pp" class="agreement-pp mfp-hide">
-
-
         <div class="agreement-pp__mdl">
             <div class="agreement-pp__section">
-
                 <div class="tabs-block">
                     <div class="tabs-bar">
                         <div id="agreement" class="agreement-pp__tab"> Соглашение об обработке личных данных</div>
                         <div id="siteRole" class="agreement-pp__tab"> Правила сайта</div>
                         <div id="agreement_line" class="agreement-pp__line" style="width: 345.016px; left: 30px;"></div>
-
                         <div class="js-modal-close agreement-pp__close"></div>
                     </div>
                     <div class="tabagr" id="agreementPanel" style="">
@@ -82,8 +78,6 @@
                                 </div>
 
                             </div>
-
-
                         </div>
                     </div>
 
@@ -375,12 +369,9 @@
                                     Администраторы ресурса<br>
                                     www.tophotels.ru<span id="ctrlcopy"><br><br>Читать полностью на&nbsp;<a href="https://www.tophotels.ru/about/agreement">https://www.tophotels.ru/about/agreement</a></span>
                                 </p></div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>

@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     //переходы по табам нестандартного запроса
     $('#step1').click(function () {
         line($(this), '.tab');
@@ -96,7 +95,6 @@ $(document).ready(function () {
         if ($(this).val().trim() !== '') {
             $(this).next('.bth__inp-lbl').hide();
         } else {
-
             $(this).next('.bth__inp-lbl').show();
         }
     });

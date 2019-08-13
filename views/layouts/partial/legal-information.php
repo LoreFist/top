@@ -305,7 +305,6 @@
                     </div>
                 </div>
 
-
                 <div class="tabagr" id="confid-panel" style="display: none;">
                     <div class="agreement-pp__role-site">
 
@@ -330,7 +329,6 @@
                             <p> • для составления отчетов.
 
                             </p>
-
 
                             <p><strong class="uppercase">3. Раскрытие информации</strong></p>
                             <p>Сайт <a href="#">www.tophotels.ru</a> не дает в аренду, не продает и не делится Вашей персональной
@@ -360,7 +358,6 @@
                                 на сайте <a href="#">www.tophotels.ru</a> , прежде чем другая Политика конфиденциальности вступит в
                                 силу по отношению
                                 к Вашей персональной информации.</p>
-
 
                             <p><strong class="uppercase"> 4. Файлы сookies</strong>
                             </p>
@@ -413,7 +410,6 @@
 
                             </p>
 
-
                             <p><strong class="uppercase">5. Ссылки на третьи сайты</strong>
                             </p>
                             <p>Сайт <a href="#">www.tophotels.ru </a> предоставляет ссылки на третьи сайты и может информировать
@@ -436,7 +432,6 @@
                                 максимальные усилия для хранения Вашей информации в безопасной среде, недоступной посторонним.
 
                             </p>
-
 
                             <p><strong class="uppercase">7. Обмен информацией между пользователями сайта www.tophotels.ru</strong>
                             </p>
@@ -479,12 +474,9 @@
 
                     </div>
 
-
                 </div>
-
 
             </div>
         </div>
-
     </div>
 </div>

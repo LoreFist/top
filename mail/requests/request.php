@@ -64,7 +64,6 @@ use yii\helpers\Url;
                     </tbody>
                 </table>
 
-
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="padding: 15px;">
                     <tbody>
                     <tr>
@@ -90,7 +89,6 @@ use yii\helpers\Url;
                                            style="-webkit-text-size-adjust:none;font: 15px Arial, sans-serif;line-height: 20px;color: #000000;text-decoration: none;"><?= $model->phone?></a>
                                     </td>
                                 </tr>
-
 
                                 </tbody>
                             </table>
@@ -167,10 +165,7 @@ use yii\helpers\Url;
                 <![endif]-->
 
             </div>
-
         </td>
-
     </tr>
-
     </tbody>
 </table>

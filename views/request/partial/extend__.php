@@ -19,7 +19,6 @@
 
                 <div class="SumoSelect open" tabindex="0"><select id="sumo-direction-city" class="SumoUnder" tabindex="-1">
 
-
                         <option value="Анапа">Анапа</option>
                         <option value="Билек">Билек</option>
                         <option value="Сиде">Сиде</option>
@@ -44,7 +43,6 @@
                         <option value="Сочи">Сочи</option>
                         <option value="Севастополь">Севастополь</option>
                         <option value="Симферополь">Симферополь</option>
-
 
                     </select><p class="CaptionCont SelectBox search" title=" Анапа"><span> Анапа</span><label><i></i></label><input type="text" class="search-txt" value="" placeholder="Искать..."></p><div class="optWrapper" style="top: 0px; position: relative;"><ul class="options"><li class="opt selected" data-val="undefined"><label>Анапа</label></li><li class="opt" data-val="undefined"><label>Билек</label></li><li class="opt" data-val="undefined"><label>Сиде</label></li><li class="opt" data-val="undefined"><label>Сочи</label></li><li class="opt" data-val="undefined"><label>Севастополь</label></li><li class="opt" data-val="undefined"><label>Симферополь</label></li><li class="opt" data-val="undefined"><label>Анапа</label></li><li class="opt" data-val="undefined"><label>Билек</label></li><li class="opt" data-val="undefined"><label>Сиде</label></li><li class="opt" data-val="undefined"><label>Сочи</label></li><li class="opt" data-val="undefined"><label>Севастополь</label></li><li class="opt" data-val="undefined"><label>Симферополь</label></li><li class="opt" data-val="undefined"><label>Анапа</label></li><li class="opt" data-val="undefined"><label>Билек</label></li><li class="opt" data-val="undefined"><label>Сиде</label></li><li class="opt" data-val="undefined"><label>Сочи</label></li><li class="opt" data-val="undefined"><label>Севастополь</label></li><li class="opt" data-val="undefined"><label>Симферополь</label></li><li class="opt" data-val="undefined"><label>Анапа</label></li><li class="opt" data-val="undefined"><label>Билек</label></li><li class="opt" data-val="undefined"><label>Сиде</label></li><li class="opt" data-val="undefined"><label>Сочи</label></li><li class="opt" data-val="undefined"><label>Севастополь</label></li><li class="opt" data-val="undefined"><label>Симферополь</label></li></ul><p class="no-match"></p></div></div>
             </div>
@@ -52,14 +50,12 @@
         </div>
     </div>
 
-
 </div>
 <div class="tour-selection-field tour-selection-field--200">
     <div class="bth__inp-block js-show-formDirections ">
         <span class="bth__inp-lbl ">Город вылета</span>
         <span class="bth__inp uppercase"></span>
     </div>
-
 
     <div class="formDirections w100p" style="display: none;">
         <div class="formDirections__wrap w100p">
@@ -71,7 +67,7 @@
             </div>
 
             <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-                <div class="SumoSelect open" tabindex="0"><select id="sumo-department" class="SumoUnder" tabindex="-1">
+                <div class="SumoSelect open" tabindex="0"><select id="sumo-departure" class="SumoUnder" tabindex="-1">
 
                         <option value="Москва">Москва</option>
                         <option value="Санкт-Петербург">Санкт-Петербург</option>
@@ -99,8 +95,6 @@
 
         </div>
     </div>
-
-
 </div>
 
 
@@ -117,35 +111,28 @@
             <div class="formDirections__top-tab super-grey">Параметры отеля</div>
         </div>
 
-
         <div class="formDirections__wrap formDirections__row">
 
             <div class="formDirections__wrap-flex">
                 <div class="formDirections__top  formDirections__top-line">
-
 
                     <div class="formDirections__top-tab active js-act-stars">
                         Категория
                     </div>
 
                     <div class="formDirections__top-tab js-act-rating">
-
                         Рейтинг
                     </div>
                     <div class="formDirections__top-tab js-act-hotels">
-
                         Питание
                     </div>
                     <div class="formDirections__top-tab js-act-country">
-
                         Расположение
                     </div>
                     <div class="formDirections__top-tab js-act-kid">
-
                         Для детей
                     </div>
                     <div class="formDirections__top-tab js-act-other">
-
                         Прочее
                     </div>
 
@@ -270,7 +257,6 @@
 
                                 </div>
                             </div>
-
 
                         </div>
                     </div>
@@ -489,7 +475,6 @@
                             </div>
                         </div>
 
-
                         <div class="form-dropdown-stars__item ">
                             <div class="rbt-block  ">
                                 <input type="radio" name="333rating" class="rbt " id="333rating8">
@@ -498,7 +483,6 @@
                                 </label>
                             </div>
                         </div>
-
 
                         <div class="form-dropdown-stars__item ">
                             <div class="rbt-block  ">
@@ -509,7 +493,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="formDirections__bottom js-search-kid" style="display: none">
 
@@ -525,7 +508,6 @@
                                 </div>
                             </div>
 
-
                             <div class="form-dropdown-stars__item ">
                                 <div class="cbx-block    cbx-block--16 ">
                                     <input type="checkbox" class="cbx" id="333kid2">
@@ -535,7 +517,6 @@
 
                                 </div>
                             </div>
-
 
                             <div class="form-dropdown-stars__item ">
                                 <div class="cbx-block   cbx-block--16  ">
@@ -556,8 +537,6 @@
 
                                 </div>
                             </div>
-
-
                         </div>
 
                     </div>
@@ -574,8 +553,6 @@
 
                                 </div>
                             </div>
-
-
                             <div class="form-dropdown-stars__item ">
                                 <div class="cbx-block    cbx-block--16 ">
                                     <input type="checkbox" class="cbx" id="333other2">
@@ -585,10 +562,7 @@
 
                                 </div>
                             </div>
-
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -596,6 +570,5 @@
 
         <div class="formDirections__btn-orange js-close-formDirections">Применить</div>
     </div>
-
 
 </div>
