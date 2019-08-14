@@ -2,13 +2,12 @@
 
 namespace app\controllers;
 
-use app\models\CityCountry;
 use app\models\DictCity;
 use app\models\DictCountry;
+use app\models\Direct;
 use app\models\Request;
 use Yii;
 use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
@@ -115,7 +114,7 @@ class RequestController extends \yii\web\Controller
     }
 
     /**
-     * Сохранение модели расширеного подбора
+     * Сохранение модели расширеного подбора, создание реквеста, разбор направлений и сохранение, добавление емайл в очередь
      *
      * @return Json
      */
@@ -140,9 +139,7 @@ class RequestController extends \yii\web\Controller
                 }
             }
 
-            $date_from_to     = explode(
-                "_", $posts['Request']['date_departure']
-            );
+            $date_from_to     = explode("_", $posts['Request']['date_departure']);
             $day_stay_from_to = explode("_", $posts['Request']['day_stay']);
 
             $posts['Request']['date_departure_from'] = $date_from_to[0];
@@ -151,11 +148,51 @@ class RequestController extends \yii\web\Controller
             $posts['Request']['day_stay_from'] = $day_stay_from_to[0];
             $posts['Request']['day_stay_to']   = $day_stay_from_to[1];
 
+            $directs = $posts['Request']['direct'];
+            unset($posts['Request']['direct']);
+
             $model->load($posts);
 
-            var_dump($posts);
-            VarDumper::dump($model);
-            die;
+            if($save = $model->save()) {
+
+                $countryCount   = count($directs['country_id']);
+                $departureCount = count($directs['departure_id']);
+                $directCount    = max($countryCount, $departureCount);
+
+                $directSave  = [];
+                $directModel = [];
+
+                for ($i = 0; $i < $directCount; $i++) {
+                    $directModel[$i] = new Direct();
+
+                    if (isset($directs['country_id'][$i])) {
+                        $directModel[$i]->country_id
+                            = $directs['country_id'][$i];
+                    }
+
+                    if (isset($directs['city_id'][$i])) {
+                        $directModel[$i]->city_id = $directs['city_id'][$i];
+                    }
+
+                    if (isset($directs['departure_id'][$i])) {
+                        $directModel[$i]->city_departure_id
+                            = $directs['departure_id'][$i];
+                    }
+
+                    $directModel[$i]->request_id = $model->id;
+                }
+
+                for ($i = 0; $i < $directCount; $i++) {
+                    $directSave[$i] = $directModel[$i]->save();
+                }
+
+                return json_encode(
+                    [
+                        'code'   => 1,
+                        'status' => 'send and save',
+                    ]
+                );
+            }
         }
     }
 
