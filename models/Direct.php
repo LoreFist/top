@@ -32,7 +32,7 @@ class Direct extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'request_id'], 'required'],
+            [['request_id'], 'required'],
             [['id', 'request_id', 'country_id', 'city_id', 'city_departure_id'], 'integer'],
             [['id', 'request_id'], 'unique', 'targetAttribute' => ['id', 'request_id']],
             [['request_id'], 'exist', 'skipOnError' => true, 'targetClass' => Request::className(), 'targetAttribute' => ['request_id' => 'id']],

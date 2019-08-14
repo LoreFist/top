@@ -73,7 +73,7 @@ $this->registerJsFile(
                         'phone',
                         [
                             'class' => 'bth__inp js-label',
-                            'id'    => 'phone1',
+                            'id'    => 'phone_nostan',
                         ]
                     ) ?>
 

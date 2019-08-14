@@ -43,7 +43,7 @@ use yii\helpers\Url;
                     <tr>
                         <td style="font: 16px Arial, sans-serif;line-height: 20px;padding: 0 30px 10px;">
                             Здравствуйте! Вы получили новую заявку на подбор тура от пользователя - <a
-                                href="http://krischenko99.tophotels.site<?= Url::to(['admin/','id'=>$model->id]) ?>" target="_blank"
+                                href="http://krischenko99.tophotels.site/admin/<?=$model->id?>" target="_blank"
                                 style="-webkit-text-size-adjust:none;font: 16px Arial, sans-serif;line-height: 20px;color: #318cc6;text-decoration: none;">
                                 № <?= $model->id ?>
                             </a>.
@@ -54,7 +54,7 @@ use yii\helpers\Url;
 
                     <tr>
                         <td style="padding-bottom: 20px;padding-top: 20px">
-                            <a href="http://krischenko99.tophotels.site<?= Url::to(['admin/index']) ?>"
+                            <a href="http://krischenko99.tophotels.site/admin"
                                style="-webkit-text-size-adjust:none;font: 16px Arial, sans-serif;line-height: 20px;display: block;width: 230px;text-align: center;text-transform: uppercase;text-decoration: none;font-weight: bold;color: #ffffff;background-color: #00a551;margin: 0 auto;padding: 14px 0;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;">
                                 Просмотреть заявку
                             </a>

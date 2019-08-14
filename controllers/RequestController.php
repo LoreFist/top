@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\DictCity;
 use app\models\DictCountry;
 use app\models\Direct;
+use app\models\MailSchedule;
 use app\models\Request;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -68,7 +69,7 @@ class RequestController extends \yii\web\Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->created_at = strtotime($model->created_at);
-
+            $model->city_tour_id = 0;
             if ($model->save()) {
 
                 $email_to = 'test.th.welcome@gmail.com';
@@ -80,7 +81,7 @@ class RequestController extends \yii\web\Controller
                             'email_to' => $email_to,
                         ]
                     )
-                        ->setFrom(Yii::$app->params['client_email'])
+                        ->setFrom(Yii::$app->params['admin_email'])
                         ->setTo($email_to)
                         ->setSubject('Добавлена новая заявка')
                         ->send();
@@ -185,6 +186,15 @@ class RequestController extends \yii\web\Controller
                 for ($i = 0; $i < $directCount; $i++) {
                     $directSave[$i] = $directModel[$i]->save();
                 }
+
+                $mail = new MailSchedule();
+                $mail->request_id = $model->id;
+                $mail->created_at = date('y-m-d H:i:s');
+                $mail->send = 0;
+                $mail->save();
+                var_dump($mail);
+                die;
+
 
                 return json_encode(
                     [

@@ -3,6 +3,7 @@
 $params = require __DIR__.'/params.php';
 $db     = require __DIR__.'/db.php';
 $dict   = require __DIR__.'/dict.php';
+$mail   = require __DIR__.'/mail.php';
 
 $config = [
     'id'         => 'basic',
@@ -55,18 +56,7 @@ $config = [
                 ],
             ],
         ],
-        'mailer'       => [
-            'class'            => 'yii\swiftmailer\Mailer',
-            'useFileTransport' => false,
-            'transport'        => [
-                'class'      => 'Swift_SmtpTransport',
-                'host'       => 'smtp.gmail.com',
-                'username'   => 'sdfghj1234567sdfg@gmail.com',
-                'password'   => 'qwertyuiopoiuytrewq',
-                'port'       => '587',
-                'encryption' => 'tls',
-            ],
-        ],
+        'mailer'       => $mail,
         'db'           => $db,
         'dict'         => $dict,
 

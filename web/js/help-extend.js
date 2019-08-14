@@ -52,14 +52,12 @@ $(document).ready(function () {
     });
 
     $('#extend_step_submit').on('click', function (){
-        console.log($('#city-tour').html());
         if($('#city-tour').html() == '')
             $('#sumo-list-city-2').val('')
 
         var $form = $('#form-extend');
         var data = $form.data("yiiActiveForm");
 
-        console.log(data.attributes);
         $.each(data.attributes, function(e) {
             this.status = 3;
         });
@@ -88,11 +86,11 @@ $(document).ready(function () {
                     data: _form_data
                 }
             )
-                .done(function (data) {
-                    if (data['code'] == 1) {
-                        $('#step2Panel').html($('#thx').html());
-                    }
-                })
+            .done(function (data) {
+                if (data['code'] == 1) {
+                    $('#step2Panel').html($('#thx').html());
+                }
+            })
         }
     });
 

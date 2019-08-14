@@ -29,7 +29,7 @@ $(document).ready(function () {
     function validation(obj) {
         var valid = [];
 
-        /*if ($('#name1').val() == '') { //имя не пустое
+        if ($('#name1').val() == '') { //имя не пустое
             $('#name1').parent('.js-add-error').addClass('has-error');
             valid['name'] = false;
         } else {
@@ -37,11 +37,11 @@ $(document).ready(function () {
             valid['name'] = true;
         }
 
-        if ($('#phone1').val() == '') { //телефон не пустой
-            $('#phone1').parent('.js-add-error').addClass('has-error');
+        if ($('#phone_nostan').val() == '') { //телефон не пустой
+            $('#phone_nostan').parent('.js-add-error').addClass('has-error');
             valid['phone'] = false;
         } else {
-            $('#phone1').parent('.js-add-error').removeClass('has-error');
+            $('#phone_nostan').parent('.js-add-error').removeClass('has-error');
             valid['phone'] = true;
         }
 
@@ -53,7 +53,7 @@ $(document).ready(function () {
         } else {
             $('#mail3').parent('.js-add-error').removeClass('has-error');
             valid['mail'] = true;
-        }*/
+        }
 
         return valid;
     }
@@ -67,7 +67,7 @@ $(document).ready(function () {
         var valid = validation($(this));
         var date = new Date();
         $('#create_at').val(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
-
+console.log(valid);
         if (valid['name'] == true && valid['phone'] == true && valid['mail'] == true) {
             $(this).addClass('bth__loader--animate'); //анимация трех точек для кнопки
             $.ajax({
