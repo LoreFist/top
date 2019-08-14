@@ -2,12 +2,14 @@ $(document).ready(function () {
     //переходы по табам нестандартного запроса
     $('#step1').click(function () {
         line($(this), '.tab');
-        $('#step1Panel').show();
+        $('#step2Panel').hide();
         $('#formPanel').hide();
+        $('#step1Panel').show();
     });
     $('#form').click(function () {
         line($(this), '.tab');
         $('#step1Panel').hide();
+        $('#step2Panel').hide();
         $('#formPanel').show();
     });
 
@@ -27,7 +29,7 @@ $(document).ready(function () {
     function validation(obj) {
         var valid = [];
 
-        if ($('#name1').val() == '') { //имя не пустое
+        /*if ($('#name1').val() == '') { //имя не пустое
             $('#name1').parent('.js-add-error').addClass('has-error');
             valid['name'] = false;
         } else {
@@ -51,14 +53,14 @@ $(document).ready(function () {
         } else {
             $('#mail3').parent('.js-add-error').removeClass('has-error');
             valid['mail'] = true;
-        }
+        }*/
 
         return valid;
     }
 
-    $('.js-label').keyup(function () {
+    /*$('.js-label').keyup(function () {
         validation($(this));
-    });
+    });*/
 
     //отправка нестандартной формы
     $('#nonstandard_submit').on('click', function () {

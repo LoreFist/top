@@ -9,7 +9,7 @@ $this->registerJsFile(
 );
 ?>
 
-<div class="panel" id="formPanel" style="display: none;">
+<div class="panel" id="formPanel" style="">
 
     <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей
         поездки

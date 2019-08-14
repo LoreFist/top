@@ -8,13 +8,13 @@ use Yii;
  * This is the model class for table "direct".
  *
  * @property int $id
+ * @property int $request_id
  * @property int $country_id
  * @property int $city_id
  * @property int $city_departure_id
  *
- * @property RequestDirect $id0
- * @property RequestDirect[] $requestDirects
- * @property Request[] $requests
+ * @property Request $request
+ * @property Request $request0
  */
 class Direct extends \yii\db\ActiveRecord
 {
@@ -32,8 +32,10 @@ class Direct extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['country_id', 'city_id', 'city_departure_id'], 'integer'],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => RequestDirect::className(), 'targetAttribute' => ['id' => 'direct_id']],
+            [['id', 'request_id'], 'required'],
+            [['id', 'request_id', 'country_id', 'city_id', 'city_departure_id'], 'integer'],
+            [['id', 'request_id'], 'unique', 'targetAttribute' => ['id', 'request_id']],
+            [['request_id'], 'exist', 'skipOnError' => true, 'targetClass' => Request::className(), 'targetAttribute' => ['request_id' => 'id']],
         ];
     }
 
@@ -44,6 +46,7 @@ class Direct extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'request_id' => 'Request ID',
             'country_id' => 'Country ID',
             'city_id' => 'City ID',
             'city_departure_id' => 'City Departure ID',
@@ -53,33 +56,25 @@ class Direct extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getId0()
+    public function getRequest()
     {
-        return $this->hasOne(RequestDirect::className(), ['direct_id' => 'id']);
+        return $this->hasOne(Request::className(), ['id' => 'request_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRequestDirects()
+    public function getRequest0()
     {
-        return $this->hasMany(RequestDirect::className(), ['direct_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRequests()
-    {
-        return $this->hasMany(Request::className(), ['id' => 'request_id'])->viaTable('request_direct', ['direct_id' => 'id']);
+        return $this->hasOne(Request::className(), ['id' => 'request_id']);
     }
 
     /**
      * {@inheritdoc}
-     * @return directQuery the active query used by this AR class.
+     * @return DirectQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new directQuery(get_called_class());
+        return new DirectQuery(get_called_class());
     }
 }

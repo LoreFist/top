@@ -47,6 +47,7 @@ class AppAsset extends AssetBundle
         'css/lib-ui-tour-filter/lsfw-form-direction.css',
         'css/lib-ui-tour-filter/lsfw-price-widget.css',
         'css/lib-ui-tour-filter/lsfw-tour-filter.css',
+        'css/lib-ui-tour-filter/lsfw-form-direction.css',
     ];
 
     public $js = [

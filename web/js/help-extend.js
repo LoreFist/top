@@ -2,7 +2,8 @@ $(document).ready(function () {
     var _countTourPach = 3; //количество направлений в турпакете
     var _sumoselect_country = $('.sumo-direction-country'); //селект поиска страны в турпакете
     var _sumoselect_departure = $('.sumo-departure'); //селект поиска город вылета в турпакете
-    var _sumoselect_city= $('.sumo-direction-city'); //селект поиска города в турпакете
+    var _sumoselect_city = $('.sumo-direction-city'); //селект поиска города в турпакете
+    var _sumoselect_city_tour = $('.sumo-list-city'); //селект поиска города в турпакете
 
     //формирование отображение страны поездки
     _sumoselect_country.SumoSelect({
@@ -31,33 +32,68 @@ $(document).ready(function () {
     _sumoselect_departure.parent().addClass('open');
     _sumoselect_departure.next().next().css('top', '0').css('position', 'relative');
 
+    //формирование отображение города турагентсва
+    _sumoselect_city_tour.SumoSelect({
+        search: true,
+        forceCustomRendering: true,
+        searchText: 'Искать...',
+        noMatch: 'Нет совпадений для "{0}"',
+        searchFn: function (haystack, needle) {
+            return needle.length > 3 && haystack.toLowerCase().indexOf(needle.toLowerCase()) < 0;
+        }
+    });
+    _sumoselect_city_tour.parent().addClass('open');
+    _sumoselect_city_tour.next().next().css('top', '0').css('position', 'relative');
+
     //сабмит формы турпакет
     $('#extend_submit').on('click', function () {
+        $('#step1Panel').hide();
+        $('#step2Panel').show();
+    });
 
-        $('#requests-optional').val($('#optional').html()); //копируем значение из div в наш инпут-optional
+    $('#extend_step_submit').on('click', function (){
+        console.log($('#city-tour').html());
+        if($('#city-tour').html() == '')
+            $('#sumo-list-city-2').val('')
 
-        $(this).addClass('bth__loader--animate'); //анимация трех точек для кнопки
+        var $form = $('#form-extend');
+        var data = $form.data("yiiActiveForm");
 
-        var _form_data = $('#form-extend').serializeArray();
+        console.log(data.attributes);
+        $.each(data.attributes, function(e) {
+            this.status = 3;
+        });
 
-        for(var i=0; i<_countTourPach; i++) {
-            _form_data.push({'name':'city_id[]', 'value': $('#city_direction-'+i).html()});
-            _form_data.push({'name':'country_id[]', 'value': $('#country_direction-'+i).html()});
-            _form_data.push({'name':'departure_id[]', 'value': $('#direct_departure-'+i).html()});
+        $form.yiiActiveForm("validate");
+
+        var _valid = $form.find('.has-error').length;
+
+        if(_valid == 0){
+            $('#requests-optional').val($('#optional').html()); //копируем значение из div в наш инпут-optional
+
+            $(this).addClass('bth__loader--animate'); //анимация трех точек для кнопки
+
+            var _form_data = $('#form-extend').serializeArray();
+
+            for(var i=0; i<_countTourPach; i++) {
+                _form_data.push({'name':'city_id[]', 'value': $('#city_direction-'+i).html()});
+                _form_data.push({'name':'country_id[]', 'value': $('#country_direction-'+i).html()});
+                _form_data.push({'name':'departure_id[]', 'value': $('#direct_departure-'+i).html()});
+            }
+
+            $.ajax({
+                    type: 'post',
+                    dataType: 'json',
+                    url: '/saveextend',
+                    data: _form_data
+                }
+            )
+                .done(function (data) {
+                    if (data['code'] == 1) {
+                        $('#step2Panel').html($('#thx').html());
+                    }
+                })
         }
-
-        $.ajax({
-                type: 'post',
-                dataType: 'json',
-                url: '/saveextend',
-                data: _form_data
-            }
-        )
-        .done(function (data) {
-            if (data['code'] == 1) {
-                $('#formPanel').html($('#thx').html());
-            }
-        })
     });
 
     //отктыртие инпута, закрытие отсльных
@@ -92,12 +128,15 @@ $(document).ready(function () {
 
     //выбор страны поездки, установка флага и значения
     _sumoselect_country.change(function (event) {
+        if($('#step1Panel').is(":hidden"))
+            return false;
+
         var _id = $(this).attr('data_id');
         var _text_select_city = $(this).find('option:selected').html();
         _sumoselect_city = $('#sumo-direction-city-'+_id);
 
         $('#country_direction-'+_id).html(_text_select_city);
-        $(this).closest('.formDirections').removeClass('d-ib');
+        $(this).closest('.formDirections').hide();
 
         sumoselectCityClear(_sumoselect_city, _id);
 
@@ -118,7 +157,6 @@ $(document).ready(function () {
         .done(function (data) {
             $('#sumo-direction-city-'+_id).html(data);
             $('#text-city-select-'+_id).html(_text_select_city);
-
             _sumoselect_city.SumoSelect({
                 search: true,
                 forceCustomRendering: true,
@@ -147,6 +185,14 @@ $(document).ready(function () {
         $(this).closest('.formDirections').hide();
     });
 
+    //выбор города турангества
+    _sumoselect_city_tour.change(function (event) {
+        var _id = $(this).attr('data_id');
+        $('#city-tour').html($(this).find('option:selected').html());
+        $('#city-tour-label').addClass('--center active');
+        $(this).closest('.formDirections').hide();
+    });
+
     //добавить удалить дополнительные контролы турпакета
     $('.js-add-field').on('click', function () {
         $('.js-show-added-field').each(function () {
@@ -169,5 +215,19 @@ $(document).ready(function () {
         $('#country_direction_Flag-'+_id).attr('class', 'tour-selection__flag');
 
         return false;
+    });
+
+    //сдвигает плейсхолдер
+    $('.optional-js-field').on('click', function () {
+        $(this).find('.bth__inp-lbl').addClass('active');
+        $(this).closest('.js-show-saggest').next().show();
+    });
+
+    //возвращает плейсхолдер
+    $('.optional-js-field').on('focusout', function () {
+        if ($(this).val().trim() === '') {
+            $(this).find('.bth__inp-lbl').removeClass('active');
+            $(this).closest('.js-show-saggest').next().hide();
+        }
     });
 });
