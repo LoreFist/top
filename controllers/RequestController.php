@@ -104,7 +104,6 @@ class RequestController extends \yii\web\Controller
 
 
             } else {
-                var_dump($model);
                 return json_encode(
                     [
                         'code'   => 0,
@@ -198,6 +197,14 @@ class RequestController extends \yii\web\Controller
                     [
                         'code'   => 1,
                         'status' => 'send and save',
+                    ]
+                );
+            }
+            else {
+                return json_encode(
+                    [
+                        'code'   => 0,
+                        'status' => 'no save',
                     ]
                 );
             }

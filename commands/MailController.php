@@ -20,10 +20,11 @@ class MailController extends Controller
             $now = new DateTime();
             $min = $date->diff($now)->format("%i");
             if($min>=Yii::$app->params['minute_delay_email']){
-                echo $mail->request_id."\n"."\n";
+                $mail->send = 1;
+                $mail->save();
 
                 $email_to = 'test.th.welcome@gmail.com';
-                $send_mail = Yii::$app->mailer->compose(
+                Yii::$app->mailer->compose(
                     '@app/mail/requests/request',
                     [
                         'model'    => Request::findOne($mail->request_id),
@@ -34,9 +35,6 @@ class MailController extends Controller
                     ->setTo($email_to)
                     ->setSubject('Добавлена новая заявка')
                     ->send();
-
-                $mail->send = 1;
-                $mail->save();
             }
         }
     }

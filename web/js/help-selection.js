@@ -4,25 +4,25 @@ $(document).ready(function () {
         line($(this), '.tab');
         $('#step2Panel').hide();
         $('#formPanel').hide();
-        $('#step1Panel').show();
+        $('#step1Panel').slideDown();
     });
     $('#form').click(function () {
         line($(this), '.tab');
         $('#step1Panel').hide();
         $('#step2Panel').hide();
-        $('#formPanel').show();
+        $('#formPanel').slideDown();
     });
 
     //переход по табам соглашения пользователя в модальном окне
     $('#agreement, .agree').click(function () {
         line($('#agreement'), '#siteRole', $('#agreement_line'));
-        $('#agreementPanel').show();
+        $('#agreementPanel').slideDown();
         $('#siteRolePanel').hide();
     });
     $('#siteRole, .site-role').click(function () {
         line($('#siteRole'), '#agreement', $('#agreement_line'));
         $('#agreementPanel').hide();
-        $('#siteRolePanel').show();
+        $('#siteRolePanel').slideDown();
     });
 
     //условия проверки полей нестандартного запроса

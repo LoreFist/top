@@ -48,7 +48,7 @@ $(document).ready(function () {
     //сабмит формы турпакет
     $('#extend_submit').on('click', function () {
         $('#step1Panel').hide();
-        $('#step2Panel').show();
+        $('#step2Panel').slideDown();
     });
 
     $('#extend_step_submit').on('click', function (){
@@ -89,6 +89,7 @@ $(document).ready(function () {
             )
             .done(function (data) {
                 if (data['code'] == 1) {
+                    $('#step1Panel').html($('#thx').html());
                     $('#step2Panel').html($('#thx').html());
                 }
             })
@@ -228,5 +229,14 @@ $(document).ready(function () {
             $(this).find('.bth__inp-lbl').removeClass('active');
             $(this).closest('.js-show-saggest').next().hide();
         }
+    });
+
+    $('#type1').on('change', function(){
+        $('.js-types-search-hotel-blocks').hide();
+        $('.js-types-search-tours-blocks').slideDown();
+    });
+    $('#type2').on('change', function(){
+        $('.js-types-search-tours-blocks').hide();
+        $('.js-types-search-hotel-blocks').slideDown();
     });
 });
