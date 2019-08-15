@@ -140,19 +140,19 @@ $this->registerJsFile(
             <div class="tour-selection-wrap">
                 <?php $data_id = 0; ?>
                 <div data-tour-row="<?= $data_id ?>" class="tour-selection-wrap-in tour-selection-wrap-flex ">
-                    <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel'); ?>
+                    <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel',['data_id'=>$data_id]); ?>
                     <span class="tour-selection-plus hide-1023 js-add-spechotel" data_id=<?= $data_id ?>><i class="fas fa-plus"></i></span>
                 </div>
 
                 <?php $data_id = 1; ?>
                 <div data-tour-row="<?= $data_id ?>" class="tour-selection-wrap-in tour-selection-wrap-flex tour-selection-wrap-in--hidden js-show-added-spechotel js-hide-dell-spechotel-<?= $data_id ?>" style="display:none;">
-                    <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel'); ?>
+                    <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel',['data_id'=>$data_id]); ?>
                     <span class=" tour-selection-plus js-del-spechotel" data_id=<?= $data_id ?>><i class="fas fa-minus"></i></span>
                 </div>
 
                 <?php $data_id = 2; ?>
                 <div data-tour-row="<?= $data_id ?>" class="tour-selection-wrap-in tour-selection-wrap-flex tour-selection-wrap-in--hidden js-show-added-spechotel js-hide-dell-spechotel-<?= $data_id ?>" style="display:none;">
-                    <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel'); ?>
+                    <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel',['data_id'=>$data_id]); ?>
                     <span class=" tour-selection-plus js-del-spechotel" data_id=<?= $data_id ?>><i class="fas fa-minus"></i></span>
                 </div>
             </div>

@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\DictCity;
-use app\models\DictCountry;
+use app\models\dict\DictCity;
+use app\models\dict\DictCountry;
 use app\models\Direct;
 use app\models\Food;
 use app\models\MailSchedule;
@@ -223,27 +223,8 @@ class RequestController extends \yii\web\Controller
         }
     }
 
-    /**
-     * Получение справочника городов
-     *
-     * @return mixed
-     */
-    public function actionGetcity()
+    public function actionGetallocation()
     {
-        if ($id = Yii::$app->request->post('id')) {
-            $dict_city = DictCity::getDictCity($id);
-            $items     = '';
 
-            foreach ($dict_city as $item) {
-                $items .= "<option value='".$item->id."'>".$item->name
-                    ."</option>";
-            }
-
-            return $this->renderPartial(
-                'partial/extend_city_select_option', [
-                    'items' => $items,
-                ]
-            );
-        }
     }
 }

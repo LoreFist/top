@@ -73,4 +73,47 @@ $(document).ready(function () {
 
         $('#label_food').html(_val_food);
     });
+
+
+    function delay(callback, ms) {
+        var timer = 0;
+        return function() {
+            var context = this, args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                callback.apply(context, args);
+            }, ms || 0);
+        };
+    }
+
+    $('.formDirections__search input.bth__inp').keyup(delay(function (e) {
+        var _searchText = $(this).val();
+        var _id = $(this).attr('data-id');
+        if (_searchText.length > 3) {
+            $.ajax(
+                {
+                    url: 'getallocation',
+                    data: {namesearch: _searchText},
+                    type: 'GET',
+                    dataType: 'html'
+                }
+            )
+                .done(function(data) {
+                    var _hotels = $('#add_hotel-'+_id);
+                    _hotels.html('');
+                    _hotels.html(data);
+                    $('.js-select-hotel-add').on('click',function(){
+                        $(this).closest('.formDirections').hide();
+                        $('#label-add-hotel-'+_id).addClass('active');
+
+                        $('.hotel-search__cut-'+_id).html($(this).attr('data-hotel-name'));
+                        $('.hotel-search__rating-'+_id).html($(this).attr('data-stars')+', ');
+                        $('.hotel-search__place-'+_id).html($(this).attr('data-country')+', '+$(this).attr('data-resort'));
+                    });
+                });
+        }
+        return;
+    }, 500));
+
+
 });
