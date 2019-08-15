@@ -122,7 +122,7 @@ $this->registerJsFile(
             'created_at',
             [
                 'style'=>'display:none;',
-                'id'=>'create_at'
+                'id'=>'create_at_n'
             ]
         ) ?>
 

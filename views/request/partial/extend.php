@@ -309,4 +309,5 @@ $this->registerJsFile(
 
     </div>
 </div>
+<?= $form->field($model, 'created_at')->hiddenInput(['id'=>'create_at'])->label(false) ?>
 <?php ActiveForm::end(); ?>​

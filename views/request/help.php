@@ -1,5 +1,6 @@
 <?php
 use lo\widgets\magnific\MagnificPopup;
+$this->title = 'Помощь в подборе';
 ?>
 <div class="tour-selection-box">
     <div class="tabs-block">

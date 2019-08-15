@@ -28,6 +28,7 @@ namespace app\models;
  *
  * @property Direct[] $directs
  * @property Direct $id0
+ * @property MailSchedule[] $mailSchedules
  */
 class Request extends \yii\db\ActiveRecord
 {
@@ -100,5 +101,13 @@ class Request extends \yii\db\ActiveRecord
     public function getId0()
     {
         return $this->hasOne(Direct::className(), ['request_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMailSchedules()
+    {
+        return $this->hasMany(MailSchedule::className(), ['request_id' => 'id']);
     }
 }

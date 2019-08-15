@@ -68,7 +68,8 @@ $(document).ready(function () {
 
         if(_valid == 0){
             $('#requests-optional').val($('#optional').html()); //копируем значение из div в наш инпут-optional
-
+            var date = new Date();
+            $('#create_at').val(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
             $(this).addClass('bth__loader--animate'); //анимация трех точек для кнопки
 
             var _form_data = $('#form-extend').serializeArray();

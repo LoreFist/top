@@ -35,9 +35,8 @@ class MailController extends Controller
                     ->setSubject('Добавлена новая заявка')
                     ->send();
 
-                $mail->send = 0;
+                $mail->send = 1;
                 $mail->save();
-                var_dump($send_mail);
             }
         }
     }

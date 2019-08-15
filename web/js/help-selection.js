@@ -66,8 +66,8 @@ $(document).ready(function () {
     $('#nonstandard_submit').on('click', function () {
         var valid = validation($(this));
         var date = new Date();
-        $('#create_at').val(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
-console.log(valid);
+        $('#create_at_n').val(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
+
         if (valid['name'] == true && valid['phone'] == true && valid['mail'] == true) {
             $(this).addClass('bth__loader--animate'); //анимация трех точек для кнопки
             $.ajax({

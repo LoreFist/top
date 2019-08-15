@@ -104,6 +104,7 @@ class RequestController extends \yii\web\Controller
 
 
             } else {
+                var_dump($model);
                 return json_encode(
                     [
                         'code'   => 0,
@@ -154,8 +155,8 @@ class RequestController extends \yii\web\Controller
 
             $model->load($posts);
 
+            $model->created_at = strtotime($model->created_at);
             if($save = $model->save()) {
-
                 $countryCount   = count($directs['country_id']);
                 $departureCount = count($directs['departure_id']);
                 $directCount    = max($countryCount, $departureCount);
@@ -192,9 +193,6 @@ class RequestController extends \yii\web\Controller
                 $mail->created_at = date('y-m-d H:i:s');
                 $mail->send = 0;
                 $mail->save();
-                var_dump($mail);
-                die;
-
 
                 return json_encode(
                     [
