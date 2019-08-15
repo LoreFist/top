@@ -1,10 +1,15 @@
 $(document).ready(function () {
     //переходы по табам нестандартного запроса
     $('#step1').click(function () {
+        if(!$('#step2Panel').is(":visible"))
+            $('#step1Panel').slideDown();
+        else
+            $('#step1Panel').show();
+
         line($(this), '.tab');
         $('#step2Panel').hide();
         $('#formPanel').hide();
-        $('#step1Panel').slideDown();
+
     });
     $('#form').click(function () {
         line($(this), '.tab');
