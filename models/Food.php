@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- * @property string $shor_name
+ * @property string $short_name
  *
  * @property RequestFood[] $requestFoods
  * @property Request[] $requests
@@ -30,7 +30,7 @@ class Food extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'shor_name'], 'string'],
+            [['name', 'short_name'], 'string'],
         ];
     }
 
@@ -42,7 +42,7 @@ class Food extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'shor_name' => 'Shor Name',
+            'short_name' => 'Short Name',
         ];
     }
 

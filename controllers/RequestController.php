@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\DictCity;
 use app\models\DictCountry;
 use app\models\Direct;
+use app\models\Food;
 use app\models\MailSchedule;
 use app\models\Request;
 use Yii;
@@ -56,12 +57,15 @@ class RequestController extends \yii\web\Controller
             -1 => 'Без перелета'
         ] + $items_dict_deprt;
 
+        $food = Food::find()->orderBy(['id'=>SORT_ASC])->all();
+
         return $this->render(
             'help',
             ['model'      => $model,
              'items_dict' => ['country'    => $items_dict_country,
                               'city_deprt' => $items_dict_deprt,
-                              'spec_hotel'  => $items_dict_deprt_spechotel
+                              'spec_hotel'  => $items_dict_deprt_spechotel,
+                              'food'        => $food
              ]]
         );
     }

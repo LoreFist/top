@@ -134,7 +134,7 @@ $this->registerJsFile(
         <div class=" js-types-search-hotel-blocks" style="display: none">
             <div class="tour-selection-wrap-in tour-selection-wrap-flex ">
                 <?php echo $this->context->renderPartial('partial/extend_spechotel_city',['items_city_spechotel' => $items_dict['spec_hotel'], 'model' => $model, 'form' => $form, 'data_id' => $data_id]); ?>
-                <?php echo $this->context->renderPartial('partial/extend_spechotel_food'); ?>
+                <?php echo $this->context->renderPartial('partial/extend_spechotel_food',['food' => $items_dict['food'], 'model' => $model, 'form' => $form, 'data_id' => $data_id]); ?>
             </div>
 
             <div class="tour-selection-wrap">
