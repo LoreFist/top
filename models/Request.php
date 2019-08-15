@@ -29,6 +29,8 @@ namespace app\models;
  * @property Direct[] $directs
  * @property Direct $id0
  * @property MailSchedule[] $mailSchedules
+ * @property RequestFood[] $requestFoods
+ * @property Food[] $foods
  */
 class Request extends \yii\db\ActiveRecord
 {
@@ -109,5 +111,21 @@ class Request extends \yii\db\ActiveRecord
     public function getMailSchedules()
     {
         return $this->hasMany(MailSchedule::className(), ['request_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRequestFoods()
+    {
+        return $this->hasMany(RequestFood::className(), ['request_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFoods()
+    {
+        return $this->hasMany(Food::className(), ['id' => 'food_id'])->viaTable('request_food', ['request_id' => 'id']);
     }
 }

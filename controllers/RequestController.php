@@ -47,14 +47,22 @@ class RequestController extends \yii\web\Controller
         $key_spb = array_search('Санкт-Петербург', $items_dict_deprt);
         unset($items_dict_deprt[$key_msc]);
         unset($items_dict_deprt[$key_spb]);
-        $items_dict_deprt = [$key_msc => 'Москва',
-                             $key_spb => 'Санкт-Петербург'] + $items_dict_deprt;
+        $items_dict_deprt = [
+            $key_msc => 'Москва',
+            $key_spb => 'Санкт-Петербург'
+            ] + $items_dict_deprt;
+
+        $items_dict_deprt_spechotel = [
+            -1 => 'Без перелета'
+        ] + $items_dict_deprt;
 
         return $this->render(
             'help',
             ['model'      => $model,
              'items_dict' => ['country'    => $items_dict_country,
-                              'city_deprt' => $items_dict_deprt]]
+                              'city_deprt' => $items_dict_deprt,
+                              'spec_hotel'  => $items_dict_deprt_spechotel
+             ]]
         );
     }
 

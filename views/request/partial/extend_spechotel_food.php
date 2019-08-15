@@ -67,8 +67,7 @@
 
                         </div>
                     </div>
-                    <div class="formDirections__static-btn js-close-formDirections">Применить
-                    </div>
+                    <div class="formDirections__static-btn js-close-formDirections">Применить</div>
                 </div>
             </div>
         </div>
