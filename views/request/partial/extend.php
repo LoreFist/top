@@ -9,6 +9,11 @@ $this->registerJsFile(
     ['depends' => [\yii\web\JqueryAsset::className()]]
 );
 
+$this->registerJsFile(
+    '@web/js/help-spechotel.js',
+    ['depends' => [\yii\web\JqueryAsset::className()]]
+);
+
 ?>
 <?php $form = ActiveForm::begin(['id' => 'form-extend',]);?>
 <div class="panel" id="step1Panel" style="display: none">
@@ -122,9 +127,7 @@ $this->registerJsFile(
                      'data_id'          => $data_id]
                 ); ?>
                 <?php echo $this->context->renderPartial('partial/extend_hotel'); ?>
-                <span class="tour-selection-plus js-del-field"
-                      data_id=<?= $data_id ?>><i
-                            class="fas fa-minus"></i></span>
+                <span class="tour-selection-plus js-del-field" data_id=<?= $data_id ?>><i class="fas fa-minus"></i></span>
             </div>
         </div>
 
@@ -136,17 +139,22 @@ $this->registerJsFile(
             </div>
 
             <div class="tour-selection-wrap">
-                <div data-tour-row="0" class="tour-selection-wrap-in tour-selection-wrap-flex ">
+                <?php $data_id = 0; ?>
+                <div data-tour-row="<?= $data_id ?>" class="tour-selection-wrap-in tour-selection-wrap-flex ">
                     <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel'); ?>
-                    <span class="tour-selection-plus hide-1023 js-add-hotel"><i class="fas fa-plus"></i></span>
+                    <span class="tour-selection-plus hide-1023 js-add-spechotel" data_id=<?= $data_id ?>><i class="fas fa-plus"></i></span>
                 </div>
-                <div data-tour-row="1" class="tour-selection-wrap-in tour-selection-wrap-flex tour-selection-wrap-in--hidden" style="display:none;">
+
+                <?php $data_id = 1; ?>
+                <div data-tour-row="<?= $data_id ?>" class="tour-selection-wrap-in tour-selection-wrap-flex tour-selection-wrap-in--hidden js-show-added-spechotel js-hide-dell-spechotel-<?= $data_id ?>" style="display:none;">
                     <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel'); ?>
-                    <span class=" tour-selection-plus js-del-hotel"><i class="fas fa-minus"></i></span>
+                    <span class=" tour-selection-plus js-del-spechotel" data_id=<?= $data_id ?>><i class="fas fa-minus"></i></span>
                 </div>
-                <div data-tour-row="2" class="tour-selection-wrap-in tour-selection-wrap-flex tour-selection-wrap-in--hidden" style="display:none;">
+
+                <?php $data_id = 2; ?>
+                <div data-tour-row="<?= $data_id ?>" class="tour-selection-wrap-in tour-selection-wrap-flex tour-selection-wrap-in--hidden js-show-added-spechotel js-hide-dell-spechotel-<?= $data_id ?>" style="display:none;">
                     <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel'); ?>
-                    <span class=" tour-selection-plus js-del-hotel"><i class="fas fa-minus"></i></span>
+                    <span class=" tour-selection-plus js-del-spechotel" data_id=<?= $data_id ?>><i class="fas fa-minus"></i></span>
                 </div>
             </div>
         </div>
