@@ -78,7 +78,9 @@ $(document).ready(function () {
                 _form_data.push({'name':'city_id[]', 'value': $('#city_direction-'+i).html()});
                 _form_data.push({'name':'country_id[]', 'value': $('#country_direction-'+i).html()});
                 _form_data.push({'name':'departure_id[]', 'value': $('#direct_departure-'+i).html()});
+                _form_data.push({'name':'location_id[]', 'value': $('#label-add-hotel-'+i).attr('data-id-location') });
             }
+            _form_data.push({'name':'food_short_name', 'value': $('#label_food').html() });
 
             $.ajax({
                     type: 'post',

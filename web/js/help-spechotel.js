@@ -98,19 +98,21 @@ $(document).ready(function () {
                     dataType: 'html'
                 }
             )
-                .done(function(data) {
-                    var _hotels = $('#add_hotel-'+_id);
-                    _hotels.html('');
-                    _hotels.html(data);
-                    $('.js-select-hotel-add').on('click',function(){
-                        $(this).closest('.formDirections').hide();
-                        $('#label-add-hotel-'+_id).addClass('active');
+            .done(function(data) {
+                var _hotels = $('#add_hotel-'+_id);
+                _hotels.html('');
+                _hotels.html(data);
+                $('.js-select-hotel-add').on('click',function(){
+                    $(this).closest('.formDirections').hide();
+                    $('#label-add-hotel-'+_id).addClass('active');
 
-                        $('.hotel-search__cut-'+_id).html($(this).attr('data-hotel-name'));
-                        $('.hotel-search__rating-'+_id).html($(this).attr('data-stars')+', ');
-                        $('.hotel-search__place-'+_id).html($(this).attr('data-country')+', '+$(this).attr('data-resort'));
-                    });
+                    $('#label-add-hotel-'+_id).attr('data-id-location',$(this).attr('data-id-location'));
+
+                    $('.hotel-search__cut-'+_id).html($(this).attr('data-hotel-name'));
+                    $('.hotel-search__rating-'+_id).html($(this).attr('data-stars')+', ');
+                    $('.hotel-search__place-'+_id).html($(this).attr('data-country')+', '+$(this).attr('data-resort'));
                 });
+            });
         }
         return;
     }, 500));

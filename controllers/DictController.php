@@ -26,9 +26,10 @@ class DictController extends \yii\web\Controller
                 ->where('"dict_allocation".name like '.$namesearch)
                 ->all();
 
-            $locationArr = [];
+            /*$locationArr = [];
             foreach ($location as $lc){
                 $locationArr[] = [
+
                     'country_id'=>$lc->resort0->country0->id,
                     'country_name'=>$lc->resort0->country0->name,
                     'country_name_eng'=>$lc->resort0->country0->name_eng,
@@ -38,11 +39,9 @@ class DictController extends \yii\web\Controller
                     'stars'=>$lc->cat0->name
 
                 ];
-            }
-            if(count($locationArr) == 0)
-                $locationArr[] = ['error'=>'По указанному названию совпадений не найдено'];
+            }*/
 
-            return $this->renderPartial( 'hotelsearch',['locationArr' => $locationArr]);
+            return $this->renderPartial( 'hotelsearch',['location' => $location]);
         }
     }
 

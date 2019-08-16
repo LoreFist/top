@@ -8,6 +8,8 @@ use app\models\Direct;
 use app\models\Food;
 use app\models\MailSchedule;
 use app\models\Request;
+use app\models\RequestFood;
+use app\models\RequestLocation;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Response;
@@ -136,6 +138,7 @@ class RequestController extends \yii\web\Controller
         $model = new Request();
 
         if ($posts = Yii::$app->request->post()) {
+            //приводим в более удобный массив, данные направления  из расширенной формы
             foreach ($posts['country_id'] as $key => $country) {
                 if ($country == 'Не важно') {
                     unset($posts['Request']['direct']['country_id'][$key]);
@@ -152,6 +155,7 @@ class RequestController extends \yii\web\Controller
                 }
             }
 
+            //даты из строк переводим в массивы
             $date_from_to     = explode("_", $posts['Request']['date_departure']);
             $day_stay_from_to = explode("_", $posts['Request']['day_stay']);
 
@@ -167,6 +171,7 @@ class RequestController extends \yii\web\Controller
             $model->load($posts);
 
             $model->created_at = strtotime($model->created_at);
+
             if($save = $model->save()) {
                 $countryCount   = count($directs['country_id']);
                 $departureCount = count($directs['departure_id']);
@@ -175,6 +180,7 @@ class RequestController extends \yii\web\Controller
                 $directSave  = [];
                 $directModel = [];
 
+                //перебираем данные направлений и записываем в бд
                 for ($i = 0; $i < $directCount; $i++) {
                     $directModel[$i] = new Direct();
 
@@ -197,6 +203,29 @@ class RequestController extends \yii\web\Controller
 
                 for ($i = 0; $i < $directCount; $i++) {
                     $directSave[$i] = $directModel[$i]->save();
+                }
+
+                //перебираем данные конкретного отеля и записываем в бд
+                foreach ($posts['location_id'] as $location_id) {
+                    if(isset($location_id) AND $location_id != ''){
+                        $lc = new RequestLocation();
+                        $lc->location_id = $location_id;
+                        $lc->request_id = $model->id;
+                        $lc->save();
+                    }
+
+                }
+
+                //данные питание из конкретного отеля
+                $foods_short_name = explode(' ',rtrim($posts['food_short_name']));
+                $foods = Food::find()->where('short_name in ("'.implode('","',$foods_short_name).'")')->all();
+
+                //сохранение питания
+                foreach ($foods as $food) {
+                    $fd = new RequestFood();
+                    $fd->food_id = $food->id;
+                    $fd->request_id = $model->id;
+                    $fd->save();
                 }
 
                 $mail = new MailSchedule();
