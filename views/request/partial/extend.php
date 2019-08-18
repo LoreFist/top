@@ -331,8 +331,7 @@ $this->registerJsFile(
 
         <div class="tour-selection-wrap-in">
             <div class="bth__ta-resizable-wrap optional-js-field">
-                <div class="bth__ta-resizable" contenteditable=""
-                     id="optional"></div>
+                <div class="bth__ta-resizable" contenteditable="" id="optional"></div>
                 <?= $form->field($model, 'optional')->hiddenInput()->label(
                     false
                 ); ?>
@@ -441,48 +440,46 @@ $this->registerJsFile(
         </div>
         <div class="tour-selection-wrap-in   tour-selection-wrap-flex ">
             <div class="tour-selection-field tour-selection-field--270 ">
-
-
-
-                            <?= $form->field($model, 'city_tour_id',
-                                [
-                                    'template'             =>
-                                     '          
-                                        <div class="bth__inp-block js-show-formDirections">
-                                            <span class="bth__inp-lbl" id="city-tour-label">Ваш город</span>
-                                            <span class="bth__inp"> <b class="uppercase" id="city-tour"></b></span>
-                                            <div class="hint-block hint-block--abs">
-                                                <i class="fa fa-question-circle question-error"aria-hidden="true"></i>
-                                                <div class="hint">
-                                                    <p class="bth__cnt">Поле не должно быть пустым</p>
-                                                </div>
-                                            </div> 
-                                        </div>  
-                                        <div class="formDirections w100p" style="display: none;">
-                                            <div class="formDirections__wrap w100p">
-                                                <div class="formDirections__top  formDirections__top-line">
-                                                    <i class="formDirections__bottom-close"></i>
-                                                    <div class="formDirections__top-tab super-grey "> Города </div>
-                                                </div> 
-                                                <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">                                          
-                                                    {input}
-                                                </div>
-                                            </div>
-                                        </div>
-                                     ',
-                                    'labelOptions' => ['class' => 'bth__inp-lbl '],
-                                    'options'      => ['class' => 'js-add-error bth__inp-block'],
-                                ])
-                                ->dropDownList(
-                                    $items_dict['city_deprt'],
-                                    [
-                                        'id'      => "sumo-list-city-".$data_id,
-                                        'class'   => "sumo-list-city",
-                                        'data_id' => $data_id,
-                                    ]
-                                )
-                                ->label(false);
-                            ?>
+                <?php $data_id = 3;?>
+                <?= $form->field($model, 'city_tour_id',
+                    [
+                        'template'             =>
+                         '          
+                            <div class="bth__inp-block js-show-formDirections">
+                                <span class="bth__inp-lbl" id="city-tour-label">Ваш город</span>
+                                <span class="bth__inp"> <b class="uppercase" id="city-tour"></b></span>
+                                <div class="hint-block hint-block--abs">
+                                    <i class="fa fa-question-circle question-error"aria-hidden="true"></i>
+                                    <div class="hint">
+                                        <p class="bth__cnt">Поле не должно быть пустым</p>
+                                    </div>
+                                </div> 
+                            </div>  
+                            <div class="formDirections w100p" style="display: none;">
+                                <div class="formDirections__wrap w100p">
+                                    <div class="formDirections__top  formDirections__top-line">
+                                        <i class="formDirections__bottom-close"></i>
+                                        <div class="formDirections__top-tab super-grey "> Города </div>
+                                    </div> 
+                                    <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">                                          
+                                        {input}
+                                    </div>
+                                </div>
+                            </div>
+                         ',
+                        'labelOptions' => ['class' => 'bth__inp-lbl '],
+                        'options'      => ['class' => 'js-add-error bth__inp-block'],
+                    ])
+                    ->dropDownList(
+                        $items_dict['city_deprt'],
+                        [
+                            'id'      => "sumo-list-city-".$data_id,
+                            'class'   => "sumo-list-city",
+                            'data_id' => $data_id,
+                        ]
+                    )
+                    ->label(false);
+                ?>
             </div>
         </div>
         <div class="tour-selection-wrap-in">
@@ -507,5 +504,5 @@ $this->registerJsFile(
 
     </div>
 </div>
-<?= $form->field($model, 'created_at')->hiddenInput(['id'=>'create_at'])->label(false) ?>
+<?= $form->field($model, 'created_at',['enableAjaxValidation' => false])->hiddenInput(['id'=>'create_at'])->label(false)->error(false) ?>
 <?php ActiveForm::end(); ?>​

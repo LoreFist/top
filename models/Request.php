@@ -10,7 +10,6 @@ namespace app\models;
  * @property string $name
  * @property string $phone
  * @property string $email
- * @property string $direct
  * @property string $optional
  * @property string $date_departure_from
  * @property string $date_departure_to
@@ -32,9 +31,9 @@ namespace app\models;
  */
 class Request extends \yii\db\ActiveRecord
 {
-
     public $date_departure; //для контрола календаря
     public $day_stay; //для контрола пребывание дней
+    public $direct; // для сбора данных по направлениям
     public $priceFrom; //не используется, но в либе lib-ui-tour-filter виджет WPrice жестко захардкоженно
 
     /**
@@ -52,8 +51,8 @@ class Request extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'phone', 'city_tour_id'], 'required'],
-            [['name', 'phone', 'email', 'direct', 'optional', 'date_departure_from', 'date_departure_to', 'day_stay_from', 'day_stay_to'], 'string'],
-            [['guest', 'currency', 'priceTo', 'priceComfort', 'children', 'age1', 'age2', 'age3', 'created_at'], 'integer'],
+            [['name', 'phone', 'email', 'optional', 'date_departure_from', 'date_departure_to', 'day_stay_from', 'day_stay_to'], 'string'],
+            [['guest', 'currency', 'priceTo', 'priceComfort', 'children', 'age1', 'age2', 'age3'], 'integer'],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Direct::className(), 'targetAttribute' => ['id' => 'request_id']],
         ];
     }
