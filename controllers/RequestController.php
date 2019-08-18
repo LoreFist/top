@@ -184,23 +184,22 @@ class RequestController extends \yii\web\Controller
                 for ($i = 0; $i < $directCount; $i++) {
                     $directModel[$i] = new Direct();
 
-                    if (isset($directs['country_id'][$i])) {
-                        $directModel[$i]->country_id
-                            = $directs['country_id'][$i];
+                    if (isset($directs['country_id'][$i]) AND $directs['country_id'][$i] != '') {
+                        $directModel[$i]->country_id = $directs['country_id'][$i];
                     }
 
-                    if (isset($directs['city_id'][$i])) {
+                    if (isset($directs['city_id'][$i]) AND $directs['city_id'][$i] != '') {
                         $directModel[$i]->city_id = $directs['city_id'][$i];
                     }
 
-                    if (isset($directs['departure_id'][$i])) {
-                        $directModel[$i]->city_departure_id
-                            = $directs['departure_id'][$i];
+                    if (isset($directs['departure_id'][$i]) AND $directs['departure_id'][$i] != '') {
+                        $directModel[$i]->city_departure_id = $directs['departure_id'][$i];
+
                     }
 
                     $directModel[$i]->request_id = $model->id;
                 }
-
+var_dump( $directModel);die;
                 for ($i = 0; $i < $directCount; $i++) {
                     $directSave[$i] = $directModel[$i]->save();
                 }

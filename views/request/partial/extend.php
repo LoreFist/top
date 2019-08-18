@@ -138,7 +138,7 @@ $this->registerJsFile(
                     'partial/extend_departure',
                     ['model'            => $model, 'form' => $form,
                      'items_city_deprt' => $items_dict['city_deprt'],
-                     'data_id'          => $data_id]
+                     'data_id'          => 4]
                 ); ?>
                 <?php echo $this->context->renderPartial('partial/extend_spechotel_food',['food' => $items_dict['food'], 'model' => $model, 'form' => $form, 'data_id' => $data_id]); ?>
             </div>

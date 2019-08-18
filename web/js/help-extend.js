@@ -81,6 +81,7 @@ $(document).ready(function () {
                 _form_data.push({'name':'location_id[]', 'value': $('#label-add-hotel-'+i).attr('data-id-location') });
             }
             _form_data.push({'name':'food_short_name', 'value': $('#label_food').html() });
+            _form_data.push({'name':'departure_id[]', 'value': $('#direct_departure-4').html()});
 
             $.ajax({
                     type: 'post',
