@@ -228,19 +228,25 @@ class RequestController extends \yii\web\Controller
                             $lc->request_id = $model->id;
                             $lc->save();
                         }
-
                     }
 
                     //данные питание из конкретного отеля
-                    $foods_short_name = explode(' ',rtrim($posts['food_short_name']));
-                    $foods = Food::find()->where('short_name in ("'.implode('","',$foods_short_name).'")')->all();
+                    if($food = $posts['food_short_name']){
+                        if($food != 'ЛЮБОЕ'){
+                            $foods_short_name = explode(' ',rtrim($posts['food_short_name']));
+                            $foods = Food::find()->where('short_name in ("'.implode('","',$foods_short_name).'")')->all();
+                        }else{
 
-                    //сохранение питания
-                    foreach ($foods as $food) {
-                        $fd = new RequestFood();
-                        $fd->food_id = $food->id;
-                        $fd->request_id = $model->id;
-                        $fd->save();
+                            $foods = Food::find()->where('name like "%'.$food.'%"')->all();
+
+                        }
+                        //сохранение питания
+                        foreach ($foods as $food) {
+                            $fd = new RequestFood();
+                            $fd->food_id = $food->id;
+                            $fd->request_id = $model->id;
+                            $fd->save();
+                        }
                     }
                 }
 

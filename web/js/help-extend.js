@@ -105,12 +105,11 @@ $(document).ready(function () {
                 if (data['code'] == 1) {
                     if(data['step'] == 1){
                         _modelRequestId = data['modelRequestId'];
-                        $('#step1Panel').hide();
-                        $('#step2Panel').slideDown();
+                        $('#step1_wrap').hide();
+                        $('#step2_wrap').slideDown();
                     }
                     else {
                         $('#step1Panel').html($('#thx').html());
-                        $('#step2Panel').html($('#thx').html());
                     }
                 }
             })

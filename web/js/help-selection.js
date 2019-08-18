@@ -3,13 +3,12 @@ $(document).ready(function () {
     $('#step1').click(function () {
         line($(this), '.tab');
 
-        if(!$('#step2Panel').is(":visible"))
+        if(!$('#step2Panel').is(":visible")) {
             $('#step1Panel').slideDown();
-        else
-            $('#step1Panel').show();
+            $('#step2Panel').hide();
+            $('#formPanel').hide();
+        }
 
-        $('#step2Panel').hide();
-        $('#formPanel').hide();
         saveActiveTab(('#step1'));
     });
     $('#form').click(function () {

@@ -89,7 +89,7 @@ $(document).ready(function () {
     $('.formDirections__search input.bth__inp').keyup(delay(function (e) {
         var _searchText = $(this).val();
         var _id = $(this).attr('data-id');
-        if (_searchText.length > 3) {
+        if (_searchText.length >= 3) {
             $.ajax(
                 {
                     url: 'getallocation',

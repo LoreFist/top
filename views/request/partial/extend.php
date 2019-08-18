@@ -21,7 +21,7 @@ $this->registerJsFile(
         поездки
     </div>
 
-    <div class="tour-selection-wrap">
+    <div class="tour-selection-wrap" id="step1_wrap">
         <div class="tour-selection-wrap-in tour-selection-wrap-flex">
 
             <?php echo $this->context->renderPartial(
@@ -186,12 +186,9 @@ $this->registerJsFile(
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </div sty>
 
-<div class="panel" id="step2Panel" style="display: none">
-
-    <div class="tour-selection-wrap">
+    <div class="tour-selection-wrap" id="step2_wrap" style="display: none">
 
         <div class="tour-selection-wrap-in mt0 tour-selection-wrap-flex">
 
@@ -292,7 +289,7 @@ $this->registerJsFile(
                 <?= $form->field($model, 'city_tour_id',
                     [
                         'template'             =>
-                         '          
+                            '          
                             <div class="bth__inp-block js-show-formDirections">
                                 <span class="bth__inp-lbl" id="city-tour-label">Ваш город</span>
                                 <span class="bth__inp"> <b class="uppercase" id="city-tour"></b></span>
@@ -352,5 +349,6 @@ $this->registerJsFile(
 
     </div>
 </div>
+
 <?= $form->field($model, 'created_at',['enableAjaxValidation' => false])->hiddenInput(['id'=>'create_at'])->label(false)->error(false) ?>
 <?php ActiveForm::end(); ?>​
