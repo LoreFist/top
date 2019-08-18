@@ -71,7 +71,7 @@ class RequestController extends \yii\web\Controller
         $model = new Request();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->created_at   = strtotime($model->created_at);
+            $model->created_at   = strtotime(Yii::$app->request->post()['Request']['created_at']);
             $model->city_tour_id = 0;
             if ($model->save()) {
 
