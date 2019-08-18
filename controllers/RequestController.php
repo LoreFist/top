@@ -2,11 +2,16 @@
 
 namespace app\controllers;
 
+use app\models\dict\DictAlloccat;
+use app\models\dict\DictAllocPlaceType;
 use app\models\dict\DictCity;
 use app\models\dict\DictCountry;
 use app\models\Direct;
 use app\models\Food;
+use app\models\ForKids;
 use app\models\MailSchedule;
+use app\models\Other;
+use app\models\Rating;
 use app\models\Request;
 use app\models\RequestFood;
 use app\models\RequestLocation;
@@ -63,13 +68,51 @@ class RequestController extends \yii\web\Controller
 
         $food = Food::find()->orderBy(['id'=>SORT_ASC])->all();
 
+        $category = DictAlloccat::find()
+            ->select('id, name')
+            ->where(['active' => true])
+            ->andWhere(['trash' => false])
+            ->orderBy(['weight'=>SORT_DESC])
+            ->all();
+
+        $rating = Rating::find()
+            ->select('id, name')
+            ->where(['active' => 'true'])
+            ->orderBy(['weight'=>SORT_DESC])
+            ->all();
+
+        $palaceType = DictAllocPlaceType::find()->joinWith('values')
+            ->where(['dict_alloc_place_type.active'=>true])
+            ->andWhere(['dict_alloc_place_type.trash'=>false])
+            ->andWhere(['dict_alloc_place_value.active'=>true])
+            ->andWhere(['dict_alloc_place_value.trash'=>false])
+            ->all();
+
+        $forKids = ForKids::find()
+            ->select('id, name')
+            ->where(['active' => 'true'])
+            ->orderBy(['weight'=>SORT_DESC])
+            ->all();
+
+        $other = Other::find()
+            ->select('id, name')
+            ->where(['active' => 'true'])
+            ->orderBy(['weight'=>SORT_DESC])
+            ->all();
+
         return $this->render(
             'help',
             ['model'      => $model,
-             'items_dict' => ['country'    => $items_dict_country,
-                              'city_deprt' => $items_dict_deprt,
-                              'spec_hotel'  => $items_dict_deprt_spechotel,
-                              'food'        => $food
+             'items_dict' => [
+                 'country'    => $items_dict_country,
+                 'city_deprt' => $items_dict_deprt,
+                 'spec_hotel' => $items_dict_deprt_spechotel,
+                 'food'       => $food,
+                 'category'   => $category,
+                 'rating'     => $rating,
+                 'palaceType' => $palaceType,
+                 'forkids'    => $forKids,
+                 'other'      => $other,
              ]]
         );
     }

@@ -27,7 +27,7 @@ use yii\helpers\ArrayHelper;
                                     return "
                                             <div class='form-dropdown-stars__item'>
                                                 <div class='cbx-block  cbx-block--16'>
-                                                    <input type='checkbox' {$checked} name='{$name}' value='{$value}' class='cbx' id='type-food{$value}'>
+                                                    <input type='checkbox' {$checked} name='{$name}' value='{$value}' class='cbx food-spechotel' id='type-food{$value}'>
                                                     <label class='label-cbx' for='type-food{$value}'>
                                                         <span class='cbx-cnt'>{$label}</span>
                                                     </label>

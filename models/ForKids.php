@@ -1,0 +1,68 @@
+<?php
+
+namespace app\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "for_kids".
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $active
+ * @property int $weight
+ *
+ * @property RequestKids[] $requestKids
+ * @property Request[] $requests
+ */
+class ForKids extends \yii\db\ActiveRecord
+{
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'for_kids';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['name', 'active'], 'required'],
+            [['name', 'active'], 'string'],
+            [['weight'], 'integer'],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'name' => 'Name',
+            'active' => 'Active',
+            'weight' => 'Weight',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRequestKids()
+    {
+        return $this->hasMany(RequestKids::className(), ['kids_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRequests()
+    {
+        return $this->hasMany(Request::className(), ['id' => 'request_id'])->viaTable('request_kids', ['kids_id' => 'id']);
+    }
+}

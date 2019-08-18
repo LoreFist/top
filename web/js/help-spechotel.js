@@ -39,19 +39,19 @@ $(document).ready(function () {
     });
 
     var _val_food = [];
-    $(document).on('change', '.cbx', function() {
+    $(document).on('change', '.food-spechotel', function() {
         var _val = $(this).val()+' ';
 
         if(this.checked) {
             if(_val == 'ALL '){
                 $(this).closest('.formDirections').hide();
                 _val_food = [];
-                $('input.cbx').prop( "checked", false );
+                $('input.food-spechotel').prop( "checked", false );
                 $('input#type-foodALL.cbx').prop( "checked", true );
                 $('#label_food').html('ЛЮБОЕ');
                 return false;
             } else{
-                $('input#type-foodALL.cbx').prop( "checked", false );
+                $('input#type-foodALL.food-spechotel').prop( "checked", false );
 
                 if(_val_food.indexOf('ЛЮБОЕ') == 1)
                     _val_food.splice(_val_food.indexOf('ЛЮБОЕ'), 1);
@@ -65,8 +65,8 @@ $(document).ready(function () {
         if(_val_food.length == 0 || _val_food.length == 5) {
             $(this).closest('.formDirections').hide();
             _val_food = [];
-            $('input.cbx').prop( "checked", false );
-            $('input#type-foodALL.cbx').prop( "checked", true );
+            $('input.food-spechotel').prop( "checked", false );
+            $('input#type-foodALL.food-spechotel').prop( "checked", true );
             $('#label_food').html('ЛЮБОЕ');
             return false;
         }

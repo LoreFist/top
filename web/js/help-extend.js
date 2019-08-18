@@ -125,6 +125,7 @@ $(document).ready(function () {
         });
 
         $(this).next('.formDirections').slideDown();
+        $('#333rating1').prop( "checked", true ); //устанавлиавем в параметры отеля дефолтный радиобатон
     });
 
     //закрытие инпута
@@ -252,6 +253,7 @@ $(document).ready(function () {
         }
     });
 
+    //радио батон турпакет или конкретный отель
     $('#type1').on('change', function(){
         $('.js-types-search-hotel-blocks').hide();
         $('.js-types-search-tours-blocks').slideDown();
@@ -260,4 +262,16 @@ $(document).ready(function () {
         $('.js-types-search-tours-blocks').hide();
         $('.js-types-search-hotel-blocks').slideDown();
     });
+
+    //упарвление контролом параметры отеля
+    $('.formDirections__top-tab').on('click', function(){
+        $('.formDirections__top-tab').removeClass('active');
+        $('.formDirections__bottom').hide();
+
+        $(this).addClass('active');
+
+        var _bottom = '.'+$(this).attr("class").split(/\s+/)[1];
+        $('.formDirections__wrap-flex-right').find(_bottom).show();
+    });
+
 });
