@@ -43,50 +43,23 @@ $(document).ready(function () {
         $('#siteRolePanel').slideDown();
     });
 
-    //условия проверки полей нестандартного запроса
-    function validation(obj) {
-        var valid = [];
-
-        if ($('#name1').val() == '') { //имя не пустое
-            $('#name1').parent('.js-add-error').addClass('has-error');
-            valid['name'] = false;
-        } else {
-            $('#name1').parent('.js-add-error').removeClass('has-error');
-            valid['name'] = true;
-        }
-
-        if ($('#phone_nostan').val() == '') { //телефон не пустой
-            $('#phone_nostan').parent('.js-add-error').addClass('has-error');
-            valid['phone'] = false;
-        } else {
-            $('#phone_nostan').parent('.js-add-error').removeClass('has-error');
-            valid['phone'] = true;
-        }
-
-        valid['mail'] = true;
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if (!filter.test($('#mail3').val()) && $('#mail3').val() != '') { //если вели емайл, проверяет формата ххх@xxx.xx
-            $('#mail3').parent('.js-add-error').addClass('has-error');
-            valid['mail'] = false;
-        } else {
-            $('#mail3').parent('.js-add-error').removeClass('has-error');
-            valid['mail'] = true;
-        }
-
-        return valid;
-    }
-
-    /*$('.js-label').keyup(function () {
-        validation($(this));
-    });*/
-
     //отправка нестандартной формы
     $('#nonstandard_submit').on('click', function () {
-        var valid = validation($(this));
+        var valid = 0;
         var date = new Date();
         $('#create_at_n').val(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
 
-        if (valid['name'] == true && valid['phone'] == true && valid['mail'] == true) {
+        var $form = $('#form-nostadndatd');
+        var data = $form.data("yiiActiveForm");
+
+        $.each(data.attributes, function (e) {
+            this.status = 3;
+        });
+        $form.yiiActiveForm("validate");
+
+        var _valid = $form.find('.has-error').length;
+
+        if(_valid == 0){
             $(this).addClass('bth__loader--animate'); //анимация трех точек для кнопки
             $.ajax({
                     type: 'post',

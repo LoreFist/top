@@ -259,9 +259,22 @@ $this->registerJsFile(
                 <?= $form
                     ->field($model, 'email',
                         [
-                                'template' => '{input} {label}',
-                                'labelOptions' => ['class' => 'bth__inp-lbl '],
-                                'options'      => ['class' => 'js-add-error bth__inp-block'],
+                            'template' => '
+                                            {input} 
+                                            {label}
+                                            <div class="hint-block hint-block--abs">
+                                                <i class="fa fa-question-circle question-error"
+                                                   aria-hidden="true"></i>
+                                                <div class="hint">
+                                                    <p class="bth__cnt">Емайл должен быть формата ххххх@xxxx.xxxx</p>
+                                                </div>
+                                            </div>
+                                        ',
+                            'enableAjaxValidation' => true,
+                            'validateOnType'       => true,
+                            'validationDelay'      => 1,
+                            'labelOptions' => ['class' => 'bth__inp-lbl '],
+                            'options'      => ['class' => 'js-add-error bth__inp-block'],
                         ]
                     )
                     ->textInput(['class' => 'bth__inp js-label', 'id' => 'mail3',])

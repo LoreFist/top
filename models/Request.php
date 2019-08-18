@@ -56,6 +56,7 @@ class Request extends \yii\db\ActiveRecord
             [['name', 'phone', 'email', 'optional', 'date_departure_from', 'date_departure_to', 'day_stay_from', 'day_stay_to'], 'string'],
             [['guest', 'currency', 'priceTo', 'priceComfort', 'children', 'age1', 'age2', 'age3'], 'integer'],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Direct::className(), 'targetAttribute' => ['id' => 'request_id']],
+            ['email', 'email'],
         ];
     }
 
