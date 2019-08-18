@@ -1170,13 +1170,14 @@
 }
 
 .formDirections .formDirections__inp-block {
-    width: 100%;
-    margin-bottom: 5px;
-    padding: 0 10px 0 10px;
-    height: 40px;
-    position: relative;
-    border: 1px solid #ddd;
-    border-radius: 2px;
+    width: 42px;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 0;
+    margin-right: 3px;
+    height: 30px;
+    font-weight: normal;
+    padding: 0;
 }
 
 .formDirections__input-bbl i {

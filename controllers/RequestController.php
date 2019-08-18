@@ -30,7 +30,9 @@ class RequestController extends \yii\web\Controller
         $model = new Request();
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            $model->created_at = strtotime($model->created_at);
             Yii::$app->response->format = Response::FORMAT_JSON;
+
             return ActiveForm::validate($model);
         }
 
@@ -82,7 +84,7 @@ class RequestController extends \yii\web\Controller
         $model = new Request();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->created_at = strtotime($model->created_at);
+            $model->created_at   = strtotime($model->created_at);
             $model->city_tour_id = 0;
             if ($model->save()) {
 
@@ -129,16 +131,27 @@ class RequestController extends \yii\web\Controller
     }
 
     /**
-     * Сохранение модели расширеного подбора, создание реквеста, разбор направлений и сохранение, добавление емайл в очередь
+     * Сохранение модели расширеного подбора, создание реквеста, разбор
+     * направлений и сохранение, добавление емайл в очередь
      *
      * @return Json
      */
     public function actionSaveextend()
     {
-        $model = new Request();
+        $posts      = Yii::$app->request->post();
 
-        if ($posts = Yii::$app->request->post()) {
-            //приводим в более удобный массив, данные направления  из расширенной формы
+        if (isset($posts['modelRequestId']) AND $posts['modelRequestId'] == 0) {
+            $model               = new Request();
+            $model->name         = 'not set';
+            $model->phone        = 'not set';
+            $model->city_tour_id = 0;
+            $step                = 1;
+        } else {
+            $model = Request::findOne((int)$posts['modelRequestId']);
+            $step  = 2;
+        }
+
+        if ($posts) {
             foreach ($posts['country_id'] as $key => $country) {
                 if ($country == 'Не важно') {
                     unset($posts['Request']['direct']['country_id'][$key]);
@@ -169,41 +182,58 @@ class RequestController extends \yii\web\Controller
             unset($posts['Request']['direct']);
 
             $model->load($posts);
+            $model->created_at = strtotime($posts['Request']['created_at']);
+            $model->city_tour_id = (int)$model->city_tour_id;
 
-            $model->created_at = strtotime($model->created_at);
+            if ($save = $model->save(false)) {
+                if($step == 1) {
+                    $countryCount   = count($directs['country_id']);
+                    $departureCount = count($directs['departure_id']);
+                    $directCount    = max($countryCount, $departureCount);
 
-            if($save = $model->save()) {
-                $countryCount   = count($directs['country_id']);
-                $departureCount = count($directs['departure_id']);
-                $directCount    = max($countryCount, $departureCount);
+                    $directSave  = [];
+                    $directModel = [];
 
-                $directSave  = [];
-                $directModel = [];
+                    for ($i = 0; $i < $directCount; $i++) {
+                        $directModel[$i] = new Direct();
 
-                //перебираем данные направлений и записываем в бд
-                for ($i = 0; $i < $directCount; $i++) {
-                    $directModel[$i] = new Direct();
-
+                        if (isset($directs['country_id'][$i])) {
+                            $directModel[$i]->country_id
+                                = $directs['country_id'][$i];
+                        }
                     if (isset($directs['country_id'][$i]) AND $directs['country_id'][$i] != '') {
                         $directModel[$i]->country_id = $directs['country_id'][$i];
                     }
 
+                        if (isset($directs['city_id'][$i])) {
+                            $directModel[$i]->city_id = $directs['city_id'][$i];
+                        }
                     if (isset($directs['city_id'][$i]) AND $directs['city_id'][$i] != '') {
                         $directModel[$i]->city_id = $directs['city_id'][$i];
                     }
 
+                        if (isset($directs['departure_id'][$i])) {
+                            $directModel[$i]->city_departure_id
+                                = $directs['departure_id'][$i];
+                        }
                     if (isset($directs['departure_id'][$i]) AND $directs['departure_id'][$i] != '') {
                         $directModel[$i]->city_departure_id = $directs['departure_id'][$i];
 
                     }
 
-                    $directModel[$i]->request_id = $model->id;
-                }
-var_dump( $directModel);die;
-                for ($i = 0; $i < $directCount; $i++) {
-                    $directSave[$i] = $directModel[$i]->save();
-                }
+                        $directModel[$i]->request_id = $model->id;
+                    }
 
+                    for ($i = 0; $i < $directCount; $i++) {
+                        $directSave[$i] = $directModel[$i]->save();
+                    }
+
+                    $mail             = new MailSchedule();
+                    $mail->request_id = $model->id;
+                    $mail->created_at = date('y-m-d H:i:s');
+                    $mail->send       = 0;
+                    $mail->save();
+                }
                 //перебираем данные конкретного отеля и записываем в бд
                 foreach ($posts['location_id'] as $location_id) {
                     if(isset($location_id) AND $location_id != ''){
@@ -235,16 +265,19 @@ var_dump( $directModel);die;
 
                 return json_encode(
                     [
-                        'code'   => 1,
-                        'status' => 'send and save',
+                        'code'           => 1,
+                        'status'         => 'send and save',
+                        'modelRequestId' => $model->id,
+                        'step'           => $step,
                     ]
                 );
-            }
-            else {
+            } else {
                 return json_encode(
                     [
-                        'code'   => 0,
-                        'status' => 'no save',
+                        'code'           => 0,
+                        'status'         => 'no save',
+                        'modelRequestId' => $model->id,
+                        'step'           => $step,
                     ]
                 );
             }

@@ -1,22 +1,35 @@
 $(document).ready(function () {
     //переходы по табам нестандартного запроса
     $('#step1').click(function () {
+        line($(this), '.tab');
+
         if(!$('#step2Panel').is(":visible"))
             $('#step1Panel').slideDown();
         else
             $('#step1Panel').show();
 
-        line($(this), '.tab');
         $('#step2Panel').hide();
         $('#formPanel').hide();
-
+        saveActiveTab(('#step1'));
     });
     $('#form').click(function () {
         line($(this), '.tab');
         $('#step1Panel').hide();
         $('#step2Panel').hide();
         $('#formPanel').slideDown();
+
+        saveActiveTab(('#form'));
     });
+
+    function saveActiveTab(_tab){
+        if (history.pushState)
+            history.pushState(null, null, _tab);
+        else
+            location.hash = _tab;
+    }
+
+    if (window.location.hash)
+        $(window.location.hash).click();
 
     //переход по табам соглашения пользователя в модальном окне
     $('#agreement, .agree').click(function () {
