@@ -352,15 +352,13 @@ $this->registerJsFile(
                     <i class="fas fa-circle"></i>
                 </div>
             </a>
-
-            <div class="tour-selection-wrap__abs-txt  bth__cnt bth__cnt--sm">
+            <div class="tour-selection-wrap__abs-txt  bth__cnt bth__cnt--sm" style="line-height: 0px;top: 97px;">
                 *Нажимая на кнопку "отправить", я принимаю
                 <a href="#p-agreement-pp" class="p-agreement-pp agree">
                     Соглашение об обработке личных данных</a> и
                 <a href="#p-agreement-pp" class="p-agreement-pp site-role">Правила
                     сайта</a>
             </div>
-
         </div>
 
     </div>

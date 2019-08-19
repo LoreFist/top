@@ -27,7 +27,6 @@ class AppAsset extends AssetBundle
         'css/_lsfw/reset-ls.css',
         'css/_lsfw/tabs.css',
         'css/tophotels_site_html/agree-pp.css',
-        'css/tophotels_site_html/main-cnt.css',
         'css/tophotels_site_html/tabs-bar-mobile.css',
         'css/tophotels_site_html/layouts/footer.css',
         'css/tophotels_site_html/layouts/header.css',
@@ -48,6 +47,7 @@ class AppAsset extends AssetBundle
         'css/lib-ui-tour-filter/lsfw-price-widget.css',
         'css/lib-ui-tour-filter/lsfw-tour-filter.css',
         'css/lib-ui-tour-filter/lsfw-form-direction.css',
+        'css/tophotels_site_html/main-cnt.css',
     ];
 
     public $js = [

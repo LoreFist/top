@@ -2,6 +2,7 @@
 
 namespace app\models\direct;
 
+use app\models\Direct;
 use Yii;
 
 /**

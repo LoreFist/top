@@ -10,8 +10,8 @@ $(document).ready(function () {
     $('.set-checked').prop( "checked", true ); //устанавлиавем в параметры отеля дефолтный радиобатон
 
     function setLabelParamHotel(id) {
-        var _countParamHotel = $('input[name*="Request[direct]['+id+']"]input[type!="hidden"]').length;
-        var _countCheckedParamHotel = $('input[name*="Request[direct]['+id+']"]input[type!="hidden"]input:checked').length;
+        var _countParamHotel = $('input[name*="[paramhotel]['+id+']"]input[type!="hidden"]').length;
+        var _countCheckedParamHotel = $('input[name*="[paramhotel]['+id+']"]input[type!="hidden"]input:checked').length;
         $('.param-hotel-'+id).html(_countCheckedParamHotel+' / '+_countParamHotel+' параметров');
         $('.param-hotel-lbl-'+id).addClass('active');
     }
@@ -106,6 +106,9 @@ $(document).ready(function () {
             _form_data.push({'name':'departure_id[]', 'value': $('#direct_departure-4').html()});
 
             _form_data.push({'name':'modelRequestId', 'value': _modelRequestId});
+
+            var _count_direct = $('.js-show-added-field:visible').length;
+            _form_data.push({'name':'countDirect', 'value': _count_direct});
 
             $.ajax({
                     type: 'post',

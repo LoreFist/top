@@ -7,6 +7,11 @@ use app\models\dict\DictAllocPlaceType;
 use app\models\dict\DictCity;
 use app\models\dict\DictCountry;
 use app\models\Direct;
+use app\models\direct\DirectCategory;
+use app\models\direct\DirectFood;
+use app\models\direct\DirectKids;
+use app\models\direct\DirectOther;
+use app\models\direct\DirectPalaceType;
 use app\models\Food;
 use app\models\ForKids;
 use app\models\MailSchedule;
@@ -17,6 +22,7 @@ use app\models\RequestFood;
 use app\models\RequestLocation;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
@@ -221,7 +227,8 @@ class RequestController extends \yii\web\Controller
             $posts['Request']['day_stay_from'] = $day_stay_from_to[0];
             $posts['Request']['day_stay_to']   = $day_stay_from_to[1];
 
-            $directs = $posts['Request']['direct'];
+            $directs     = $posts['Request']['direct'];
+            $paramsHotel = $posts['Request']['direct']['paramhotel'];
             unset($posts['Request']['direct']);
 
             $model->load($posts);
@@ -230,9 +237,7 @@ class RequestController extends \yii\web\Controller
 
             if ($save = $model->save(false)) {
                 if($step == 1) {
-                    $countryCount   = count($directs['country_id']);
-                    $departureCount = count($directs['departure_id']);
-                    $directCount    = max($countryCount, $departureCount);
+                    $directCount = (int)$posts['countDirect']+1;
 
                     $directSave  = [];
                     $directModel = [];
@@ -251,10 +256,57 @@ class RequestController extends \yii\web\Controller
                         }
 
                         $directModel[$i]->request_id = $model->id;
+                        $directModel[$i]->hotel_rating_id = $paramsHotel[$i]['rating'][0];
                     }
 
                     for ($i = 0; $i < $directCount; $i++) {
                         $directSave[$i] = $directModel[$i]->save();
+
+                        if (is_array($categorys = $paramsHotel[$i]['category'])) {
+                            foreach ($categorys as $cat) {
+                                $category              = new DirectCategory();
+                                $category->direct_id   = $directModel[$i]->id;
+                                $category->category_id = (int)$cat;
+                                $category->save();
+                            }
+                        }
+
+                        $foods = Food::find()->where('short_name in ("'.implode('","', $paramsHotel[$i]['food']).'")')->all();
+                        foreach ($foods as $food) {
+                            $fd            = new DirectFood();
+                            $fd->food_id   = $food->id;
+                            $fd->direct_id = $directModel[$i]->id;
+                            $fd->save();
+                        }
+
+                        if (is_array($kids = $paramsHotel[$i]['forkids'])) {
+                            foreach ($kids as $kid) {
+                                $newKids            = new DirectKids();
+                                $newKids->kids_id   = (int)$kid;
+                                $newKids->direct_id = $directModel[$i]->id;
+                                $newKids->save();
+                            }
+                        }
+
+                        if (is_array($others = $paramsHotel[$i]['other'])) {
+                            foreach ($others as $other) {
+                                $newOther            = new DirectOther();
+                                $newOther->other_id  = (int)$other;
+                                $newOther->direct_id = $directModel[$i]->id;
+                                $newOther->save();
+                            }
+                        }
+
+                        if ($paramsHotel[$i]['palacetype'][0] != 'any') {
+                            foreach ($paramsHotel[$i]['palacetype'] as $palace)
+                            {
+                                $newPalace                = new DirectPalaceType();
+                                $newPalace->palacetype_id = (int)$palace;
+                                $newPalace->direct_id     = $directModel[$i]->id;
+                                $newPalace->save();
+                            }
+
+                        }
                     }
 
                     $mail             = new MailSchedule();

@@ -39,14 +39,14 @@ use yii\helpers\ArrayHelper;
                         <div class="formDirections__bottom-blocks">
                             <div class="form-dropdown-stars__item ">
                                 <div class="cbx-block  cbx-block--16  ">
-                                    <input name="Request[direct][<?=$data_id?>][category][]" value="any" type="checkbox" class="cbx checkbox-stars checkbox-stars<?=$data_id?>" id="type-category<?=$data_id?>_0" checked="">
+                                    <input name="Request[direct][paramhotel][<?=$data_id?>][category][]" value="any" type="checkbox" class="cbx checkbox-stars checkbox-stars<?=$data_id?>" id="type-category<?=$data_id?>_0" checked="">
                                     <label class="label-cbx " for="type-category<?=$data_id?>_0">
                                         <span class="cbx-cnt uppercase">Любая категория</span>
                                     </label>
                                 </div>
                             </div>
                             <?= $form
-                                ->field($model, "direct[$data_id][category][]")
+                                ->field($model, "direct[paramhotel][$data_id][category][]")
                                 ->checkBoxList(ArrayHelper::map($items_dict['category'], 'id', 'name'),[
                                         'item' => function($index, $label, $name, $checked, $value) {
                                             if($label[1] == '*') {
@@ -56,7 +56,7 @@ use yii\helpers\ArrayHelper;
                                                     $label .= '<i class="fa fa-star"></i>';
                                             }elseif ($label == 'No Category')
                                                 $label = 'Без категории';
-                                            $data_id = mb_substr( explode('[',$name)[2],0,-1);
+                                            $data_id = mb_substr( explode('[',$name)[3],0,-1);
                                             return "
                                             <div class='form-dropdown-stars__item'>
                                                 <div class='cbx-block  cbx-block--16'>
@@ -77,19 +77,20 @@ use yii\helpers\ArrayHelper;
 
                     <div class="formDirections__bottom_ph<?=$data_id?> js-search-rating" style="display: none">
                         <?= $form
-                            ->field($model, "direct[$data_id][rating][]")
+                            ->field($model, "direct[paramhotel][$data_id][rating][]")
                             ->radioList(ArrayHelper::map($items_dict['rating'], 'id', 'name'),[
+                                    'unselect' => null,
                                     'item' => function($index, $label, $name, $checked, $value) {
                                         if($index == 0)
                                             $classDef = 'set-checked';
                                         else
                                             $classDef = '';
 
-                                        $data_id = mb_substr( explode('[',$name)[2],0,-1);
+                                        $data_id = mb_substr( explode('[',$name)[3],0,-1);
                                         return "
                                             <div class='form-dropdown-stars__item'>
                                                 <div class='rbt-block'>
-                                                    <input type='radio' name='{$name}' value='{$value}' class='rbt {$classDef}' id='333rating{$data_id}_{$value}' {$checked}>
+                                                    <input type='radio' name='{$name}' value='{$value}' class='rbt {$classDef}' id='333rating{$data_id}_{$value}'>
                                                     <label class='label-rbt' for='333rating{$data_id}_{$value}'>
                                                         <span class='rbt-cnt uppercase'>{$label}</span>
                                                     </label>
@@ -103,12 +104,12 @@ use yii\helpers\ArrayHelper;
                     </div>
                     <div class="formDirections__bottom_ph<?=$data_id?> js-search-hotels" style="display: none">
                         <?= $form
-                            ->field($model, "direct[$data_id][food][]")
+                            ->field($model, "direct[paramhotel][$data_id][food][]")
                             ->checkBoxList(ArrayHelper::map($items_dict['food'], 'short_name', 'name'),[
                                     'item' => function($index, $label, $name, $checked, $value) {
                                         if($value=='ALL')
                                             $checked = 'checked';
-                                        $data_id = mb_substr( explode('[',$name)[2],0,-1);
+                                        $data_id = mb_substr( explode('[',$name)[3],0,-1);
                                         return "
                                             <div class='form-dropdown-stars__item'>
                                                 <div class='cbx-block  cbx-block--16'>
@@ -128,10 +129,10 @@ use yii\helpers\ArrayHelper;
                     <div class="formDirections__bottom_ph<?=$data_id?> js-search-kid" style="display: none">
                         <div class="formDirections__bottom-blocks">
                             <?= $form
-                                ->field($model, "direct[$data_id][forkids][]")
+                                ->field($model, "direct[paramhotel][$data_id][forkids][]")
                                 ->checkBoxList(ArrayHelper::map($items_dict['forkids'], 'id', 'name'),[
                                         'item' => function($index, $label, $name, $checked, $value) {
-                                            $data_id = mb_substr( explode('[',$name)[2],0,-1);
+                                            $data_id = mb_substr( explode('[',$name)[3],0,-1);
                                             return "
                                             <div class='form-dropdown-stars__item'>
                                                 <div class='cbx-block  cbx-block--16'>
@@ -151,10 +152,10 @@ use yii\helpers\ArrayHelper;
                     <div class="formDirections__bottom_ph<?=$data_id?> js-search-other" style="display: none">
                         <div class="formDirections__bottom-blocks">
                             <?= $form
-                                ->field($model, "direct[$data_id][other][]")
+                                ->field($model, "direct[paramhotel][$data_id][other][]")
                                 ->checkBoxList(ArrayHelper::map($items_dict['other'], 'id', 'name'),[
                                         'item' => function($index, $label, $name, $checked, $value) {
-                                            $data_id = mb_substr( explode('[',$name)[2],0,-1);
+                                            $data_id = mb_substr( explode('[',$name)[3],0,-1);
                                             return "
                                             <div class='form-dropdown-stars__item'>
                                                 <div class='cbx-block  cbx-block--16'>
@@ -176,7 +177,7 @@ use yii\helpers\ArrayHelper;
                         <div class="formDirections__bottom-blocks">
                             <div class="form-dropdown-stars__item">
                                 <div class="cbx-block   cbx-block--16 ">
-                                    <input name="Request[direct][<?=$data_id?>][palacetype][]" value="any" type="checkbox" class="cbx obj-palace palace-type-<?=$data_id?>" id="palace_type_<?=$data_id?>_0" checked="">
+                                    <input name="Request[direct][paramhotel][<?=$data_id?>][palacetype][]" value="any" type="checkbox" class="cbx obj-palace palace-type-<?=$data_id?>" id="palace_type_<?=$data_id?>_0" checked="">
                                     <label class="label-cbx" for="palace_type_<?=$data_id?>_0">
                                         <span class="cbx-cnt">Любой тип</span>
                                     </label>
@@ -187,7 +188,7 @@ use yii\helpers\ArrayHelper;
                                     <div class=" formDirections__left-30 ">
                                         <?php foreach ($type->values as $value): ?>
                                             <div class="cbx-block   cbx-block--16 ">
-                                                <input name="Request[direct][<?=$data_id?>][palacetype][]" value="<?=$value->id?>" type="checkbox" class="cbx obj-palace palace-type-<?=$data_id?>" id="palace_type_<?=$data_id?>_<?=$value->id?>">
+                                                <input name="Request[direct][paramhotel][<?=$data_id?>][palacetype][]" value="<?=$value->id?>" type="checkbox" class="cbx obj-palace palace-type-<?=$data_id?>" id="palace_type_<?=$data_id?>_<?=$value->id?>">
                                                 <label class="label-cbx" for="palace_type_<?=$data_id?>_<?=$value->id?>">
                                                     <span class="cbx-cnt"><?=$value->name?></span>
                                                 </label>
