@@ -1,7 +1,7 @@
 <div class="tour-selection-field tour-selection-field--200">
     <div class="bth__inp-block js-show-formDirections" data-id="<?=$data_id?>">
         <span class="bth__inp-lbl --center active">Город вылета</span>
-        <span class="bth__inp " id="direct_departure-<?=$data_id?>">Не важно</span>
+        <span class="bth__inp uppercase " id="direct_departure-<?=$data_id?>">Не важно</span>
     </div>
     <div class="formDirections w100p" style="display: none;">
         <div class="formDirections__wrap w100p">

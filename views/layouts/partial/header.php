@@ -7,7 +7,7 @@ use yii\helpers\Html;
 <div class="headerMobile">
 
     <div class="headerMobile__flex js-serach-active-hide">
-        <a href="/tophotels/" class="headerMobile__logo">
+        <a href="#" class="headerMobile__logo">
             <img src="/i/th-logo.png" width="112" height="40" class="mr10">
         </a>
         <div class="headerMobile__right">
@@ -51,7 +51,7 @@ use yii\helpers\Html;
 
 <header class="header">
     <div class="header-cnt header-cnt_index ">
-        <a href="/" class="header-logo">
+        <a href="#" class="header-logo">
             <?= Html::img("/i/th-logo.png") ?>
         </a>
         <div class="header-nav">

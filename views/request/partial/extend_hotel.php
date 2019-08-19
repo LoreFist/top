@@ -4,7 +4,7 @@ use yii\helpers\ArrayHelper;
 <div class="tour-selection-field tour-selection-field--180" data-id="<?=$data_id?>">
     <div class="bth__inp-block bth__inp-block--hotel-params js-show-formDirections js-formDirections--big-mobile">
         <span class="bth__inp-lbl param-hotel-lbl-<?=$data_id?>">Параметры отеля</span>
-        <span class="bth__inp param-hotel-<?=$data_id?>"></span>
+        <span class="bth__inp uppercase param-hotel-<?=$data_id?>"></span>
     </div>
 
     <div class="formDirections   formDirections--big-mobile formDirections--char" style="display: none;">

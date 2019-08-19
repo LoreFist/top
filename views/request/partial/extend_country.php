@@ -3,7 +3,7 @@
         <span class="bth__inp-lbl bth__inp-lbl--center active">Страна поездки</span>
         <div class="js-lsfw-ppdb bth__inp tour-selection__country">
             <div id="country_direction_Flag-<?=$data_id?>" class="tour-selection__flag"></div>
-            <b id="country_direction-<?=$data_id?>" class="bth__inp" style="padding: 0px;">Не важно</b>
+            <b id="country_direction-<?=$data_id?>" class="tour-selection__country-cut" style="padding: 0px;">Не важно</b>
         </div>
     </div>
     <div class="formDirections w100p" style="display: none;">

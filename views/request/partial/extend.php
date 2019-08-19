@@ -17,11 +17,10 @@ $this->registerJsFile(
 ?>
 <?php $form = ActiveForm::begin(['id' => 'form-extend',]);?>
 <div class="panel" id="step1Panel" style="display: none">
-    <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей
-        поездки
-    </div>
-
     <div class="tour-selection-wrap" id="step1_wrap">
+        <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей
+            поездки
+        </div>
         <div class="tour-selection-wrap-in tour-selection-wrap-flex">
 
             <?php echo $this->context->renderPartial(
@@ -345,14 +344,14 @@ $this->registerJsFile(
             </div>
         </div>
         <div class="tour-selection-wrap-in">
-            <div class=" bth__btn  bth__btn--fill bth__loader" id='extend_step_submit'>
-                Отправить заявку*
+            <a href="#" class="metro-valid-pp bth__btn  bth__btn--fill bth__loader" id='extend_step_submit'>
+                Отправить запрос*
                 <div class=" bth__loader-spin">
                     <i class="fas fa-circle"></i>
                     <i class="fas fa-circle"></i>
                     <i class="fas fa-circle"></i>
                 </div>
-            </div>
+            </a>
 
             <div class="tour-selection-wrap__abs-txt  bth__cnt bth__cnt--sm">
                 *Нажимая на кнопку "отправить", я принимаю
