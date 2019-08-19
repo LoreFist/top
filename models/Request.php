@@ -16,7 +16,7 @@ namespace app\models;
  * @property string $day_stay_from
  * @property string $day_stay_to
  * @property int $guest
- * @property int $currency
+ * @property int $currency_id
  * @property int $priceTo
  * @property int $priceComfort
  * @property int $children
@@ -30,12 +30,14 @@ namespace app\models;
  * @property MailSchedule[] $mailSchedules
  * @property RequestFood[] $requestFoods
  * @property Food[] $foods
+ * @property Currency $currencyDecrypt
  */
 class Request extends \yii\db\ActiveRecord
 {
     public $date_departure; //для контрола календаря
     public $day_stay; //для контрола пребывание дней
     public $direct; // для сбора данных по направлениям
+    public $currency; //для виджета бюджета Валюта
     public $priceFrom; //не используется, но в либе lib-ui-tour-filter виджет WPrice жестко захардкоженно
 
     /**
@@ -54,7 +56,7 @@ class Request extends \yii\db\ActiveRecord
         return [
             [['name', 'phone', 'city_tour_id'], 'required'],
             [['name', 'phone', 'email', 'optional', 'date_departure_from', 'date_departure_to', 'day_stay_from', 'day_stay_to'], 'string'],
-            [['guest', 'currency', 'priceTo', 'priceComfort', 'children', 'age1', 'age2', 'age3'], 'integer'],
+            [['guest', 'currency_id', 'priceTo', 'priceComfort', 'children', 'age1', 'age2', 'age3'], 'integer'],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Direct::className(), 'targetAttribute' => ['id' => 'request_id']],
             ['email', 'email'],
         ];
@@ -78,7 +80,7 @@ class Request extends \yii\db\ActiveRecord
             'day_stay_from' => 'Day Stay From',
             'day_stay_to' => 'Day Stay To',
             'guest' => 'Guest',
-            'currency' => 'Currency',
+            'currency_id' => 'Currency ID',
             'priceTo' => 'Price To',
             'priceComfort' => 'Price Comfort',
             'children' => 'Children',
@@ -127,5 +129,13 @@ class Request extends \yii\db\ActiveRecord
     public function getFoods()
     {
         return $this->hasMany(Food::className(), ['id' => 'food_id'])->viaTable('request_food', ['request_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCurrencyDecrypt()
+    {
+        return $this->hasOne(Currency::className(), ['id' => 'currency_id']);
     }
 }

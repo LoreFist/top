@@ -235,6 +235,8 @@ class RequestController extends \yii\web\Controller
             $model->created_at = strtotime($posts['Request']['created_at']);
             $model->city_tour_id = (int)$model->city_tour_id;
 
+            $model->currency_id = (int)$posts['Request']['currency'];
+
             if ($save = $model->save(false)) {
                 if($step == 1) {
                     $directCount = (int)$posts['countDirect']+1;

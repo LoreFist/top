@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\models\dict\DictCity;
+use app\models\dict\DictCountry;
 use Yii;
 
 /**
@@ -12,11 +14,22 @@ use Yii;
  * @property int $country_id
  * @property int $city_id
  * @property int $city_departure_id
+ * @property DictCountry $dictCountry
+ * @property DictCity $dictCity
  *
  * @property Request $request
  */
 class Direct extends \yii\db\ActiveRecord
 {
+    public function getDictcountry()
+    {
+        return $this->hasOne(DictCountry::className(), ['id' => 'country_id']);
+    }
+
+    public function getDictcity()
+    {
+        return $this->hasOne(DictCity::className(), ['id' => 'city_id']);
+    }
     /**
      * {@inheritdoc}
      */
