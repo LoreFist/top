@@ -80,5 +80,39 @@ $(document).ready(function () {
         return;
     }, 500));
 
+    var _val_food = [];
+    $(document).on('change', '.food-spechotel', function() {
+        var _val = $(this).val()+' ';
 
+        if(this.checked) {
+            if(_val == 'ALL '){
+                $(this).closest('.formDirections').hide();
+                _val_food = [];
+                $('input.food-spechotel').prop( "checked", false );
+                $('input#type-foodALL.food-spechotel').prop( "checked", true );
+                $('#label_food').html('ЛЮБОЕ');
+                return false;
+            } else{
+                $('input#type-foodALL.food-spechotel').prop( "checked", false );
+
+                if(_val_food.indexOf('ЛЮБОЕ') == 1)
+                    _val_food.splice(_val_food.indexOf('ЛЮБОЕ'), 1);
+
+                _val_food.push(_val);
+            }
+        } else {
+            _val_food.splice(_val_food.indexOf(_val), 1);
+        }
+
+        if(_val_food.length == 0 || _val_food.length == 5) {
+            $(this).closest('.formDirections').hide();
+            _val_food = [];
+            $('input.food-spechotel').prop( "checked", false );
+            $('input#type-foodALL.food-spechotel').prop( "checked", true );
+            $('#label_food').html('ЛЮБОЕ');
+            return false;
+        }
+
+        $('#label_food').html(_val_food);
+    });
 });

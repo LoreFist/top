@@ -289,107 +289,73 @@ $(document).ready(function () {
         $('.form-change'+_data_id).find(_bottom).show();
     });
 
-
-    function checkboxFood(classCheckbox, idCheckbox, labelCheckbox, valueFood, flagClose){
-        $(document).on('change', '.'+classCheckbox, function() {
-            var _val = $(this).val()+' ';
-
-            if(this.checked) {
-                if(_val == 'ALL '){
-                    if(flagClose)
-                        $(this).closest('.formDirections').hide();
-                    valueFood = [];
-                    $('input.'+classCheckbox).prop( "checked", false );
-                    $('input#'+idCheckbox+'ALL.cbx').prop( "checked", true );
-                    $('#'+labelCheckbox).html('ЛЮБОЕ');
-                    return valueFood;
-                } else{
-                    $('input#'+idCheckbox+'ALL.'+classCheckbox).prop( "checked", false );
-
-                    if(valueFood.indexOf('ЛЮБОЕ') == 1)
-                        valueFood.splice(valueFood.indexOf('ЛЮБОЕ'), 1);
-
-                    valueFood.push(_val);
-                }
-            } else {
-                valueFood.splice(valueFood.indexOf(_val), 1);
-            }
-
-            if(valueFood.length == 0 || valueFood.length == 5) {
-                if(flagClose)
-                    $(this).closest('.formDirections').hide();
-                valueFood = [];
-                $('input.'+classCheckbox).prop( "checked", false );
-                $('input#'+idCheckbox+'ALL.'+classCheckbox).prop( "checked", true );
-                $('#'+labelCheckbox).html('ЛЮБОЕ');
-                return false;
-            }
-
-            $('#'+labelCheckbox).html(valueFood);
-
-            return valueFood
-        });
-    }
-
     $(document).on('change', '.checkbox-stars', function() {//логика чекбоксов в параметрах отеля Категории
         var _val = $(this).val();
         if(this.checked) {
             if(_val == 'any' || _val == 66) { //значение чекбоксов Любая Категория и Без Категории
-                $('input[name*="Request[direct]['+_data_id+']"].checkbox-stars').prop( "checked", false );
-                $('input[name*="Request[direct]['+_data_id+']"]#type-category0.cbx').prop( "checked", true );
-                $('input[name*="Request[direct]['+_data_id+']"]#type-category66.cbx').prop( "checked", true );
+                $('input.checkbox-stars'+_data_id).prop( "checked", false );
+                $('input#type-category'+_data_id+'_0.cbx').prop( "checked", true );
+                $('input#type-category'+_data_id+'_66.cbx').prop( "checked", true );
             }
             else{
-                $('input[name*="Request[direct]['+_data_id+']"]#type-category0.cbx').prop( "checked", false );
-                $('input[name*="Request[direct]['+_data_id+']"]#type-category66.cbx').prop( "checked", false );
+                $('input#type-category'+_data_id+'_0.cbx').prop( "checked", false );
+                $('input#type-category'+_data_id+'_66.cbx').prop( "checked", false );
             }
         }
     });
 
-    $(document).on('change', '.palace-type', function() {//логика чекбоксов в параметрах отеля Расположение
+    //логика чекбоксов в параметрах отеля Расположение
+    $(document).on('change', '.obj-palace', function() {
         var _val = $(this).val();
         if(this.checked) {
             if(_val == 'any'){
-                $('input.palace-type').prop( "checked", false );
-                $('input#palace_type_0.cbx').prop( "checked", true );
+                $('input.palace-type-'+_data_id).prop( "checked", false );
+                $('input#palace_type_'+_data_id+'_0.cbx').prop( "checked", true );
             } else if(_val >=1 && _val <=13){
-                $('input#palace_type_0.cbx').prop( "checked", false );
+                $('input#palace_type_'+_data_id+'_0.cbx').prop( "checked", false );
 
                 if(_val >=1 && _val<=4){
                     for(var i=5; i<=13; i++)
-                        $('input#palace_type_'+i+'.cbx').prop( "checked", false );
+                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
                 }
 
                 if(_val >=11 && _val<=13){
                     for(var i=1; i<=10; i++)
-                        $('input#palace_type_'+i+'.cbx').prop( "checked", false );
+                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
                 }
 
                 if(_val >=8 && _val<=10){
                     for(var i=1; i<=7; i++)
-                        $('input#palace_type_'+i+'.cbx').prop( "checked", false );
+                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
 
                     for(var i=11; i<=13; i++)
-                        $('input#palace_type_'+i+'.cbx').prop( "checked", false );
+                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
                 }
 
                 if(_val >=5 && _val<=7){
                     for(var i=1; i<=4; i++)
-                        $('input#palace_type_'+i+'.cbx').prop( "checked", false );
+                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
 
                     for(var i=8; i<=13; i++)
-                        $('input#palace_type_'+i+'.cbx').prop( "checked", false );
+                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
                 }
             }
 
         }
     });
 
-    var _val_food = [];
-    _val_food = checkboxFood('food-spechotel','type-food','label_food',_val_food, true); //логика чекбоксов в конткретном отеле еда
-
-    var _val_food_param_hotel = [];
-    _val_food_param_hotel = checkboxFood('param-hotel','type-food-param-hotel','',_val_food_param_hotel,false); //логика чекбоксов в параметрах отеле еда
+    //логика чекбоксов питания в параметрах отеля
+    $(document).on('change', '.food_obj', function() {
+        var _val = $(this).val();
+        if(this.checked) {
+            if (_val == 'ALL' || $('input:checked.food_param_hotel_'+_data_id).length == 5) {
+                $('input.food_param_hotel_'+_data_id).prop( "checked", false );
+                $('input#type-food-param-hotel_'+_data_id+'ALL').prop( "checked", true );
+            } else{
+                $('input#type-food-param-hotel_'+_data_id+'ALL').prop( "checked", false );
+            }
+        }
+    });
 
     $('.submit-hotel-params').on('click', function(){
         $(this).closest('.formDirections').hide();
