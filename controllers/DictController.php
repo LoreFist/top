@@ -2,9 +2,12 @@
 namespace app\controllers;
 
 use app\models\dict\DictAllocation;
+use app\models\dict\DictAllocationType;
+use app\models\dict\DictAlloccat;
 use app\models\dict\DictCity;
+use app\models\dict\DictCountry;
+use app\models\dict\DictResort;
 use Yii;
-use yii\helpers\VarDumper;
 
 /**
  * Для работы со справочниками
@@ -22,24 +25,28 @@ class DictController extends \yii\web\Controller
         if($namesearch = Yii::$app->request->get('namesearch')){
             $namesearch = "'%".$namesearch."%'";
 
-            $location = DictAllocation::find()->joinWith(['type','resort0','resort0.country0','cat0'])
-                ->where('"dict_allocation".name like '.$namesearch)
+            $location = DictAllocation::find()
+                ->select([
+                    DictAllocation::tableName().'.name', DictAllocation::tableName().'.id',
+                    DictAllocation::tableName().'.cat',DictAllocation::tableName().'.allocation_type',
+                    DictAllocation::tableName().'.resort',
+                ])
+                ->joinWith([
+                    'type'=>function($q){
+                        $q->select(DictAllocationType::tableName().'.name');
+                    },
+                    'resort0'=>function($q){
+                        $q->select([DictResort::tableName().'.id', DictResort::tableName().'.name', DictResort::tableName().'.country']);
+                    },
+                    'resort0.country0'=>function($q){
+                        $q->select([DictCountry::tableName().'.id', DictCountry::tableName().'.name']);
+                    },
+                    'cat0'=>function($q){
+                        $q->select([DictAlloccat::tableName().'.id', DictAlloccat::tableName().'.name']);
+                    }
+                ])
+                ->where( DictAllocation::tableName().'.name like '.$namesearch)
                 ->all();
-
-            /*$locationArr = [];
-            foreach ($location as $lc){
-                $locationArr[] = [
-
-                    'country_id'=>$lc->resort0->country0->id,
-                    'country_name'=>$lc->resort0->country0->name,
-                    'country_name_eng'=>$lc->resort0->country0->name_eng,
-                    'id'=>$lc->id,
-                    'name'=>$lc->name,
-                    'resort_name'=>$lc->resort0->name,
-                    'stars'=>$lc->cat0->name
-
-                ];
-            }*/
 
             return $this->renderPartial( 'hotelsearch',['location' => $location]);
         }

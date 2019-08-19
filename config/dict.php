@@ -9,9 +9,10 @@ return [
     'schemaMap'    => [
         'pgsql' => [
             'class'         => 'yii\db\pgsql\Schema',
-            'defaultSchema' => 'dict' //specify your schema here
+            'defaultSchema' => 'dict'
         ],
     ],
+    'enableSchemaCache' => true,
     'on afterOpen' => function ($event) {
         $event->sender->createCommand("SET search_path TO dict;")->execute();
     },
