@@ -17,11 +17,10 @@ $this->registerJsFile(
 ?>
 <?php $form = ActiveForm::begin(['id' => 'form-extend',]);?>
 <div class="panel" id="step1Panel" style="display: none">
-    <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей
-        поездки
-    </div>
-
     <div class="tour-selection-wrap" id="step1_wrap">
+        <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей
+            поездки
+        </div>
         <div class="tour-selection-wrap-in tour-selection-wrap-flex">
 
             <?php echo $this->context->renderPartial(
