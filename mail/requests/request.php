@@ -44,7 +44,9 @@ use yii\helpers\Url;
                             </table>
                         </td>
                     </tr>
-
+                    <tr>
+                        <td style="font: 16px Arial, sans-serif;line-height: 20px;padding: 35px 30px 20px;text-align: center;"></td>
+                    </tr>
                     <tr>
                         <td style="font: 16px Arial, sans-serif;line-height: 20px;padding: 0 30px 10px;">
                             Здравствуйте! Вы получили новую заявку на подбор

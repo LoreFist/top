@@ -15,8 +15,9 @@ $this->registerJsFile(
 );
 
 ?>
-<?php $form = ActiveForm::begin(['id' => 'form-extend',]);?>
+
 <div class="panel" id="step1Panel" style="display: none">
+    <?php $form = ActiveForm::begin(['id' => 'form-extend',]);?>
     <div class="tour-selection-wrap" id="step1_wrap">
         <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей
             поездки
@@ -362,7 +363,7 @@ $this->registerJsFile(
         </div>
 
     </div>
+    <?= $form->field($model, 'created_at',['enableAjaxValidation' => false])->hiddenInput(['id'=>'create_at'])->label(false)->error(false) ?>
+    <?php ActiveForm::end(); ?>​
 </div>
 
-<?= $form->field($model, 'created_at',['enableAjaxValidation' => false])->hiddenInput(['id'=>'create_at'])->label(false)->error(false) ?>
-<?php ActiveForm::end(); ?>​

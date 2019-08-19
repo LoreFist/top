@@ -365,4 +365,15 @@ $(document).ready(function () {
         var _id = $(this).attr('data-id');
         setLabelParamHotel(_id);
     });
+
+    $('.js-lsfw-ppdb ').on('click', function () {
+        if(
+            $(this).next().attr('id') == '_mtIdxFormDurationPP' ||
+            $(this).next().attr('id') == '_mtIdxFormGuestPP' ||
+            $(this).next().attr('data-input-selector') == "#request-currency"
+        ) {
+            $(this).next().slideDown();
+        }
+        $('.formDirections').hide();
+    })
 });
