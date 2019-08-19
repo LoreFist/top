@@ -496,14 +496,14 @@ $this->registerJsFile(
             </div>
         </div>
         <div class="tour-selection-wrap-in">
-            <div class=" bth__btn  bth__btn--fill bth__loader" id='extend_step_submit'>
-                Отправить заявку*
+            <a href="#" class="metro-valid-pp bth__btn  bth__btn--fill bth__loader" id='extend_step_submit'>
+                Отправить запрос*
                 <div class=" bth__loader-spin">
                     <i class="fas fa-circle"></i>
                     <i class="fas fa-circle"></i>
                     <i class="fas fa-circle"></i>
                 </div>
-            </div>
+            </a>
 
             <div class="tour-selection-wrap__abs-txt  bth__cnt bth__cnt--sm">
                 *Нажимая на кнопку "отправить", я принимаю

@@ -30,6 +30,8 @@ $(document).ready(function () {
 
     if (window.location.hash)
         $(window.location.hash).click();
+    else
+        $('.tab.active').first().click();
 
     //переход по табам соглашения пользователя в модальном окне
     $('#agreement, .agree').click(function () {
