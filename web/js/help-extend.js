@@ -241,6 +241,7 @@ $(document).ready(function () {
     //сдвигает плейсхолдер
     $('.optional-js-field').on('click', function () {
         $(this).find('.bth__inp-lbl').addClass('active');
+        $('#optional').addClass('focus');
         $(this).closest('.js-show-saggest').next().show();
     });
 
@@ -249,6 +250,7 @@ $(document).ready(function () {
         if ($('#optional').html() == '') {
             $(this).find('.bth__inp-lbl').removeClass('active');
             $(this).closest('.js-show-saggest').next().hide();
+            $('#optional').removeClass('focus');
         }
     });
 

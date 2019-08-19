@@ -172,7 +172,7 @@
     font-size: 16px;
     font-family: 'apercu_pro', sans-serif;
     display: inline-block;
-    color: #475669;
+    color: #475669 !important;
     font-weight: bold;
     border-radius: 2px;
 }
@@ -853,6 +853,7 @@
 
     top: 4px;
     font-size: 13px;
+    padding-top: 0;
 }
 
 .tour-selection-wrap .tour-selection-field .bth__inp-lbl.bth__inp-lbl--center {
