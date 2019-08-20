@@ -110,6 +110,8 @@ $(document).ready(function () {
             var _count_direct = $('.js-show-added-field:visible').length;
             _form_data.push({'name':'countDirect', 'value': _count_direct});
 
+            _form_data.push({'name':'typeTour', 'value': $('.type-tour:checked').attr('id')});
+
             $.ajax({
                     type: 'post',
                     dataType: 'json',

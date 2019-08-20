@@ -41,7 +41,7 @@ class RequestController extends \yii\web\Controller
         $model = new Request();
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            $model->created_at = strtotime($model->created_at);
+            $model->created_at          = strtotime($model->created_at);
             Yii::$app->response->format = Response::FORMAT_JSON;
 
             return ActiveForm::validate($model);
@@ -64,46 +64,46 @@ class RequestController extends \yii\web\Controller
         unset($items_dict_deprt[$key_msc]);
         unset($items_dict_deprt[$key_spb]);
         $items_dict_deprt = [
-            $key_msc => 'Москва',
-            $key_spb => 'Санкт-Петербург'
+                $key_msc => 'Москва',
+                $key_spb => 'Санкт-Петербург',
             ] + $items_dict_deprt;
 
         $items_dict_deprt_spechotel = [
-            -1 => 'Без перелета'
-        ] + $items_dict_deprt;
+                -1 => 'Без перелета',
+            ] + $items_dict_deprt;
 
-        $food = Food::find()->orderBy(['id'=>SORT_ASC])->all();
+        $food = Food::find()->orderBy(['id' => SORT_ASC])->all();
 
         $category = DictAlloccat::find()
             ->select('id, name')
             ->where(['active' => true])
             ->andWhere(['trash' => false])
-            ->orderBy(['weight'=>SORT_DESC])
+            ->orderBy(['weight' => SORT_DESC])
             ->all();
 
         $rating = Rating::find()
             ->select('id, name')
             ->where(['active' => 'true'])
-            ->orderBy(['weight'=>SORT_DESC])
+            ->orderBy(['weight' => SORT_DESC])
             ->all();
 
         $palaceType = DictAllocPlaceType::find()->joinWith('values')
-            ->where(['dict_alloc_place_type.active'=>true])
-            ->andWhere(['dict_alloc_place_type.trash'=>false])
-            ->andWhere(['dict_alloc_place_value.active'=>true])
-            ->andWhere(['dict_alloc_place_value.trash'=>false])
+            ->where(['dict_alloc_place_type.active' => true])
+            ->andWhere(['dict_alloc_place_type.trash' => false])
+            ->andWhere(['dict_alloc_place_value.active' => true])
+            ->andWhere(['dict_alloc_place_value.trash' => false])
             ->all();
 
         $forKids = ForKids::find()
             ->select('id, name')
             ->where(['active' => 'true'])
-            ->orderBy(['weight'=>SORT_DESC])
+            ->orderBy(['weight' => SORT_DESC])
             ->all();
 
         $other = Other::find()
             ->select('id, name')
             ->where(['active' => 'true'])
-            ->orderBy(['weight'=>SORT_DESC])
+            ->orderBy(['weight' => SORT_DESC])
             ->all();
 
         return $this->render(
@@ -187,7 +187,7 @@ class RequestController extends \yii\web\Controller
      */
     public function actionSaveextend()
     {
-        $posts      = Yii::$app->request->post();
+        $posts = Yii::$app->request->post();
 
         if (isset($posts['modelRequestId']) AND $posts['modelRequestId'] == 0) {
             $model               = new Request();
@@ -232,81 +232,111 @@ class RequestController extends \yii\web\Controller
             unset($posts['Request']['direct']);
 
             $model->load($posts);
-            $model->created_at = strtotime($posts['Request']['created_at']);
+            $model->created_at   = strtotime($posts['Request']['created_at']);
             $model->city_tour_id = (int)$model->city_tour_id;
 
             $model->currency_id = (int)$posts['Request']['currency'];
+            $model->type        = $posts['typeTour'];
 
             if ($save = $model->save(false)) {
-                if($step == 1) {
-                    $directCount = (int)$posts['countDirect']+1;
+                if ($step == 1) {
+                    $directCount = (int)$posts['countDirect'] + 1;
+                    if ($model->type == 'type1') {
+                        $directSave  = [];
+                        $directModel = [];
 
-                    $directSave  = [];
-                    $directModel = [];
+                        for ($i = 0; $i < $directCount; $i++) {
+                            $directModel[$i] = new Direct();
 
-                    for ($i = 0; $i < $directCount; $i++) {
-                        $directModel[$i] = new Direct();
+                            if (isset($directs['country_id'][$i]) AND $directs['country_id'][$i] != '') {
+                                $directModel[$i]->country_id = $directs['country_id'][$i];
+                            }
+                            if (isset($directs['city_id'][$i]) AND $directs['city_id'][$i] != '') {
+                                $directModel[$i]->city_id = $directs['city_id'][$i];
+                            }
+                            if (isset($directs['departure_id'][$i]) AND $directs['departure_id'][$i] != '') {
+                                $directModel[$i]->city_departure_id = $directs['departure_id'][$i];
+                            }
 
-                        if (isset($directs['country_id'][$i]) AND $directs['country_id'][$i] != '') {
-                            $directModel[$i]->country_id = $directs['country_id'][$i];
+                            $directModel[$i]->request_id      = $model->id;
+                            $directModel[$i]->hotel_rating_id = $paramsHotel[$i]['rating'][0];
                         }
-                        if (isset($directs['city_id'][$i]) AND $directs['city_id'][$i] != '') {
-                            $directModel[$i]->city_id = $directs['city_id'][$i];
+
+                        for ($i = 0; $i < $directCount; $i++) {
+                            $directSave[$i] = $directModel[$i]->save();
+
+                            if (is_array($categorys = $paramsHotel[$i]['category'])) {
+                                foreach ($categorys as $cat) {
+                                    $category              = new DirectCategory();
+                                    $category->direct_id   = $directModel[$i]->id;
+                                    $category->category_id = (int)$cat;
+                                    $category->save();
+                                }
+                            }
+
+                            $foods = Food::find()->where('short_name in ("'.implode('","', $paramsHotel[$i]['food']).'")')->all();
+                            foreach ($foods as $food) {
+                                $fd            = new DirectFood();
+                                $fd->food_id   = $food->id;
+                                $fd->direct_id = $directModel[$i]->id;
+                                $fd->save();
+                            }
+
+                            if (is_array($kids = $paramsHotel[$i]['forkids'])) {
+                                foreach ($kids as $kid) {
+                                    $newKids            = new DirectKids();
+                                    $newKids->kids_id   = (int)$kid;
+                                    $newKids->direct_id = $directModel[$i]->id;
+                                    $newKids->save();
+                                }
+                            }
+
+                            if (is_array($others = $paramsHotel[$i]['other'])) {
+                                foreach ($others as $other) {
+                                    $newOther            = new DirectOther();
+                                    $newOther->other_id  = (int)$other;
+                                    $newOther->direct_id = $directModel[$i]->id;
+                                    $newOther->save();
+                                }
+                            }
+
+                            if ($paramsHotel[$i]['palacetype'][0] != 'any') {
+                                foreach ($paramsHotel[$i]['palacetype'] as $palace) {
+                                    $newPalace                 = new DirectPalaceValue();
+                                    $newPalace->palacevalue_id = (int)$palace;
+                                    $newPalace->direct_id      = $directModel[$i]->id;
+                                    $newPalace->save();
+                                }
+
+                            }
                         }
-                        if (isset($directs['departure_id'][$i]) AND $directs['departure_id'][$i] != '') {
-                            $directModel[$i]->city_departure_id = $directs['departure_id'][$i];
-                        }
-
-                        $directModel[$i]->request_id = $model->id;
-                        $directModel[$i]->hotel_rating_id = $paramsHotel[$i]['rating'][0];
-                    }
-
-                    for ($i = 0; $i < $directCount; $i++) {
-                        $directSave[$i] = $directModel[$i]->save();
-
-                        if (is_array($categorys = $paramsHotel[$i]['category'])) {
-                            foreach ($categorys as $cat) {
-                                $category              = new DirectCategory();
-                                $category->direct_id   = $directModel[$i]->id;
-                                $category->category_id = (int)$cat;
-                                $category->save();
+                    } elseif ($model->type == 'type2') {
+                        //перебираем данные конкретного отеля и записываем в бд
+                        foreach ($posts['location_id'] as $location_id) {
+                            if (isset($location_id) AND $location_id != '') {
+                                $lc              = new RequestLocation();
+                                $lc->location_id = $location_id;
+                                $lc->request_id  = $model->id;
+                                $lc->save();
                             }
                         }
 
-                        $foods = Food::find()->where('short_name in ("'.implode('","', $paramsHotel[$i]['food']).'")')->all();
-                        foreach ($foods as $food) {
-                            $fd            = new DirectFood();
-                            $fd->food_id   = $food->id;
-                            $fd->direct_id = $directModel[$i]->id;
-                            $fd->save();
-                        }
-
-                        if (is_array($kids = $paramsHotel[$i]['forkids'])) {
-                            foreach ($kids as $kid) {
-                                $newKids            = new DirectKids();
-                                $newKids->kids_id   = (int)$kid;
-                                $newKids->direct_id = $directModel[$i]->id;
-                                $newKids->save();
-                            }
-                        }
-
-                        if (is_array($others = $paramsHotel[$i]['other'])) {
-                            foreach ($others as $other) {
-                                $newOther            = new DirectOther();
-                                $newOther->other_id  = (int)$other;
-                                $newOther->direct_id = $directModel[$i]->id;
-                                $newOther->save();
-                            }
-                        }
-
-                        if ($paramsHotel[$i]['palacetype'][0] != 'any') {
-                            foreach ($paramsHotel[$i]['palacetype'] as $palace) {
-                                $newPalace                 = new DirectPalaceValue();
-                                $newPalace->palacevalue_id = (int)$palace;
-                                $newPalace->direct_id      = $directModel[$i]->id;
-                                $newPalace->save();
+                        //данные питание из конкретного отеля
+                        if ($food = $posts['food_short_name']) {
+                            if ($food != 'ЛЮБОЕ') {
+                                $foods_short_name = explode(' ', rtrim($posts['food_short_name']));
+                                $foods            = Food::find()->where('short_name in ("'.implode('","', $foods_short_name).'")')->all();
+                            } else {
+                                $foods = Food::find()->where('name like "%'.$food.'%"')->all();
                             }
 
+                            //сохранение питания
+                            foreach ($foods as $food) {
+                                $fd             = new RequestFood();
+                                $fd->food_id    = $food->id;
+                                $fd->request_id = $model->id;
+                                $fd->save();
+                            }
                         }
                     }
 
@@ -315,35 +345,6 @@ class RequestController extends \yii\web\Controller
                     $mail->created_at = date('y-m-d H:i:s');
                     $mail->send       = 0;
                     $mail->save();
-
-                    //перебираем данные конкретного отеля и записываем в бд
-                    foreach ($posts['location_id'] as $location_id) {
-                        if(isset($location_id) AND $location_id != ''){
-                            $lc = new RequestLocation();
-                            $lc->location_id = $location_id;
-                            $lc->request_id = $model->id;
-                            $lc->save();
-                        }
-                    }
-
-                    //данные питание из конкретного отеля
-                    if($food = $posts['food_short_name']){
-                        if($food != 'ЛЮБОЕ'){
-                            $foods_short_name = explode(' ',rtrim($posts['food_short_name']));
-                            $foods = Food::find()->where('short_name in ("'.implode('","',$foods_short_name).'")')->all();
-                        }else{
-
-                            $foods = Food::find()->where('name like "%'.$food.'%"')->all();
-
-                        }
-                        //сохранение питания
-                        foreach ($foods as $food) {
-                            $fd = new RequestFood();
-                            $fd->food_id = $food->id;
-                            $fd->request_id = $model->id;
-                            $fd->save();
-                        }
-                    }
                 }
 
                 return json_encode(
@@ -371,4 +372,5 @@ class RequestController extends \yii\web\Controller
     {
 
     }
+
 }

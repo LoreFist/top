@@ -28,11 +28,17 @@ use Yii;
  * @property Rating              $rating
  * @property DirectKids[]        $kids
  * @property DirectOther[]       $other
+ * @property DictCity            $dictcitydeparture
  *
  * @property Request             $request
  */
 class Direct extends \yii\db\ActiveRecord
 {
+    public function getDictcitydeparture()
+    {
+        return $this->hasOne(DictCity::className(), ['id' => 'city_departure_id']);
+    }
+
     public function getKids()
     {
         return $this->hasMany(DirectKids::className(), ['direct_id' => 'id']);

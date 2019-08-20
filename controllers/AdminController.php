@@ -23,12 +23,13 @@ class AdminController extends \yii\web\Controller
             ->joinWith([
                 'currencyDecrypt','directs','directs.categorys',
                 'directs.foods.food','directs.palacevalues','directs.rating',
-                'directs.kids.kids','directs.others.other',
+                'directs.kids.kids','directs.others.other','locations','requestFoods as rf', 'requestFoods.food as rf_f'
                 ])
             ->with([
-                'directs.dictcountry','directs.dictcity',
+                'directs.dictcountry','directs.dictcity','directs.dictcitydeparture',
                 'directs.palacevalues.dictpalacevalue','directs.palacevalues.dictpalacevalue.type',
-                'city'
+                'city','locations.location','locations.location.resort0','locations.location.cat0',
+                'locations.location.resort0.country0','citydeparture'
             ])
             ->orderBy(['Request.id' => SORT_DESC]);
 
@@ -44,26 +45,63 @@ class AdminController extends \yii\web\Controller
                 'format'    => ['date', 'php:Y-m-d H:i:s'],
             ],
             [
-                'header'    => 'Направление <br>(Страна/Курорт(город)/Отель)',
+                'header'    => 'Направление <br>(Страна | Курорт(город) | Отель | Город Вылета)',
                 'format'    => 'html',
                 'value'  => function ($model) {
 
                     $view = '';
-                    foreach ($model->directs as $key => $direct){
-                        $view .= '<b>'.($key+1).'.</b> ';
-                        if($direct->country_id != '' AND isset($direct->dictcountry))
-                            $view .= $direct->dictcountry->name;
-                        else
-                            $view .= '-';
+                    if($model->type == 'type1' OR $model->type == ''){
+                        foreach ($model->directs as $key => $direct) {
+                            $view .= '<b>'.($key + 1).'.</b> ';
 
-                        if($direct->city_id != '' AND isset($direct->dictcity))
-                            $view .= '/'.$direct->dictcity->name;
-                        else
-                            $view .= '/-';
+                            if ($direct->country_id != '' AND isset($direct->dictcountry))
+                                $view .= $direct->dictcountry->name;
+                            else
+                                $view .= ' - ';
 
-                        if($view != '')
-                            $view .= '<br>';
+                            if ($direct->city_id != '' AND isset($direct->dictcity))
+                                $view .= ' | '.$direct->dictcity->name;
+                            else
+                                $view .= ' | - ';
+
+
+                            if ($direct->city_departure_id != '' AND isset($direct->dictcitydeparture))
+                                $view .= ' | '.$direct->dictcitydeparture->name;
+                            else
+                                $view .= ' | - ';
+
+                            if ($view != '')
+                                $view .= '<br>';
+                        }
+                    }elseif ($model->type == 'type2'){
+                        foreach($model->locations as $key => $locations){
+                            $view .= '<b>'.($key + 1).'.</b> ';
+                            if (isset($locations->location->resort0->country0))
+                                $view .= $locations->location->resort0->country0->name;
+                            else
+                                $view .= ' - ';
+
+
+                            if (isset($locations->location->resort0))
+                                $view .= ' | '.$locations->location->resort0->name;
+                            else
+                                $view .= ' | - ';
+
+                            if (isset($locations->location))
+                                $view .= ' | '.$locations->location->name.' '.$locations->location->cat0->name;
+                            else
+                                $view .= ' | - ';
+
+                            if (isset($model->citydeparture))
+                                $view .= ' | '.$model->citydeparture->name;
+                            else
+                                $view .= ' | - ';
+
+                            if ($view != '')
+                                $view .= '<br>';
+                        }
                     }
+
                     return $view;
                 }
             ],
@@ -79,64 +117,84 @@ class AdminController extends \yii\web\Controller
                 'format'    => 'html',
                 'value'  => function ($model) {
                     $view = '';
-                    foreach ($model->directs as $key=>$direct){
-                        $view .= '<b>'.($key+1).'.</b> <br/>';
-                        if(count($direct->categorys)!=0){
-                            $view .= '    <b>Катг:</b> ';
-                            foreach($direct->categorys as $category){
-                                if(isset($category->dictcat))
-                                    $view .= $category->dictcat->name.',';
-                            }
-                            $view = substr($view,0,-1);
-                            $view .= '<br/>';
-                        }
-                        if(count($direct->foods) != 0){
-                            $view .= '    <b>Питн:</b> ';
-                            foreach ($direct->foods as $foods) {
-                                $view .= $foods->food->short_name.',';
-
-                            }
-                            $view = substr($view, 0, -1);
-                            $view .= '<br/>';
-                        }
-                        if(count($direct->palacevalues) != 0){
-                            $view .= '    <b>Расположение:</b> ';
-                            foreach($direct->palacevalues as $keyplace => $palacevalue){
-                                if(isset($palacevalue->dictpalacevalue)) {
-                                    if($keyplace == 0 )
-                                        $view .= $palacevalue->dictpalacevalue->type->name.' — '.$palacevalue->dictpalacevalue->name.',';
-                                    else
-                                        $view .= ' '.$palacevalue->dictpalacevalue->name.',';
+                    if($model->type == 'type1' OR $model->type == '') {
+                        foreach ($model->directs as $key => $direct) {
+                            $view .= '<b>'.($key + 1).'.</b> <br/>';
+                            if (count($direct->categorys) != 0) {
+                                $view .= '    <b>Катг:</b> ';
+                                foreach ($direct->categorys as $category) {
+                                    if (isset($category->dictcat)) {
+                                        $view .= $category->dictcat->name.',';
+                                    }
                                 }
+                                $view = substr($view, 0, -1);
+                                $view .= '<br/>';
                             }
-                            $view = substr($view,0,-1);
-                            $view .= '<br/>';
-                        }
-                        if(isset($direct->rating)) {
-                            $view .= '    <b>Рейтинг:</b> '.$direct->rating->name;
-                            $view .= '<br/>';
-                        }
-                        if(count($direct->kids) != 0){
-                            $view .= '    <b>Для детей:</b> ';
-                            foreach ($direct->kids as $kids) {
-                                $view .= ' '.$kids->kids->name.',';
+                            if (count($direct->foods) != 0) {
+                                $view .= '    <b>Питн:</b> ';
+                                foreach ($direct->foods as $foods) {
+                                    $view .= $foods->food->short_name.',';
 
+                                }
+                                $view = substr($view, 0, -1);
+                                $view .= '<br/>';
+                            }
+                            if (count($direct->palacevalues) != 0) {
+                                $view .= '    <b>Расположение:</b> ';
+                                foreach ($direct->palacevalues as $keyplace => $palacevalue) {
+                                    if (isset($palacevalue->dictpalacevalue)) {
+                                        if ($keyplace == 0) {
+                                            $view .= $palacevalue->dictpalacevalue->type->name.' — '.$palacevalue->dictpalacevalue->name.',';
+                                        } else {
+                                            $view .= ' '.$palacevalue->dictpalacevalue->name.',';
+                                        }
+                                    }
+                                }
+                                $view = substr($view, 0, -1);
+                                $view .= '<br/>';
+                            }
+                            if (isset($direct->rating)) {
+                                $view .= '    <b>Рейтинг:</b> '.$direct->rating->name;
+                                $view .= '<br/>';
+                            }
+                            if (count($direct->kids) != 0) {
+                                $view .= '    <b>Для детей:</b> ';
+                                foreach ($direct->kids as $kids) {
+                                    $view .= ' '.$kids->kids->name.',';
+
+                                }
+                                $view = substr($view, 0, -1);
+                                $view .= '<br/>';
+                            }
+                            if (count($direct->others) != 0) {
+                                $view .= '    <b>Прочее:</b> ';
+                                foreach ($direct->others as $others) {
+                                    $view .= ' '.$others->other->name.',';
+                                }
+                                $view = substr($view, 0, -1);
+                                $view .= '<br/>';
+                            }
+                        }
+                        if ($model->optional != '') {
+                            $view .= '<b>Комментарий:</b> '.$model->optional;
+                        }
+
+                        return $view;
+                    }elseif ($model->type == 'type2'){
+                        if (count($model->requestFoods) != 0) {
+                            $view .= '    <b>Питн:</b> ';
+                            foreach ($model->requestFoods as $requestFood) {
+                                $view .= ' '.$requestFood->food->short_name.',';
                             }
                             $view = substr($view, 0, -1);
                             $view .= '<br/>';
                         }
-                        if(count($direct->others) != 0){
-                            $view .= '    <b>Прочее:</b> ';
-                            foreach ($direct->others as $others) {
-                                $view .= ' '.$others->other->name.',';
-                            }
-                            $view = substr($view, 0, -1);
-                            $view .= '<br/>';
+
+                        if ($model->optional != '') {
+                            $view .= '<b>Комментарий:</b> '.$model->optional;
                         }
+                        return $view;
                     }
-                    if($model->optional != '')
-                        $view .= '<b>Комментарий:</b> '.$model->optional;
-                    return $view;
                 }
             ],
             [

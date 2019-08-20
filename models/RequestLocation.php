@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\dict\DictAllocation;
 use Yii;
 
 /**
@@ -10,11 +11,20 @@ use Yii;
  * @property int $id
  * @property int $location_id
  * @property int $request_id
+ * @property DictAllocation $location
  *
  * @property Request $request
  */
 class RequestLocation extends \yii\db\ActiveRecord
 {
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLocation()
+    {
+        return $this->hasOne(DictAllocation::className(), ['id' => 'location_id']);
+    }
+
     /**
      * {@inheritdoc}
      */

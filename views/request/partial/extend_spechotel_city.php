@@ -15,8 +15,8 @@
             </div>
 
             <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-                    <?= $form->field($model, 'direct[departure_id][spechotel]')->dropDownList(
-                        $items_city_spechotel,
+                    <?= $form->field($model, 'city_departure_id')->dropDownList(
+                        $items_city_deprt,
                         [
                             'id'=>"sumo-departure-spechotel-".$data_id,
                             'class'=>"sumo-departure-spechotel",

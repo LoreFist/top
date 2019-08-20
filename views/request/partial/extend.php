@@ -43,14 +43,14 @@ $this->registerJsFile(
         <div class="tour-selection-wrap-in">
 
             <div class="rbt-block mt0 mb0 ">
-                <input type="radio" name="types" class="rbt " id="type1"checked="">
+                <input type="radio" name="types" class="rbt type-tour" id="type1"checked="">
                 <label class=" js-type1 label-rbt" for="type1">
                     <span class="rbt-cnt uppercase">Турпакет</span>
                 </label>
             </div>
 
             <div class="rbt-block   mt0 mb0">
-                <input type="radio" name="types" class="rbt " id="type2">
+                <input type="radio" name="types" class="rbt type-tour" id="type2">
                 <label class="js-type2 label-rbt" for="type2">
                     <span class="rbt-cnt uppercase">Конкретный отель</span>
                 </label>
@@ -151,7 +151,7 @@ $this->registerJsFile(
         <div class=" js-types-search-hotel-blocks" style="display: none">
             <div class="tour-selection-wrap-in tour-selection-wrap-flex ">
                 <?php echo $this->context->renderPartial(
-                    'partial/extend_departure',
+                    'partial/extend_spechotel_city',
                     ['model'            => $model, 'form' => $form,
                      'items_city_deprt' => $items_dict['city_deprt'],
                      'data_id'          => 4]
