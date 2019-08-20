@@ -2,10 +2,16 @@
 
 namespace app\controllers;
 
+use app\models\consultant\Consultant;
+use app\models\consultant\ConsultantCat;
+use app\models\consultant\ConsultantCountry;
+use app\models\consultant\ConsultantResort;
+use app\models\dict\DictAllocation;
 use app\models\dict\DictAlloccat;
 use app\models\dict\DictAllocPlaceType;
 use app\models\dict\DictCity;
 use app\models\dict\DictCountry;
+use app\models\dict\DictResort;
 use app\models\Direct;
 use app\models\direct\DirectCategory;
 use app\models\direct\DirectFood;
@@ -262,6 +268,30 @@ class RequestController extends \yii\web\Controller
                             $directModel[$i]->hotel_rating_id = $paramsHotel[$i]['rating'][0];
                         }
 
+                        if(isset($directModel[0]->country_id) AND $directModel[0]->country_id != ''){//распределение заявки по первому турпакету
+                            $consCountry = ConsultantCountry::findOne(['country_id'=>$directModel[0]->country_id]);
+                            $countIf = 1;
+                            if(isset($consCountry->consultant_id)) {
+                                $categorys = $paramsHotel[0]['category'];
+                                if(isset($categorys) AND $categorys != '' ) {
+                                    $consCategory = ConsultantCat::find()->select('cat_id')->where('consultant_id='.$consCountry->consultant_id)->all();
+                                    $idConsCat = [];
+                                    foreach ($consCategory as $ct)
+                                       $idConsCat[] = $ct->cat_id;
+                                    $countIf = count(array_diff($categorys,$idConsCat));
+                                    if($countIf== 0) {
+                                        $model->consultant_id = $consCountry->consultant_id;
+                                        $model->save(false);
+                                    }
+
+                                }
+                            }
+                            if($countIf > 0){//записываем консультанта Анна
+                                $model->consultant_id = Yii::$app->params['defaultConsultant'];
+                                $model->save(false);
+                            }
+                        }
+
                         for ($i = 0; $i < $directCount; $i++) {
                             $directSave[$i] = $directModel[$i]->save();
 
@@ -312,8 +342,40 @@ class RequestController extends \yii\web\Controller
                         }
                     } elseif ($model->type == 'type2') {
                         //перебираем данные конкретного отеля и записываем в бд
-                        foreach ($posts['location_id'] as $location_id) {
+                        foreach ($posts['location_id'] as $key => $location_id) {
                             if (isset($location_id) AND $location_id != '') {
+                                if($key == 0) {
+                                    $model->consultant_id = Yii::$app->params['defaultConsultant']; //Записываем консультанта Анна
+
+                                    $dictLocation = DictAllocation::find()
+                                        ->where([DictAllocation::tableName().'.id'=>$location_id])
+                                        ->joinWith(['cat0','resort0','resort0.country0'])
+                                        ->one();
+
+                                    $dictCat = $dictLocation->cat0->id;
+                                    $dictCountry = $dictLocation->resort0->country0->id;
+                                    $dictResort = $dictLocation->resort0->id;
+
+                                    $consultant = Consultant::find()
+                                        ->joinWith(['consultantcountries','consultantcats'])
+                                        ->where(['=',ConsultantCountry::tableName().'.country_id',$dictCountry])
+                                        ->andWhere(['=',ConsultantCat::tableName().'.cat_id',$dictCat])
+                                        ->one();
+
+                                    if(!isset($consultant)){
+                                        $consultant = Consultant::find()
+                                            ->joinWith(['consultantresorts'])
+                                            ->where(['=',ConsultantResort::tableName().'.resort_id',$dictResort])
+                                            ->one();
+                                        if(isset($consultant))
+                                            $model->consultant_id = $consultant->id;
+                                    }
+                                    else
+                                        $model->consultant_id = $consultant->id;
+
+                                    $model->save(false);
+                                }
+
                                 $lc              = new RequestLocation();
                                 $lc->location_id = $location_id;
                                 $lc->request_id  = $model->id;

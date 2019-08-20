@@ -48,6 +48,7 @@ $config = [
                 '/admin/page/<page:\d+>/<per-page:\d+>' => 'admin/index',
                 '/admin/<id:\d+>'                       => 'admin/view',
                 '/admin'                                => 'admin/index',
+                '/admin/consultant'                     => 'admin/consultant',
             ],
         ],
         'assetManager' => [

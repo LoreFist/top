@@ -375,7 +375,11 @@ $(document).ready(function () {
             $(this).next().attr('data-input-selector') == "#request-currency"
         ) {
             $(this).next().slideDown();
+            $('.formDirections').hide();
         }
-        $('.formDirections').hide();
+    })
+
+    $('.formDirections__guest-plus').on('click', function(){//фикс кнопки плюса в гостях
+        $('.js-show-adults, .formDirections__guest-wrap').show();
     })
 });

@@ -2,42 +2,45 @@
 
 namespace app\models;
 
+use app\models\consultant\Consultant;
 use app\models\dict\DictCity;
 
 /**
  * This is the model class for table "request".
  *
- * @property int            $id
- * @property int            $city_tour_id
- * @property int            $city_departure_id
- * @property string         $name
- * @property string         $phone
- * @property string         $email
- * @property string         $optional
- * @property string         $date_departure_from
- * @property string         $date_departure_to
- * @property string         $day_stay_from
- * @property string         $day_stay_to
- * @property int            $guest
- * @property int            $currency_id
- * @property int            $priceTo
- * @property int            $priceComfort
- * @property int            $children
- * @property int            $age1
- * @property int            $age2
- * @property int            $age3
- * @property string         $type
- * @property int            $created_at
+ * @property int               $id
+ * @property int               $city_tour_id
+ * @property int               $city_departure_id
+ * @property int               $consultant_id
+ * @property string            $name
+ * @property string            $phone
+ * @property string            $email
+ * @property string            $optional
+ * @property string            $date_departure_from
+ * @property string            $date_departure_to
+ * @property string            $day_stay_from
+ * @property string            $day_stay_to
+ * @property int               $guest
+ * @property int               $currency_id
+ * @property int               $priceTo
+ * @property int               $priceComfort
+ * @property int               $children
+ * @property int               $age1
+ * @property int               $age2
+ * @property int               $age3
+ * @property string            $type
+ * @property int               $created_at
  *
- * @property Direct[]       $directs
- * @property Direct         $id0
- * @property MailSchedule[] $mailSchedules
- * @property RequestFood[]  $requestFoods
- * @property Food[]         $foods
- * @property Currency       $currencyDecrypt
- * @property DictCity       $city
+ * @property Direct[]          $directs
+ * @property Direct            $id0
+ * @property MailSchedule[]    $mailSchedules
+ * @property RequestFood[]     $requestFoods
+ * @property Food[]            $foods
+ * @property Currency          $currencyDecrypt
+ * @property DictCity          $city
  * @property RequestLocation[] $locations
- * @property DictCity       $cityDeparture
+ * @property DictCity          $cityDeparture
+ * @property Consultant        $consultant
  */
 class Request extends \yii\db\ActiveRecord
 {
@@ -47,6 +50,14 @@ class Request extends \yii\db\ActiveRecord
     public $direct; // для сбора данных по направлениям
     public $currency; //для виджета бюджета Валюта
     public $priceFrom; //не используется, но в либе lib-ui-tour-filter виджет WPrice жестко захардкоженно
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getConsultant()
+    {
+        return $this->hasOne(Consultant::className(), ['id' => 'consultant_id']);
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -136,7 +147,7 @@ class Request extends \yii\db\ActiveRecord
         return [
             [['name', 'phone', 'city_tour_id'], 'required'],
             [['name', 'phone', 'email', 'optional', 'date_departure_from', 'date_departure_to', 'day_stay_from', 'day_stay_to'], 'string'],
-            [['guest', 'currency_id', 'priceTo', 'priceComfort', 'children', 'age1', 'age2', 'age3','city_departure_id'], 'integer'],
+            [['guest', 'currency_id', 'priceTo', 'priceComfort', 'children', 'age1', 'age2', 'age3', 'city_departure_id'], 'integer'],
             [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Direct::className(), 'targetAttribute' => ['id' => 'request_id']],
             ['email', 'email'],
         ];

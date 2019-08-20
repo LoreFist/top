@@ -354,7 +354,7 @@ $this->registerJsFile(
             </div>
         </div>
         <div class="tour-selection-wrap-in">
-            <a href="#" class="metro-valid-pp bth__btn  bth__btn--fill bth__loader" id='extend_step_submit'>
+            <a class="metro-valid-pp bth__btn  bth__btn--fill bth__loader" id='extend_step_submit'>
                 Отправить запрос*
                 <div class=" bth__loader-spin">
                     <i class="fas fa-circle"></i>

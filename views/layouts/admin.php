@@ -3,6 +3,8 @@
 /* @var $content string */
 use yii\helpers\Html;
 use common\widgets\Alert;
+use yii\widgets\Breadcrumbs;
+
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -23,6 +25,18 @@ use common\widgets\Alert;
     <?php $this->beginBody() ?>
 
     <div class="page">
+        <?=
+        Breadcrumbs::widget([
+            'homeLink' => [
+                'label' => Yii::t('yii', 'Admin'),
+                'url' => Yii::$app->homeUrl.'admin',
+                'class'=>'breadcrumb-item'
+            ],
+            'links' => [
+                    ['label'=> Yii::t('yii', 'Consultant'),'url' => Yii::$app->homeUrl.'admin/consultant','class'=>'breadcrumb-item']
+            ],
+        ])
+        ?>
         <div class="page-main">
             <?= $content ?>
         </div>

@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\consultant\Consultant;
 use app\models\Request;
-use yii\base\ErrorException;
 use yii\helpers\VarDumper;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
@@ -23,7 +23,8 @@ class AdminController extends \yii\web\Controller
             ->joinWith([
                 'currencyDecrypt','directs','directs.categorys',
                 'directs.foods.food','directs.palacevalues','directs.rating',
-                'directs.kids.kids','directs.others.other','locations','requestFoods as rf', 'requestFoods.food as rf_f'
+                'directs.kids.kids','directs.others.other','locations','requestFoods as rf', 'requestFoods.food as rf_f',
+                'consultant'
                 ])
             ->with([
                 'directs.dictcountry','directs.dictcity','directs.dictcitydeparture',
@@ -267,6 +268,87 @@ class AdminController extends \yii\web\Controller
                     if($model->city_tour_id != 0 AND isset($model->city_tour_id) AND isset($model->city))
                         return $model->city->name;
                 },
+            ],
+            [
+                'header'    => 'Консультант',
+                'format'    => 'html',
+                'value'  => function ($model) {
+                    if(isset($model->consultant))
+                        return $model->consultant->name;
+                }
+            ]
+        ];
+
+        $dataProvider = new ActiveDataProvider(
+            [
+                'query'      => $query->distinct(),
+                'pagination' => [
+                    'pageSize' => 10,
+                ],
+            ]
+        );
+
+        $this->layout = 'admin';
+        return $this->render(
+            'index',
+            ['dataProvider' => $dataProvider, 'columns' => $columns]
+        );
+    }
+
+    /**
+     * Отображение консультантов и их условий
+     *
+     * @return string
+     */
+    public function actionConsultant()
+    {
+        $query   = Consultant::find()
+            ->joinWith(['consultantcats','consultantcountries','consultantresorts'])
+            ->with(['consultantcats.dictcat','consultantcountries.dictcountry','consultantresorts.dictresort'])
+        ;
+
+        $columns = [
+            [
+                'header'    => 'Id консультанта',
+                'attribute' => 'id',
+            ],
+            [
+                'header'    => 'Имя консультанта',
+                'attribute' => 'name',
+            ],
+            [
+                'header'    => 'Email консультанта',
+                'attribute' => 'email',
+            ],
+            [
+                'header'    => 'Категории отелей',
+                'value'=> function($model){
+                    $view = '';
+                    foreach($model->consultantcats as $cats)
+                            $view .= ' '.$cats->dictcat->name.',';
+                    $view = substr($view, 0, -1);
+                    return $view;
+                }
+            ],
+            [
+                'header'    => 'Страны',
+                'value'=> function($model){
+                    $view = '';
+                    foreach($model->consultantcountries as $country)
+                        $view .= ' '.$country->dictcountry->name.',';
+                    $view = substr($view, 0, -1);
+                    return $view;
+                }
+            ],
+            [
+                'header'    => 'Курорт',
+                'value'=> function($model){
+                    $view = '';
+                    foreach($model->consultantresorts as $resorn)
+                        $view .= ' '.$resorn->dictresort->name.',';
+                    $view = substr($view, 0, -1);
+                    return $view;
+                }
             ],
         ];
 
