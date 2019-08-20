@@ -2,6 +2,7 @@
 
 namespace app\models\direct;
 
+use app\models\dict\DictAlloccat;
 use app\models\Direct;
 use Yii;
 
@@ -10,11 +11,16 @@ use Yii;
  *
  * @property int $direct_id
  * @property int $category_id
+ * @property DictAlloccat $dictCat
  *
  * @property Direct $direct
  */
 class DirectCategory extends \yii\db\ActiveRecord
 {
+    public function getDictcat()
+    {
+        return $this->hasOne(DictAlloccat::className(), ['id' => 'category_id']);
+    }
     /**
      * {@inheritdoc}
      */

@@ -4,23 +4,50 @@ namespace app\models;
 
 use app\models\dict\DictCity;
 use app\models\dict\DictCountry;
+use app\models\direct\DirectCategory;
+use app\models\direct\DirectFood;
+use app\models\direct\DirectKids;
+use app\models\direct\DirectOther;
+use app\models\direct\DirectPalaceValue;
 use Yii;
 
 /**
  * This is the model class for table "direct".
  *
- * @property int $id
- * @property int $request_id
- * @property int $country_id
- * @property int $city_id
- * @property int $city_departure_id
- * @property DictCountry $dictCountry
- * @property DictCity $dictCity
+ * @property int                 $id
+ * @property int                 $request_id
+ * @property int                 $country_id
+ * @property int                 $city_id
+ * @property int                 $city_departure_id
+ * @property int                 $hotel_rating_id
+ * @property DictCountry         $dictCountry
+ * @property DictCity            $dictCity
+ * @property DirectCategory[]    $categorys
+ * @property DirectFood[]        $foods
+ * @property DirectPalaceValue[] $palacevalues
+ * @property Rating              $rating
+ * @property DirectKids[]        $kids
+ * @property DirectOther[]       $other
  *
- * @property Request $request
+ * @property Request             $request
  */
 class Direct extends \yii\db\ActiveRecord
 {
+    public function getKids()
+    {
+        return $this->hasMany(DirectKids::className(), ['direct_id' => 'id']);
+    }
+
+    public function getOthers()
+    {
+        return $this->hasMany(DirectOther::className(), ['direct_id' => 'id']);
+    }
+
+    public function getRating()
+    {
+        return $this->hasOne(Rating::className(), ['id' => 'hotel_rating_id']);
+    }
+
     public function getDictcountry()
     {
         return $this->hasOne(DictCountry::className(), ['id' => 'country_id']);
@@ -30,6 +57,22 @@ class Direct extends \yii\db\ActiveRecord
     {
         return $this->hasOne(DictCity::className(), ['id' => 'city_id']);
     }
+
+    public function getCategorys()
+    {
+        return $this->hasMany(DirectCategory::className(), ['direct_id' => 'id']);
+    }
+
+    public function getFoods()
+    {
+        return $this->hasMany(DirectFood::className(), ['direct_id' => 'id']);
+    }
+
+    public function getPalacevalues()
+    {
+        return $this->hasMany(DirectPalaceValue::className(), ['direct_id' => 'id']);
+    }
+
     /**
      * {@inheritdoc}
      */

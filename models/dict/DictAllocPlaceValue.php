@@ -18,9 +18,14 @@ use Yii;
  * @property int $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
  * @property string $name_eng
  * @property string $description_eng
+ * @property DictAllocPlaceType $type
  */
 class DictAllocPlaceValue extends \yii\db\ActiveRecord
 {
+    public function getType()
+    {
+        return $this->hasOne(DictAllocPlaceType::className(), ['id' => 'place']);
+    }
     /**
      * {@inheritdoc}
      */

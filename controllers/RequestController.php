@@ -11,7 +11,7 @@ use app\models\direct\DirectCategory;
 use app\models\direct\DirectFood;
 use app\models\direct\DirectKids;
 use app\models\direct\DirectOther;
-use app\models\direct\DirectPalaceType;
+use app\models\direct\DirectPalaceValue;
 use app\models\Food;
 use app\models\ForKids;
 use app\models\MailSchedule;
@@ -300,11 +300,10 @@ class RequestController extends \yii\web\Controller
                         }
 
                         if ($paramsHotel[$i]['palacetype'][0] != 'any') {
-                            foreach ($paramsHotel[$i]['palacetype'] as $palace)
-                            {
-                                $newPalace                = new DirectPalaceType();
-                                $newPalace->palacetype_id = (int)$palace;
-                                $newPalace->direct_id     = $directModel[$i]->id;
+                            foreach ($paramsHotel[$i]['palacetype'] as $palace) {
+                                $newPalace                 = new DirectPalaceValue();
+                                $newPalace->palacevalue_id = (int)$palace;
+                                $newPalace->direct_id      = $directModel[$i]->id;
                                 $newPalace->save();
                             }
 

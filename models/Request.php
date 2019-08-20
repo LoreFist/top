@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\models\dict\DictCity;
+
 /**
  * This is the model class for table "request".
  *
@@ -31,6 +33,7 @@ namespace app\models;
  * @property RequestFood[] $requestFoods
  * @property Food[] $foods
  * @property Currency $currencyDecrypt
+ * @property DictCity $city
  */
 class Request extends \yii\db\ActiveRecord
 {
@@ -39,6 +42,59 @@ class Request extends \yii\db\ActiveRecord
     public $direct; // для сбора данных по направлениям
     public $currency; //для виджета бюджета Валюта
     public $priceFrom; //не используется, но в либе lib-ui-tour-filter виджет WPrice жестко захардкоженно
+
+    public function getCity()
+    {
+        return $this->hasOne(DictCity::className(), ['id' => 'city_tour_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDirects()
+    {
+        return $this->hasMany(Direct::className(), ['request_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getId0()
+    {
+        return $this->hasOne(Direct::className(), ['request_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMailSchedules()
+    {
+        return $this->hasMany(MailSchedule::className(), ['request_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRequestFoods()
+    {
+        return $this->hasMany(RequestFood::className(), ['request_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFoods()
+    {
+        return $this->hasMany(Food::className(), ['id' => 'food_id'])->viaTable('request_food', ['request_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCurrencyDecrypt()
+    {
+        return $this->hasOne(Currency::className(), ['id' => 'currency_id']);
+    }
 
     /**
      * {@inheritdoc}
@@ -89,53 +145,5 @@ class Request extends \yii\db\ActiveRecord
             'age3' => 'Age3',
             'created_at' => 'Created At',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDirects()
-    {
-        return $this->hasMany(Direct::className(), ['request_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getId0()
-    {
-        return $this->hasOne(Direct::className(), ['request_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMailSchedules()
-    {
-        return $this->hasMany(MailSchedule::className(), ['request_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRequestFoods()
-    {
-        return $this->hasMany(RequestFood::className(), ['request_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFoods()
-    {
-        return $this->hasMany(Food::className(), ['id' => 'food_id'])->viaTable('request_food', ['request_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCurrencyDecrypt()
-    {
-        return $this->hasOne(Currency::className(), ['id' => 'currency_id']);
     }
 }

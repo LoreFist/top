@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Request;
+use yii\base\ErrorException;
 use yii\helpers\VarDumper;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
@@ -18,9 +19,20 @@ class AdminController extends \yii\web\Controller
     public function actionIndex()
     {
 
-        $query   = Request::find()->joinWith(['currencyDecrypt','directs'])->with(['directs.dictcountry','directs.dictcity'])->orderBy(['id' => SORT_DESC]);
+        $query   = Request::find()
+            ->joinWith([
+                'currencyDecrypt','directs','directs.categorys',
+                'directs.foods.food','directs.palacevalues','directs.rating',
+                'directs.kids.kids','directs.others.other',
+                ])
+            ->with([
+                'directs.dictcountry','directs.dictcity',
+                'directs.palacevalues.dictpalacevalue','directs.palacevalues.dictpalacevalue.type',
+                'city'
+            ])
+            ->orderBy(['Request.id' => SORT_DESC]);
+
         $columns = [
-            ['class' => 'yii\grid\SerialColumn'],
             [
                 'header'    => 'Id заявки',
                 'attribute' => 'id',
@@ -30,7 +42,7 @@ class AdminController extends \yii\web\Controller
                 'format'    => 'html',
                 'attribute' => 'created_at',
                 'format'    => ['date', 'php:Y-m-d H:i:s'],
-            ],////“Страна”/”Курорт (город)”/”Отель”
+            ],
             [
                 'header'    => 'Направление <br>(Страна/Курорт(город)/Отель)',
                 'format'    => 'html',
@@ -56,24 +68,76 @@ class AdminController extends \yii\web\Controller
                 }
             ],
             [
-                'header'    => 'Имя',
+                'header'    => 'Имя Телефон Еmail',
                 'format'    => 'html',
-                'attribute' => 'name',
-            ],
-            [
-                'header'    => 'Телефон',
-                'format'    => 'html',
-                'attribute' => 'phone',
-            ],
-            [
-                'header'    => 'Еmail',
-                'format'    => 'html',
-                'attribute' => 'email',
+                'value'=>function ($model){
+                    return $model->name.'<br/>'.$model->phone.'<br/>'.$model->email;
+                }
             ],
             [
                 'header'    => 'Доп. пожелание',
                 'format'    => 'html',
-                'attribute' => 'optional',
+                'value'  => function ($model) {
+                    $view = '';
+                    foreach ($model->directs as $key=>$direct){
+                        $view .= '<b>'.($key+1).'.</b> <br/>';
+                        if(count($direct->categorys)!=0){
+                            $view .= '    <b>Катг:</b> ';
+                            foreach($direct->categorys as $category){
+                                if(isset($category->dictcat))
+                                    $view .= $category->dictcat->name.',';
+                            }
+                            $view = substr($view,0,-1);
+                            $view .= '<br/>';
+                        }
+                        if(count($direct->foods) != 0){
+                            $view .= '    <b>Питн:</b> ';
+                            foreach ($direct->foods as $foods) {
+                                $view .= $foods->food->short_name.',';
+
+                            }
+                            $view = substr($view, 0, -1);
+                            $view .= '<br/>';
+                        }
+                        if(count($direct->palacevalues) != 0){
+                            $view .= '    <b>Расположение:</b> ';
+                            foreach($direct->palacevalues as $keyplace => $palacevalue){
+                                if(isset($palacevalue->dictpalacevalue)) {
+                                    if($keyplace == 0 )
+                                        $view .= $palacevalue->dictpalacevalue->type->name.' — '.$palacevalue->dictpalacevalue->name.',';
+                                    else
+                                        $view .= ' '.$palacevalue->dictpalacevalue->name.',';
+                                }
+                            }
+                            $view = substr($view,0,-1);
+                            $view .= '<br/>';
+                        }
+                        if(isset($direct->rating)) {
+                            $view .= '    <b>Рейтинг:</b> '.$direct->rating->name;
+                            $view .= '<br/>';
+                        }
+                        if(count($direct->kids) != 0){
+                            $view .= '    <b>Для детей:</b> ';
+                            foreach ($direct->kids as $kids) {
+                                $view .= ' '.$kids->kids->name.',';
+
+                            }
+                            $view = substr($view, 0, -1);
+                            $view .= '<br/>';
+                        }
+                        if(count($direct->others) != 0){
+                            $view .= '    <b>Прочее:</b> ';
+                            foreach ($direct->others as $others) {
+                                $view .= ' '.$others->other->name.',';
+                            }
+                            $view = substr($view, 0, -1);
+                            $view .= '<br/>';
+                        }
+                    }
+                    if($model->optional != '')
+                        $view .= '<b>Комментарий:</b> '.$model->optional;
+                    return $view;
+                }
             ],
             [
                 'header' => 'Дата вылета/Кол-во ночей',
@@ -118,7 +182,6 @@ class AdminController extends \yii\web\Controller
                         else
                             $view .= ' + '.$model->children.' ребенок ('.$children.' лет)';
                     }
-
                     return $view;
                 },
             ],
@@ -136,25 +199,29 @@ class AdminController extends \yii\web\Controller
                     if ($model->currency_id != '' AND $view != '') {
                         $view .= ' '.$model->currencyDecrypt->short_name;
                     }
-
-                    if ($view == '') {
-                        $view = "(not set)";
-                    }
-
                     return $view;
+                },
+            ],
+            [
+                'header' => 'Город туриста',
+                'format' => 'html',
+                'value'  => function ($model) {
+                    if($model->city_tour_id != 0 AND isset($model->city_tour_id) AND isset($model->city))
+                        return $model->city->name;
                 },
             ],
         ];
 
         $dataProvider = new ActiveDataProvider(
             [
-                'query'      => $query,
+                'query'      => $query->distinct(),
                 'pagination' => [
                     'pageSize' => 10,
                 ],
             ]
         );
 
+        $this->layout = 'admin';
         return $this->render(
             'index',
             ['dataProvider' => $dataProvider, 'columns' => $columns]
