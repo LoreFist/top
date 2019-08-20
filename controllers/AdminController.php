@@ -275,6 +275,8 @@ class AdminController extends \yii\web\Controller
                 'value'  => function ($model) {
                     if(isset($model->consultant))
                         return $model->consultant->name;
+                    else
+                        return 'нет распределения, <br/>так как нет направления';
                 }
             ]
         ];
@@ -378,6 +380,7 @@ class AdminController extends \yii\web\Controller
      */
     public function actionView($id)
     {
+        $this->layout = 'admin';
         return $this->render(
             'view',
             [

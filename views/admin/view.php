@@ -1,6 +1,11 @@
 <?php
 
+use app\assets\AdminAsset;
 use yii\widgets\DetailView;
+
+AdminAsset::register($this);
+$this->title = 'Admin bootstrap | view';
+
 
 echo DetailView::widget(
     [
@@ -16,3 +21,4 @@ echo DetailView::widget(
         ],
     ]
 );
+?>

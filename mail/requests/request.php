@@ -45,11 +45,13 @@ use yii\helpers\Url;
                         </td>
                     </tr>
                     <tr>
-                        <td style="font: 16px Arial, sans-serif;line-height: 20px;padding: 35px 30px 20px;text-align: center;"></td>
+                        <td style="font: 16px Arial, sans-serif;line-height: 20px;padding: 35px 30px 20px;text-align: center;">
+                            Здравствуйте, <?=$name?>!
+                        </td>
                     </tr>
                     <tr>
                         <td style="font: 16px Arial, sans-serif;line-height: 20px;padding: 0 30px 10px;">
-                            Здравствуйте! Вы получили новую заявку на подбор
+                            Вы получили новую заявку на подбор
                             тура от пользователя - <a
                                     href="http://krischenko99.tophotels.site/admin/<?= $model->id ?>"
                                     target="_blank"
