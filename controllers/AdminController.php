@@ -22,7 +22,7 @@ class AdminController extends \yii\web\Controller
             ->joinWith(
                 [
                     'currencyDecrypt', 'directs', 'directs.categorys',
-                    'directs.foods.food', 'directs.palacevalues', 'directs.rating',
+                    'directs.foods.food', 'directs.placevalues', 'directs.rating',
                     'directs.kids.kids', 'directs.others.other', 'locations', 'requestFoods as rf', 'requestFoods.food as rf_f',
                     'consultant',
                 ]
@@ -30,7 +30,7 @@ class AdminController extends \yii\web\Controller
             ->with(
                 [
                     'directs.dictcountry', 'directs.dictcity', 'directs.dictcitydeparture',
-                    'directs.palacevalues.dictpalacevalue', 'directs.palacevalues.dictpalacevalue.type',
+                    'directs.placevalues.dictplacevalue', 'directs.placevalues.dictplacevalue.type',
                     'city', 'locations.location', 'locations.location.resort0', 'locations.location.cat0',
                     'locations.location.resort0.country0', 'citydeparture',
                 ]
@@ -152,14 +152,14 @@ class AdminController extends \yii\web\Controller
                                 $view = substr($view, 0, -1);
                                 $view .= '<br/>';
                             }
-                            if (count($direct->palacevalues) != 0) {
+                            if (count($direct->placevalues) != 0) {
                                 $view .= '    <b>Расположение:</b> ';
-                                foreach ($direct->palacevalues as $keyplace => $palacevalue) {
-                                    if (isset($palacevalue->dictpalacevalue)) {
+                                foreach ($direct->placevalues as $keyplace => $placevalue) {
+                                    if (isset($placevalue->dictplacevalue)) {
                                         if ($keyplace == 0) {
-                                            $view .= $palacevalue->dictpalacevalue->type->name.' — '.$palacevalue->dictpalacevalue->name.',';
+                                            $view .= $placevalue->dictplacevalue->type->name.' — '.$placevalue->dictplacevalue->name.',';
                                         } else {
-                                            $view .= ' '.$palacevalue->dictpalacevalue->name.',';
+                                            $view .= ' '.$placevalue->dictplacevalue->name.',';
                                         }
                                     }
                                 }

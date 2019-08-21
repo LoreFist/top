@@ -7,20 +7,20 @@ use app\models\Direct;
 use Yii;
 
 /**
- * This is the model class for table "direct_palace_type".
+ * This is the model class for table "direct_place_type".
  *
  * @property int                 $direct_id
- * @property int                 $palacevalue_id
- * @property DictAllocPlaceValue $dictPalaceValue
+ * @property int                 $placevalue_id
+ * @property DictAllocPlaceValue $dictplaceValue
  *
  * @property Direct              $direct
  */
-class DirectPalaceValue extends \yii\db\ActiveRecord
+class DirectplaceValue extends \yii\db\ActiveRecord
 {
 
-    public function getDictpalacevalue()
+    public function getDictplacevalue()
     {
-        return $this->hasOne(DictAllocPlaceValue::className(), ['id' => 'palacevalue_id']);
+        return $this->hasOne(DictAllocPlaceValue::className(), ['id' => 'placevalue_id']);
     }
 
     /**
@@ -28,7 +28,7 @@ class DirectPalaceValue extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'direct_palace_value';
+        return 'direct_place_value';
     }
 
     /**
@@ -37,9 +37,9 @@ class DirectPalaceValue extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['direct_id', 'palacevalue_id'], 'required'],
-            [['direct_id', 'palacevalue_id'], 'integer'],
-            [['direct_id', 'palacevalue_id'], 'unique', 'targetAttribute' => ['direct_id', 'palacevalue_id']],
+            [['direct_id', 'placevalue_id'], 'required'],
+            [['direct_id', 'placevalue_id'], 'integer'],
+            [['direct_id', 'placevalue_id'], 'unique', 'targetAttribute' => ['direct_id', 'placevalue_id']],
             [['direct_id'], 'exist', 'skipOnError' => true, 'targetClass' => Direct::className(), 'targetAttribute' => ['direct_id' => 'id']],
         ];
     }
@@ -51,7 +51,7 @@ class DirectPalaceValue extends \yii\db\ActiveRecord
     {
         return [
             'direct_id'      => 'Direct ID',
-            'palacevalue_id' => 'Palacetype ID',
+            'placevalue_id' => 'placetype ID',
         ];
     }
 

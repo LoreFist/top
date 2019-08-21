@@ -312,39 +312,39 @@ $(document).ready(function () {
     });
 
     //логика чекбоксов в параметрах отеля Расположение
-    $(document).on('change', '.obj-palace', function () {
+    $(document).on('change', '.obj-place', function () {
         var _val = $(this).val();
         if (this.checked) {
             if (_val == 'any') {
-                $('input.palace-type-' + _data_id).prop("checked", false);
-                $('input#palace_type_' + _data_id + '_0.cbx').prop("checked", true);
+                $('input.place-type-' + _data_id).prop("checked", false);
+                $('input#place_type_' + _data_id + '_0.cbx').prop("checked", true);
             } else if (_val >= 1 && _val <= 13) {
-                $('input#palace_type_' + _data_id + '_0.cbx').prop("checked", false);
+                $('input#place_type_' + _data_id + '_0.cbx').prop("checked", false);
 
                 if (_val >= 1 && _val <= 4) {
                     for (var i = 5; i <= 13; i++)
-                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
+                        $('input#place_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
                 }
 
                 if (_val >= 11 && _val <= 13) {
                     for (var i = 1; i <= 10; i++)
-                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
+                        $('input#place_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
                 }
 
                 if (_val >= 8 && _val <= 10) {
                     for (var i = 1; i <= 7; i++)
-                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
+                        $('input#place_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
 
                     for (var i = 11; i <= 13; i++)
-                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
+                        $('input#place_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
                 }
 
                 if (_val >= 5 && _val <= 7) {
                     for (var i = 1; i <= 4; i++)
-                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
+                        $('input#place_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
 
                     for (var i = 8; i <= 13; i++)
-                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
+                        $('input#place_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
                 }
             }
 

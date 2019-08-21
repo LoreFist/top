@@ -177,19 +177,19 @@ use yii\helpers\ArrayHelper;
                         <div class="formDirections__bottom-blocks">
                             <div class="form-dropdown-stars__item">
                                 <div class="cbx-block   cbx-block--16 ">
-                                    <input name="Request[direct][paramhotel][<?=$data_id?>][palacetype][]" value="any" type="checkbox" class="cbx obj-palace palace-type-<?=$data_id?>" id="palace_type_<?=$data_id?>_0" checked="">
-                                    <label class="label-cbx" for="palace_type_<?=$data_id?>_0">
+                                    <input name="Request[direct][paramhotel][<?=$data_id?>][placetype][]" value="any" type="checkbox" class="cbx obj-place place-type-<?=$data_id?>" id="place_type_<?=$data_id?>_0" checked="">
+                                    <label class="label-cbx" for="place_type_<?=$data_id?>_0">
                                         <span class="cbx-cnt">Любой тип</span>
                                     </label>
                                 </div>
                             </div>
-                            <?php foreach ($items_dict['palaceType'] as $type):?>
+                            <?php foreach ($items_dict['placeType'] as $type):?>
                                 <div class="formDirections__cbx-ttl"><?=$type->name?></div>
                                     <div class=" formDirections__left-30 ">
                                         <?php foreach ($type->values as $value): ?>
                                             <div class="cbx-block   cbx-block--16 ">
-                                                <input name="Request[direct][paramhotel][<?=$data_id?>][palacetype][]" value="<?=$value->id?>" type="checkbox" class="cbx obj-palace palace-type-<?=$data_id?>" id="palace_type_<?=$data_id?>_<?=$value->id?>">
-                                                <label class="label-cbx" for="palace_type_<?=$data_id?>_<?=$value->id?>">
+                                                <input name="Request[direct][paramhotel][<?=$data_id?>][placetype][]" value="<?=$value->id?>" type="checkbox" class="cbx obj-place place-type-<?=$data_id?>" id="place_type_<?=$data_id?>_<?=$value->id?>">
+                                                <label class="label-cbx" for="place_type_<?=$data_id?>_<?=$value->id?>">
                                                     <span class="cbx-cnt"><?=$value->name?></span>
                                                 </label>
                                             </div>

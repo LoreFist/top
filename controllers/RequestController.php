@@ -17,7 +17,7 @@ use app\models\direct\DirectCategory;
 use app\models\direct\DirectFood;
 use app\models\direct\DirectKids;
 use app\models\direct\DirectOther;
-use app\models\direct\DirectPalaceValue;
+use app\models\direct\DirectplaceValue;
 use app\models\Food;
 use app\models\ForKids;
 use app\models\MailSchedule;
@@ -93,7 +93,7 @@ class RequestController extends \yii\web\Controller
             ->orderBy(['weight' => SORT_DESC])
             ->all();
 
-        $palaceType = DictAllocPlaceType::find()->joinWith('values')
+        $placeType = DictAllocPlaceType::find()->joinWith('values')
             ->where(['dict_alloc_place_type.active' => true])
             ->andWhere(['dict_alloc_place_type.trash' => false])
             ->andWhere(['dict_alloc_place_value.active' => true])
@@ -122,7 +122,7 @@ class RequestController extends \yii\web\Controller
                  'food'       => $food,
                  'category'   => $category,
                  'rating'     => $rating,
-                 'palaceType' => $palaceType,
+                 'placeType' => $placeType,
                  'forkids'    => $forKids,
                  'other'      => $other,
              ]]
@@ -156,10 +156,10 @@ class RequestController extends \yii\web\Controller
 
                     $consultant = Consultant::findOne(Yii::$app->params['defaultConsultant']);
 
-                    $model->consultant_id = $consultant->id;
-                    $model->save(false);
 
                     if (count($dictCountry) != 0) {
+                        $model->consultant_id = $consultant->id;
+                        $model->save(false);
 
                         $email_to = $consultant->email;
                         Yii::$app->mailer->compose(
@@ -349,12 +349,12 @@ class RequestController extends \yii\web\Controller
                                 }
                             }
 
-                            if ($paramsHotel[$i]['palacetype'][0] != 'any') {
-                                foreach ($paramsHotel[$i]['palacetype'] as $palace) {
-                                    $newPalace                 = new DirectPalaceValue();
-                                    $newPalace->palacevalue_id = (int)$palace;
-                                    $newPalace->direct_id      = $directModel[$i]->id;
-                                    $newPalace->save();
+                            if ($paramsHotel[$i]['placetype'][0] != 'any') {
+                                foreach ($paramsHotel[$i]['placetype'] as $place) {
+                                    $newplace                 = new DirectplaceValue();
+                                    $newplace->placevalue_id = (int)$place;
+                                    $newplace->direct_id      = $directModel[$i]->id;
+                                    $newplace->save();
                                 }
 
                             }

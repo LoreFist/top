@@ -8,7 +8,7 @@ use app\models\direct\DirectCategory;
 use app\models\direct\DirectFood;
 use app\models\direct\DirectKids;
 use app\models\direct\DirectOther;
-use app\models\direct\DirectPalaceValue;
+use app\models\direct\DirectplaceValue;
 use Yii;
 
 /**
@@ -24,7 +24,7 @@ use Yii;
  * @property DictCity            $dictCity
  * @property DirectCategory[]    $categorys
  * @property DirectFood[]        $foods
- * @property DirectPalaceValue[] $palacevalues
+ * @property DirectplaceValue[] $placevalues
  * @property Rating              $rating
  * @property DirectKids[]        $kids
  * @property DirectOther[]       $other
@@ -75,9 +75,9 @@ class Direct extends \yii\db\ActiveRecord
         return $this->hasMany(DirectFood::className(), ['direct_id' => 'id']);
     }
 
-    public function getPalacevalues()
+    public function getplacevalues()
     {
-        return $this->hasMany(DirectPalaceValue::className(), ['direct_id' => 'id']);
+        return $this->hasMany(DirectplaceValue::className(), ['direct_id' => 'id']);
     }
 
     /**
