@@ -141,21 +141,40 @@ class RequestController extends \yii\web\Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->created_at   = strtotime(Yii::$app->request->post()['Request']['created_at']);
             $model->city_tour_id = 0;
+
             if ($model->save()) {
 
-                $email_to = 'test.th.welcome@gmail.com';
                 try {
-                    Yii::$app->mailer->compose(
-                        '@app/mail/requests/request',
-                        [
-                            'model'    => $model,
-                            'email_to' => $email_to,
-                        ]
-                    )
-                        ->setFrom(Yii::$app->params['admin_email'])
-                        ->setTo($email_to)
-                        ->setSubject('Добавлена новая заявка')
-                        ->send();
+                    //даем шанс пользователю попасть на дефолтного менеджера по всем странам
+                    $words_arr = preg_split('/\s+/', $model->optional);
+
+                    $dictCountry = DictCountry::find()->select('id,name');
+                    foreach ($words_arr as $key=>$word){
+                        $key == 0 ? $dictCountry->where("name ILIKE '".$word."'") : $dictCountry->orWhere("name ILIKE '".$word."'");
+                    }
+                    $dictCountry = $dictCountry->all();
+
+                    $consultant = Consultant::findOne(Yii::$app->params['defaultConsultant']);
+
+                    $model->consultant_id = $consultant->id;
+                    $model->save(false);
+
+                    if (count($dictCountry) != 0) {
+
+                        $email_to = $consultant->email;
+                        Yii::$app->mailer->compose(
+                            '@app/mail/requests/request',
+                            [
+                                'model'    => $model,
+                                'email_to' => $email_to,
+                                'name'     => $consultant->name,
+                            ]
+                        )
+                            ->setFrom(Yii::$app->params['admin_email'])
+                            ->setTo($email_to)
+                            ->setSubject('Добавлена новая заявка')
+                            ->send();
+                    }
 
                     return json_encode(
                         [

@@ -215,48 +215,54 @@ class AdminController extends \yii\web\Controller
                 'header' => 'Дата вылета/Кол-во ночей',
                 'format' => 'html',
                 'value'  => function ($model) {
-                    $ts1 = strtotime($model->date_departure_from);
-                    $ts2 = strtotime($model->date_departure_to);
+                    if($model->date_departure_from != '' AND $model->date_departure_to != '') {
+                        $ts1 = strtotime($model->date_departure_from);
+                        $ts2 = strtotime($model->date_departure_to);
 
-                    $diff     = $ts2 - $ts1;
-                    $date2    = date('j', $diff);
-                    $viewDate = date('d.m.Y', $ts1).' ';
+                        $diff     = $ts2 - $ts1;
+                        $date2    = date('j', $diff);
+                        $viewDate = date('d.m.Y', $ts1).' ';
 
-                    if ($diff != 0) {
-                        $viewDate .= '+ '.$date2.' дн';
+                        if ($diff != 0) {
+                            $viewDate .= '+ '.$date2.' дн';
+                        }
+
+                        if ($model->day_stay_to == $model->day_stay_from) {
+                            $viewNihts = $model->day_stay_from.' нч.';
+                        } else {
+                            $viewNihts = $model->day_stay_from.'-'.$model->day_stay_to.' нч.';
+                        }
+
+                        return $viewDate.'/ '.$viewNihts;
                     }
-
-                    if ($model->day_stay_to == $model->day_stay_from) {
-                        $viewNihts = $model->day_stay_from.' нч.';
-                    } else {
-                        $viewNihts = $model->day_stay_from.'-'.$model->day_stay_to.' нч.';
-                    }
-
-                    return $viewDate.'/ '.$viewNihts;
+                    return '';
                 },
             ],
             [
                 'header' => 'Кол-во человек',
                 'format' => 'html',
                 'value'  => function ($model) {
-                    $view = $model->guest.' взрослых';
+                    if($model->guest != '') {
+                        $view = $model->guest.' взрослых';
 
-                    if ($model->children != 0) {
-                        $children = '';
-                        for ($i = 1; $i <= $model->children; $i++) {
-                            $children .= ${"model->age$i"} = $i;
-                            if ($i != $model->children) {
-                                $children .= ',';
+                        if ($model->children != 0) {
+                            $children = '';
+                            for ($i = 1; $i <= $model->children; $i++) {
+                                $children .= ${"model->age$i"} = $i;
+                                if ($i != $model->children) {
+                                    $children .= ',';
+                                }
+                            }
+                            if ($model->children > 1) {
+                                $view .= ' + '.$model->children.' ребенокa ('.$children.' лет)';
+                            } else {
+                                $view .= ' + '.$model->children.' ребенок ('.$children.' лет)';
                             }
                         }
-                        if ($model->children > 1) {
-                            $view .= ' + '.$model->children.' ребенокa ('.$children.' лет)';
-                        } else {
-                            $view .= ' + '.$model->children.' ребенок ('.$children.' лет)';
-                        }
-                    }
 
-                    return $view;
+                        return $view;
+                    }
+                    return '';
                 },
             ],
             [
@@ -284,6 +290,7 @@ class AdminController extends \yii\web\Controller
                     if ($model->city_tour_id != 0 AND isset($model->city_tour_id) AND isset($model->city)) {
                         return $model->city->name;
                     }
+                    return '';
                 },
             ],
             [
