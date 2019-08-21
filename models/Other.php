@@ -2,21 +2,20 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "other".
  *
- * @property int $id
- * @property string $name
- * @property string $active
- * @property int $weight
+ * @property int           $id
+ * @property string        $name
+ * @property string        $active
+ * @property int           $weight
  *
  * @property DirectOther[] $directOthers
- * @property Direct[] $directs
+ * @property Direct[]      $directs
  */
 class Other extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -43,8 +42,8 @@ class Other extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
+            'id'     => 'ID',
+            'name'   => 'Name',
             'active' => 'Active',
             'weight' => 'Weight',
         ];
@@ -65,4 +64,5 @@ class Other extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Direct::className(), ['id' => 'direct_id'])->viaTable('direct_other', ['other_id' => 'id']);
     }
+
 }

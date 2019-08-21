@@ -7,13 +7,13 @@ $(document).ready(function () {
 
     //подчеркивание активной табы
     line = function (obj, pre_tab_selector, obj_line = $('.line')) {
-        setTimeout(function(){//ждем попап
+        setTimeout(function () {//ждем попап
             var w = obj.width();
             var p = obj.position().left;
             obj_line.css({'left': p, 'width': w});
             $(pre_tab_selector).removeClass('active');
             obj.addClass('active');
-        },0);
+        }, 0);
     };
 
     //переход по табам правовая информация в модальном окне

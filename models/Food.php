@@ -2,20 +2,19 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "food".
  *
- * @property int $id
- * @property string $name
- * @property string $short_name
+ * @property int           $id
+ * @property string        $name
+ * @property string        $short_name
  *
  * @property RequestFood[] $requestFoods
- * @property Request[] $requests
+ * @property Request[]     $requests
  */
 class Food extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -40,8 +39,8 @@ class Food extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
+            'id'         => 'ID',
+            'name'       => 'Name',
             'short_name' => 'Short Name',
         ];
     }
@@ -61,4 +60,5 @@ class Food extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Request::className(), ['id' => 'request_id'])->viaTable('request_food', ['food_id' => 'id']);
     }
+
 }

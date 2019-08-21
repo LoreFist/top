@@ -2,21 +2,20 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "for_kids".
  *
- * @property int $id
- * @property string $name
- * @property string $active
- * @property int $weight
+ * @property int           $id
+ * @property string        $name
+ * @property string        $active
+ * @property int           $weight
  *
  * @property RequestKids[] $requestKids
- * @property Request[] $requests
+ * @property Request[]     $requests
  */
 class ForKids extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -43,8 +42,8 @@ class ForKids extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
+            'id'     => 'ID',
+            'name'   => 'Name',
             'active' => 'Active',
             'weight' => 'Weight',
         ];
@@ -65,4 +64,5 @@ class ForKids extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Request::className(), ['id' => 'request_id'])->viaTable('request_kids', ['kids_id' => 'id']);
     }
+
 }

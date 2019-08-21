@@ -9,14 +9,15 @@ use Yii;
 /**
  * This is the model class for table "direct_other".
  *
- * @property int $direct_id
- * @property int $other_id
+ * @property int    $direct_id
+ * @property int    $other_id
  *
- * @property Other $other
+ * @property Other  $other
  * @property Direct $direct
  */
 class DirectOther extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -46,7 +47,7 @@ class DirectOther extends \yii\db\ActiveRecord
     {
         return [
             'direct_id' => 'Direct ID',
-            'other_id' => 'Other ID',
+            'other_id'  => 'Other ID',
         ];
     }
 
@@ -65,4 +66,5 @@ class DirectOther extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Direct::className(), ['id' => 'direct_id']);
     }
+
 }

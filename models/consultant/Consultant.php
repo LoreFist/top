@@ -3,7 +3,6 @@
 namespace app\models\consultant;
 
 use app\models\dict\DictAlloccat;
-use Yii;
 
 /**
  * This is the model class for table "consultant".

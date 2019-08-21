@@ -7,17 +7,18 @@ use Yii;
 /**
  * This is the model class for table "dict_allocation_type".
  *
- * @property int $id
+ * @property int    $id
  * @property string $name
  * @property string $name_eng
- * @property bool $active
- * @property bool $trash
+ * @property bool   $active
+ * @property bool   $trash
  * @property string $date_create
- * @property int $updated
- * @property int $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
+ * @property int    $updated
+ * @property int    $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
  */
 class DictAllocationType extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -58,14 +59,15 @@ class DictAllocationType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'name_eng' => 'Name Eng',
-            'active' => 'Active',
-            'trash' => 'Trash',
+            'id'          => 'ID',
+            'name'        => 'Name',
+            'name_eng'    => 'Name Eng',
+            'active'      => 'Active',
+            'trash'       => 'Trash',
             'date_create' => 'Date Create',
-            'updated' => 'Updated',
-            'th_updated' => 'признак обновления записи, используется для построения таблицы кэша отелей на ТХ',
+            'updated'     => 'Updated',
+            'th_updated'  => 'признак обновления записи, используется для построения таблицы кэша отелей на ТХ',
         ];
     }
+
 }

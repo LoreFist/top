@@ -3,20 +3,20 @@
 namespace app\models\consultant;
 
 use app\models\dict\DictResort;
-use Yii;
 
 /**
  * This is the model class for table "consultant_resort".
  *
- * @property int $id
- * @property int $consultant_id
- * @property int $resort_id
+ * @property int        $id
+ * @property int        $consultant_id
+ * @property int        $resort_id
  * @property DictResort $dictresort
  *
  * @property Consultant $consultant
  */
 class ConsultantResort extends \yii\db\ActiveRecord
 {
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -24,6 +24,7 @@ class ConsultantResort extends \yii\db\ActiveRecord
     {
         return $this->hasOne(DictResort::className(), ['id' => 'resort_id']);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -50,9 +51,9 @@ class ConsultantResort extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id'            => 'ID',
             'consultant_id' => 'Consultant ID',
-            'resort_id' => 'Resort ID',
+            'resort_id'     => 'Resort ID',
         ];
     }
 
@@ -63,4 +64,5 @@ class ConsultantResort extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Consultant::className(), ['id' => 'consultant_id']);
     }
+
 }

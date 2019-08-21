@@ -3,20 +3,20 @@
 namespace app\models;
 
 use app\models\dict\DictAllocation;
-use Yii;
 
 /**
  * This is the model class for table "request_location".
  *
- * @property int $id
- * @property int $location_id
- * @property int $request_id
+ * @property int            $id
+ * @property int            $location_id
+ * @property int            $request_id
  * @property DictAllocation $location
  *
- * @property Request $request
+ * @property Request        $request
  */
 class RequestLocation extends \yii\db\ActiveRecord
 {
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -50,9 +50,9 @@ class RequestLocation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id'          => 'ID',
             'location_id' => 'Location ID',
-            'request_id' => 'Request ID',
+            'request_id'  => 'Request ID',
         ];
     }
 
@@ -63,4 +63,5 @@ class RequestLocation extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Request::className(), ['id' => 'request_id']);
     }
+
 }

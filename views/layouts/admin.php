@@ -1,8 +1,6 @@
 <?php
-/* @var $this \yii\web\View */
-/* @var $content string */
+
 use yii\helpers\Html;
-use common\widgets\Alert;
 use yii\widgets\Breadcrumbs;
 
 ?>
@@ -26,16 +24,18 @@ use yii\widgets\Breadcrumbs;
 
     <div class="page">
         <?=
-        Breadcrumbs::widget([
-            'homeLink' => [
-                'label' => Yii::t('yii', 'Admin'),
-                'url' => Yii::$app->homeUrl.'admin',
-                'class'=>'breadcrumb-item'
-            ],
-            'links' => [
-                    ['label'=> Yii::t('yii', 'Consultant'),'url' => Yii::$app->homeUrl.'admin/consultant','class'=>'breadcrumb-item']
-            ],
-        ])
+        Breadcrumbs::widget(
+            [
+                'homeLink' => [
+                    'label' => Yii::t('yii', 'Admin'),
+                    'url'   => Yii::$app->homeUrl.'admin',
+                    'class' => 'breadcrumb-item',
+                ],
+                'links'    => [
+                    ['label' => Yii::t('yii', 'Consultant'), 'url' => Yii::$app->homeUrl.'admin/consultant', 'class' => 'breadcrumb-item'],
+                ],
+            ]
+        )
         ?>
         <div class="page-main">
             <?= $content ?>

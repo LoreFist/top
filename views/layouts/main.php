@@ -1,11 +1,9 @@
 <?php
-/* @var $this \yii\web\View */
-
-/* @var $content string */
 
 use app\assets\AppAsset;
 use lo\widgets\magnific\MagnificPopup;
 use yii\helpers\Html;
+
 ?>
 
 <?php $this->beginPage() ?>
@@ -41,10 +39,10 @@ use yii\helpers\Html;
     <?php
     echo MagnificPopup::widget(
         [
-            'target' => '.legal-information-pp',
-            'type'=>'inline',
+            'target'  => '.legal-information-pp',
+            'type'    => 'inline',
             'options' => [
-                'modal'=> 'true',
+                'modal' => 'true',
             ],
         ]
     )

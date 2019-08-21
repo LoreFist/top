@@ -34,6 +34,7 @@ use Yii;
  */
 class Direct extends \yii\db\ActiveRecord
 {
+
     public function getDictcitydeparture()
     {
         return $this->hasOne(DictCity::className(), ['id' => 'city_departure_id']);
@@ -106,10 +107,10 @@ class Direct extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'request_id' => 'Request ID',
-            'country_id' => 'Country ID',
-            'city_id' => 'City ID',
+            'id'                => 'ID',
+            'request_id'        => 'Request ID',
+            'country_id'        => 'Country ID',
+            'city_id'           => 'City ID',
             'city_departure_id' => 'City Departure ID',
         ];
     }
@@ -121,4 +122,5 @@ class Direct extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Request::className(), ['id' => 'request_id']);
     }
+
 }

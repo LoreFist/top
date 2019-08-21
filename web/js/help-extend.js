@@ -4,19 +4,19 @@ $(document).ready(function () {
     var _sumoselectDeparture = $('.sumo-departure'); //селект поиска город вылета в турпакете
     var _sumoselectCity = $('.sumo-direction-city'); //селект поиска города в турпакете
     var _sumoselectCityTour = $('.sumo-list-city'); //селект поиска города в турпакете
-    var _modelRequestId = 0;
+    var _modelRequestId = 0; //для сохранения заявки из сложной формы в несколько этапов
     var _data_id = 0; //номер направления
 
-    $('.set-checked').prop( "checked", true ); //устанавлиавем в параметры отеля дефолтный радиобатон
+    $('.set-checked').prop("checked", true); //устанавлиавем в параметры отеля дефолтный радиобатон
 
-    function setLabelParamHotel(id) {
-        var _countParamHotel = $('input[name*="[paramhotel]['+id+']"]input[type!="hidden"]').length;
-        var _countCheckedParamHotel = $('input[name*="[paramhotel]['+id+']"]input[type!="hidden"]input:checked').length;
-        $('.param-hotel-'+id).html(_countCheckedParamHotel+' / '+_countParamHotel+' параметров');
-        $('.param-hotel-lbl-'+id).addClass('active');
+    function setLabelParamHotel(id) { //отображение кол-ва параметров отеля
+        var _countParamHotel = $('input[name*="[paramhotel][' + id + ']"]input[type!="hidden"]').length;
+        var _countCheckedParamHotel = $('input[name*="[paramhotel][' + id + ']"]input[type!="hidden"]input:checked').length;
+        $('.param-hotel-' + id).html(_countCheckedParamHotel + ' / ' + _countParamHotel + ' параметров');
+        $('.param-hotel-lbl-' + id).addClass('active');
     }
 
-    for (var i=0; i<=_countTourPach; i++) //устаналиваем дефолтное значение Лэйбла параметров отеля
+    for (var i = 0; i <= _countTourPach; i++) //устаналиваем дефолтное значение Лэйбла параметров отеля
         setLabelParamHotel(i);
 
     //формирование отображение страны поездки
@@ -64,22 +64,22 @@ $(document).ready(function () {
         submitForm(false, $('#extend_submit'));
     });
 
-    $('#extend_step_submit').on('click', function (){
+    $('#extend_step_submit').on('click', function () {
         submitForm(true, $('#extend_step_submit'));
     });
 
-    function submitForm(validation, buttonObj){
+    function submitForm(validation, buttonObj) {
         var _valid = 0;
 
         $('#request-optional').val($('#optional').html()); //копируем значение из div в наш инпут-optional
 
-        if($('#city-tour').html() == '')
+        if ($('#city-tour').html() == '')
             $('#sumo-list-city-3').val('')
 
         var $form = $('#form-extend');
         var data = $form.data("yiiActiveForm");
 
-        if(validation) {
+        if (validation) {
             $.each(data.attributes, function (e) {
                 this.status = 3;
             });
@@ -88,29 +88,32 @@ $(document).ready(function () {
             var _valid = $form.find('.has-error').length;
         }
 
-        if(_valid == 0){
+        if (_valid == 0) {
             var date = new Date();
-            $('#create_at').val(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
+            $('#create_at').val(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds());
 
             buttonObj.addClass('bth__loader--animate'); //анимация трех точек для кнопки
 
             var _form_data = $('#form-extend').serializeArray();
 
-            for(var i=0; i<_countTourPach; i++) {
-                _form_data.push({'name':'city_id[]', 'value': $('#city_direction-'+i).html()});
-                _form_data.push({'name':'country_id[]', 'value': $('#country_direction-'+i).html()});
-                _form_data.push({'name':'departure_id[]', 'value': $('#direct_departure-'+i).html()});
-                _form_data.push({'name':'location_id[]', 'value': $('#label-add-hotel-'+i).attr('data-id-location') });
+            for (var i = 0; i < _countTourPach; i++) {//добавляем в форму данных направления из турпакета
+                _form_data.push({'name': 'city_id[]', 'value': $('#city_direction-' + i).html()});
+                _form_data.push({'name': 'country_id[]', 'value': $('#country_direction-' + i).html()});
+                _form_data.push({'name': 'departure_id[]', 'value': $('#direct_departure-' + i).html()});
+                _form_data.push({
+                    'name': 'location_id[]',
+                    'value': $('#label-add-hotel-' + i).attr('data-id-location')
+                });
             }
-            _form_data.push({'name':'food_short_name', 'value': $('#label_food').html() });
-            _form_data.push({'name':'departure_id[]', 'value': $('#direct_departure-4').html()});
 
-            _form_data.push({'name':'modelRequestId', 'value': _modelRequestId});
+            _form_data.push({'name': 'food_short_name', 'value': $('#label_food').html()});//питание из конкретного отеля
 
-            var _count_direct = $('.js-show-added-field:visible').length;
-            _form_data.push({'name':'countDirect', 'value': _count_direct});
+            _form_data.push({'name': 'modelRequestId', 'value': _modelRequestId});//для сохранения заявки из сложной формы в несколько этапов
 
-            _form_data.push({'name':'typeTour', 'value': $('.type-tour:checked').attr('id')});
+            var _count_direct = $('.js-show-added-field:visible').length;//подсчет кол-ва активных направлений
+            _form_data.push({'name': 'countDirect', 'value': _count_direct});
+
+            _form_data.push({'name': 'typeTour', 'value': $('.type-tour:checked').attr('id')});//определение типа заявки
 
             $.ajax({
                     type: 'post',
@@ -119,18 +122,17 @@ $(document).ready(function () {
                     data: _form_data
                 }
             )
-            .done(function (data) {
-                if (data['code'] == 1) {
-                    if(data['step'] == 1){
-                        _modelRequestId = data['modelRequestId'];
-                        $('#step1_wrap').hide();
-                        $('#step2_wrap').slideDown();
+                .done(function (data) {
+                    if (data['code'] == 1) {
+                        if (data['step'] == 1) {
+                            _modelRequestId = data['modelRequestId'];
+                            $('#step1_wrap').hide();
+                            $('#step2_wrap').slideDown();
+                        } else {
+                            $('#step1Panel').html($('#thx').html());
+                        }
                     }
-                    else {
-                        $('#step1Panel').html($('#thx').html());
-                    }
-                }
-            })
+                })
         }
     }
 
@@ -153,34 +155,34 @@ $(document).ready(function () {
     });
 
     //очистка города поездки
-    function sumoselectCityClear(_sumoselectCity, _id){
+    function sumoselectCityClear(_sumoselectCity, _id) {
         if (_sumoselectCity.hasClass('SumoUnder')) {
             _sumoselectCity[0].sumo.unload();
             _sumoselectCity.removeClass('SumoUnder');
         }
 
-        $('#city_direction-'+_id).html('Не важно');
-        $('#text-city-select-'+_id).html('Укажите страну');
+        $('#city_direction-' + _id).html('Не важно');
+        $('#text-city-select-' + _id).html('Укажите страну');
         _sumoselectCity.html(' ');
         _sumoselectCity.hide();
     }
 
     //выбор страны поездки, установка флага и значения
     _sumoselectCountry.change(function (event) {
-        if($('#step1Panel').is(":hidden"))
+        if ($('#step1Panel').is(":hidden"))
             return false;
 
         var _id = $(this).attr('data_id');
         var _text_select_city = $(this).find('option:selected').html();
-        _sumoselectCity = $('#sumo-direction-city-'+_id);
+        _sumoselectCity = $('#sumo-direction-city-' + _id);
 
-        $('#country_direction-'+_id).html(_text_select_city);
+        $('#country_direction-' + _id).html(_text_select_city);
         $(this).closest('.formDirections').hide();
 
         sumoselectCityClear(_sumoselectCity, _id);
 
-        $('#country_direction_Flag-'+_id).attr('class', 'tour-selection__flag');
-        $('#country_direction_Flag-'+_id).addClass('lsfw-flag lsfw-flag-' + $(this).val());
+        $('#country_direction_Flag-' + _id).attr('class', 'tour-selection__flag');
+        $('#country_direction_Flag-' + _id).addClass('lsfw-flag lsfw-flag-' + $(this).val());
 
         $.ajax({
                 type: 'post',
@@ -193,34 +195,34 @@ $(document).ready(function () {
                 }
             }
         )
-        .done(function (data) {
-            $('#sumo-direction-city-'+_id).html(data);
-            $('#text-city-select-'+_id).html(_text_select_city);
-            _sumoselectCity.SumoSelect({
-                search: true,
-                forceCustomRendering: true,
-                searchText: 'Искать...',
-                noMatch: 'Нет совпадений для "{0}"',
-                searchFn: function (haystack, needle) {
-                    return needle.length >= 3 && haystack.toLowerCase().indexOf(needle.toLowerCase()) < 0;
-                }
-            });
-            _sumoselectCity.parent().addClass('open');
-            _sumoselectCity.next().next().css('top', '0').css('position', 'relative');
-        })
+            .done(function (data) {
+                $('#sumo-direction-city-' + _id).html(data);
+                $('#text-city-select-' + _id).html(_text_select_city);
+                _sumoselectCity.SumoSelect({
+                    search: true,
+                    forceCustomRendering: true,
+                    searchText: 'Искать...',
+                    noMatch: 'Нет совпадений для "{0}"',
+                    searchFn: function (haystack, needle) {
+                        return needle.length >= 3 && haystack.toLowerCase().indexOf(needle.toLowerCase()) < 0;
+                    }
+                });
+                _sumoselectCity.parent().addClass('open');
+                _sumoselectCity.next().next().css('top', '0').css('position', 'relative');
+            })
     });
 
     //выбор города
     _sumoselectCity.change(function (event) {
         var _id = $(this).attr('data_id');
-        $('#city_direction-'+_id).html($(this).find('option:selected').html());
+        $('#city_direction-' + _id).html($(this).find('option:selected').html());
         $(this).closest('.formDirections').hide();
     });
 
     //выбор города вылета
     _sumoselectDeparture.change(function (event) {
         var _id = $(this).attr('data_id');
-        $('#direct_departure-'+_id).html($(this).find('option:selected').html());
+        $('#direct_departure-' + _id).html($(this).find('option:selected').html());
         $(this).closest('.formDirections').hide();
     });
 
@@ -244,15 +246,15 @@ $(document).ready(function () {
     });
     $('.js-del-field').on('click', function () {
         var _id = $(this).attr('data_id');
-        _sumoselectCity = $('#sumo-direction-city-'+_id);
-        $('.js-hide-dell-field-'+_id).hide();
+        _sumoselectCity = $('#sumo-direction-city-' + _id);
+        $('.js-hide-dell-field-' + _id).hide();
 
         sumoselectCityClear(_sumoselectCity, _id);
 
-        $('#city_direction-'+_id).html('Не важно');
-        $('#direct_departure-'+_id).html('Не важно');
-        $('#country_direction-'+_id).html('Не важно');
-        $('#country_direction_Flag-'+_id).attr('class', 'tour-selection__flag');
+        $('#city_direction-' + _id).html('Не важно');
+        $('#direct_departure-' + _id).html('Не важно');
+        $('#country_direction-' + _id).html('Не важно');
+        $('#country_direction_Flag-' + _id).attr('class', 'tour-selection__flag');
 
         return false;
     });
@@ -274,75 +276,75 @@ $(document).ready(function () {
     });
 
     //радио батон турпакет или конкретный отель
-    $('#type1').on('change', function(){
+    $('#type1').on('change', function () {
         $('.js-types-search-hotel-blocks').hide();
         $('.js-types-search-tours-blocks').slideDown();
     });
-    $('#type2').on('change', function(){
+    $('#type2').on('change', function () {
         $('.js-types-search-tours-blocks').hide();
         $('.js-types-search-hotel-blocks').slideDown();
     });
 
     //упарвление контролом параметры отеля
-    $('.formDirections__top-tab').on('click', function(){
+    $('.formDirections__top-tab').on('click', function () {
         $('.formDirections__top-tab').removeClass('active');
-        $('.formDirections__bottom_ph'+_data_id).hide();
+        $('.formDirections__bottom_ph' + _data_id).hide();
 
         $(this).addClass('active');
 
-        var _bottom = '.'+$(this).attr("class").split(/\s+/)[1];
-        $('.form-change'+_data_id).find(_bottom).show();
+        var _bottom = '.' + $(this).attr("class").split(/\s+/)[1];
+        $('.form-change' + _data_id).find(_bottom).show();
     });
 
-    $(document).on('change', '.checkbox-stars', function() {//логика чекбоксов в параметрах отеля Категории
+    //логика чекбоксов в параметрах отеля Категории
+    $(document).on('change', '.checkbox-stars', function () {
         var _val = $(this).val();
-        if(this.checked) {
-            if(_val == 'any' || _val == 66) { //значение чекбоксов Любая Категория и Без Категории
-                $('input.checkbox-stars'+_data_id).prop( "checked", false );
-                $('input#type-category'+_data_id+'_0.cbx').prop( "checked", true );
-                $('input#type-category'+_data_id+'_66.cbx').prop( "checked", true );
-            }
-            else{
-                $('input#type-category'+_data_id+'_0.cbx').prop( "checked", false );
-                $('input#type-category'+_data_id+'_66.cbx').prop( "checked", false );
+        if (this.checked) {
+            if (_val == 'any' || _val == 66) { //значение чекбоксов Любая Категория и Без Категории
+                $('input.checkbox-stars' + _data_id).prop("checked", false);
+                $('input#type-category' + _data_id + '_0.cbx').prop("checked", true);
+                $('input#type-category' + _data_id + '_66.cbx').prop("checked", true);
+            } else {
+                $('input#type-category' + _data_id + '_0.cbx').prop("checked", false);
+                $('input#type-category' + _data_id + '_66.cbx').prop("checked", false);
             }
         }
     });
 
     //логика чекбоксов в параметрах отеля Расположение
-    $(document).on('change', '.obj-palace', function() {
+    $(document).on('change', '.obj-palace', function () {
         var _val = $(this).val();
-        if(this.checked) {
-            if(_val == 'any'){
-                $('input.palace-type-'+_data_id).prop( "checked", false );
-                $('input#palace_type_'+_data_id+'_0.cbx').prop( "checked", true );
-            } else if(_val >=1 && _val <=13){
-                $('input#palace_type_'+_data_id+'_0.cbx').prop( "checked", false );
+        if (this.checked) {
+            if (_val == 'any') {
+                $('input.palace-type-' + _data_id).prop("checked", false);
+                $('input#palace_type_' + _data_id + '_0.cbx').prop("checked", true);
+            } else if (_val >= 1 && _val <= 13) {
+                $('input#palace_type_' + _data_id + '_0.cbx').prop("checked", false);
 
-                if(_val >=1 && _val<=4){
-                    for(var i=5; i<=13; i++)
-                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
+                if (_val >= 1 && _val <= 4) {
+                    for (var i = 5; i <= 13; i++)
+                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
                 }
 
-                if(_val >=11 && _val<=13){
-                    for(var i=1; i<=10; i++)
-                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
+                if (_val >= 11 && _val <= 13) {
+                    for (var i = 1; i <= 10; i++)
+                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
                 }
 
-                if(_val >=8 && _val<=10){
-                    for(var i=1; i<=7; i++)
-                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
+                if (_val >= 8 && _val <= 10) {
+                    for (var i = 1; i <= 7; i++)
+                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
 
-                    for(var i=11; i<=13; i++)
-                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
+                    for (var i = 11; i <= 13; i++)
+                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
                 }
 
-                if(_val >=5 && _val<=7){
-                    for(var i=1; i<=4; i++)
-                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
+                if (_val >= 5 && _val <= 7) {
+                    for (var i = 1; i <= 4; i++)
+                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
 
-                    for(var i=8; i<=13; i++)
-                        $('input#palace_type_'+_data_id+'_'+i+'.cbx').prop( "checked", false );
+                    for (var i = 8; i <= 13; i++)
+                        $('input#palace_type_' + _data_id + '_' + i + '.cbx').prop("checked", false);
                 }
             }
 
@@ -350,26 +352,27 @@ $(document).ready(function () {
     });
 
     //логика чекбоксов питания в параметрах отеля
-    $(document).on('change', '.food_obj', function() {
+    $(document).on('change', '.food_obj', function () {
         var _val = $(this).val();
-        if(this.checked) {
-            if (_val == 'ALL' || $('input:checked.food_param_hotel_'+_data_id).length == 5) {
-                $('input.food_param_hotel_'+_data_id).prop( "checked", false );
-                $('input#type-food-param-hotel_'+_data_id+'ALL').prop( "checked", true );
-            } else{
-                $('input#type-food-param-hotel_'+_data_id+'ALL').prop( "checked", false );
+        if (this.checked) {
+            if (_val == 'ALL' || $('input:checked.food_param_hotel_' + _data_id).length == 5) {
+                $('input.food_param_hotel_' + _data_id).prop("checked", false);
+                $('input#type-food-param-hotel_' + _data_id + 'ALL').prop("checked", true);
+            } else {
+                $('input#type-food-param-hotel_' + _data_id + 'ALL').prop("checked", false);
             }
         }
     });
 
-    $('.submit-hotel-params').on('click', function(){
+    $('.submit-hotel-params').on('click', function () {
         $(this).closest('.formDirections').hide();
         var _id = $(this).attr('data-id');
         setLabelParamHotel(_id);
     });
 
+    //анимация контролов кол-ва гостей, пребывание, цена. В либе используется .slide() который не работает
     $('.js-lsfw-ppdb ').on('click', function () {
-        if(
+        if (
             $(this).next().attr('id') == '_mtIdxFormDurationPP' ||
             $(this).next().attr('id') == '_mtIdxFormGuestPP' ||
             $(this).next().attr('data-input-selector') == "#request-currency"
@@ -379,7 +382,8 @@ $(document).ready(function () {
         }
     })
 
-    $('.formDirections__guest-plus').on('click', function(){//фикс кнопки плюса в гостях
+    //фикс кнопки плюса в гостях
+    $('.formDirections__guest-plus').on('click', function () {
         $('.js-show-adults, .formDirections__guest-wrap').show();
     })
 });

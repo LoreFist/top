@@ -7,23 +7,24 @@ use Yii;
 /**
  * This is the model class for table "dict_city".
  *
- * @property int $id
+ * @property int    $id
  * @property string $name
- * @property bool $active
- * @property bool $trash
- * @property int $updated
+ * @property bool   $active
+ * @property bool   $trash
+ * @property int    $updated
  * @property string $date_create
- * @property int $country
- * @property int $district
+ * @property int    $country
+ * @property int    $district
  * @property string $name_eng
- * @property int $staff_modified
- * @property int $resort
+ * @property int    $staff_modified
+ * @property int    $resort
  */
 class DictCity extends \yii\db\ActiveRecord
 {
 
     /**
      * в постановке задачи 4.1 указаны эти города
+     *
      * @var array
      */
     private static $direct_city
@@ -36,7 +37,7 @@ class DictCity extends \yii\db\ActiveRecord
             'Оренбург', 'Пенза', 'Ростов-на-Дону', 'Саратов', 'Санкт-Петербург',
             'Симферополь', 'Смоленск', 'Сочи', 'Томск', 'Ульяновск', 'Харьков',
             'Челябинск', 'Шымкент', 'Якутск', 'Ярославль',
-            'Москва', 'Санкт-Петербург'
+            'Москва', 'Санкт-Петербург',
         ];
 
     /**
@@ -111,17 +112,18 @@ class DictCity extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'active' => 'Active',
-            'trash' => 'Trash',
-            'updated' => 'Updated',
-            'date_create' => 'Date Create',
-            'country' => 'Country',
-            'district' => 'District',
-            'name_eng' => 'Name Eng',
+            'id'             => 'ID',
+            'name'           => 'Name',
+            'active'         => 'Active',
+            'trash'          => 'Trash',
+            'updated'        => 'Updated',
+            'date_create'    => 'Date Create',
+            'country'        => 'Country',
+            'district'       => 'District',
+            'name_eng'       => 'Name Eng',
             'staff_modified' => 'Staff Modified',
-            'resort' => 'Resort',
+            'resort'         => 'Resort',
         ];
     }
+
 }

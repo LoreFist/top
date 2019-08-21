@@ -1,12 +1,12 @@
-<?php if(count($location) == 0): ?>
+<?php if (count($location) == 0): ?>
     <div class="formDirections__bottom-item">
         <span>
             По указанному названию совпадений не найдено
         </span>
     </div>
-<?php else:?>
+<?php else: ?>
 
-<?php foreach ($location as $lc): ?>
+    <?php foreach ($location as $lc): ?>
         <div class="formDirections__bottom-item js-select-hotel-add"
              data-hotel-name="<?= $lc->name ?>" data-stars="<?= $lc->cat0->name ?>"
              data-country="<?= $lc->resort0->country0->name ?>" data-resort="<?= $lc->resort0->name ?>"
@@ -20,5 +20,5 @@
             </div>
             <span class="formDirections__count"><?= $lc->resort0->name ?></span>
         </div>
-<?php endforeach; ?>
+    <?php endforeach; ?>
 <?php endif; ?>

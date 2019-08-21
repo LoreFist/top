@@ -7,20 +7,21 @@ use Yii;
 /**
  * This is the model class for table "dict_alloccat".
  *
- * @property int $id
+ * @property int    $id
  * @property string $name
  * @property string $nick
  * @property string $name_eng
  * @property string $description
  * @property string $weight
- * @property bool $active
- * @property bool $trash
+ * @property bool   $active
+ * @property bool   $trash
  * @property string $date_create
- * @property int $updated
- * @property int $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
+ * @property int    $updated
+ * @property int    $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
  */
 class DictAlloccat extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -63,17 +64,18 @@ class DictAlloccat extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'nick' => 'Nick',
-            'name_eng' => 'Name Eng',
+            'id'          => 'ID',
+            'name'        => 'Name',
+            'nick'        => 'Nick',
+            'name_eng'    => 'Name Eng',
             'description' => 'Description',
-            'weight' => 'Weight',
-            'active' => 'Active',
-            'trash' => 'Trash',
+            'weight'      => 'Weight',
+            'active'      => 'Active',
+            'trash'       => 'Trash',
             'date_create' => 'Date Create',
-            'updated' => 'Updated',
-            'th_updated' => 'признак обновления записи, используется для построения таблицы кэша отелей на ТХ',
+            'updated'     => 'Updated',
+            'th_updated'  => 'признак обновления записи, используется для построения таблицы кэша отелей на ТХ',
         ];
     }
+
 }

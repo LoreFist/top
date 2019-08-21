@@ -2,19 +2,18 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "request_food".
  *
- * @property int $request_id
- * @property int $food_id
+ * @property int     $request_id
+ * @property int     $food_id
  *
- * @property Food $food
+ * @property Food    $food
  * @property Request $request
  */
 class RequestFood extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -44,7 +43,7 @@ class RequestFood extends \yii\db\ActiveRecord
     {
         return [
             'request_id' => 'Request ID',
-            'food_id' => 'Food ID',
+            'food_id'    => 'Food ID',
         ];
     }
 
@@ -63,4 +62,5 @@ class RequestFood extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Request::className(), ['id' => 'request_id']);
     }
+
 }

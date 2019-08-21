@@ -3,20 +3,20 @@
 namespace app\models\consultant;
 
 use app\models\dict\DictAlloccat;
-use Yii;
 
 /**
  * This is the model class for table "consultant_cat".
  *
- * @property int $id
- * @property int $consultant_id
- * @property int $cat_id
+ * @property int          $id
+ * @property int          $consultant_id
+ * @property int          $cat_id
  * @property DictAlloccat $dictCat
  *
- * @property Consultant $consultant
+ * @property Consultant   $consultant
  */
 class ConsultantCat extends \yii\db\ActiveRecord
 {
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -24,6 +24,7 @@ class ConsultantCat extends \yii\db\ActiveRecord
     {
         return $this->hasOne(DictAlloccat::className(), ['id' => 'cat_id']);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -50,9 +51,9 @@ class ConsultantCat extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id'            => 'ID',
             'consultant_id' => 'Consultant ID',
-            'cat_id' => 'Cat ID',
+            'cat_id'        => 'Cat ID',
         ];
     }
 
@@ -63,4 +64,5 @@ class ConsultantCat extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Consultant::className(), ['id' => 'consultant_id']);
     }
+
 }

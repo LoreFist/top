@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers;
 
 use app\models\dict\DictAllocation;
@@ -22,33 +23,37 @@ class DictController extends \yii\web\Controller
      */
     public function actionGetallocation()
     {
-        if($namesearch = Yii::$app->request->get('namesearch')){
+        if ($namesearch = Yii::$app->request->get('namesearch')) {
             $namesearch = "'%".$namesearch."%'";
 
             $location = DictAllocation::find()
-                ->select([
-                    DictAllocation::tableName().'.name', DictAllocation::tableName().'.id',
-                    DictAllocation::tableName().'.cat',DictAllocation::tableName().'.allocation_type',
-                    DictAllocation::tableName().'.resort',
-                ])
-                ->joinWith([
-                    'type'=>function($q){
-                        $q->select(DictAllocationType::tableName().'.name');
-                    },
-                    'resort0'=>function($q){
-                        $q->select([DictResort::tableName().'.id', DictResort::tableName().'.name', DictResort::tableName().'.country']);
-                    },
-                    'resort0.country0'=>function($q){
-                        $q->select([DictCountry::tableName().'.id', DictCountry::tableName().'.name']);
-                    },
-                    'cat0'=>function($q){
-                        $q->select([DictAlloccat::tableName().'.id', DictAlloccat::tableName().'.name']);
-                    }
-                ])
-                ->where( DictAllocation::tableName().'.name like '.$namesearch)
+                ->select(
+                    [
+                        DictAllocation::tableName().'.name', DictAllocation::tableName().'.id',
+                        DictAllocation::tableName().'.cat', DictAllocation::tableName().'.allocation_type',
+                        DictAllocation::tableName().'.resort',
+                    ]
+                )
+                ->joinWith(
+                    [
+                        'type'             => function ($q) {
+                            $q->select(DictAllocationType::tableName().'.name');
+                        },
+                        'resort0'          => function ($q) {
+                            $q->select([DictResort::tableName().'.id', DictResort::tableName().'.name', DictResort::tableName().'.country']);
+                        },
+                        'resort0.country0' => function ($q) {
+                            $q->select([DictCountry::tableName().'.id', DictCountry::tableName().'.name']);
+                        },
+                        'cat0'             => function ($q) {
+                            $q->select([DictAlloccat::tableName().'.id', DictAlloccat::tableName().'.name']);
+                        },
+                    ]
+                )
+                ->where(DictAllocation::tableName().'.name like '.$namesearch)
                 ->all();
 
-            return $this->renderPartial( 'hotelsearch',['location' => $location]);
+            return $this->renderPartial('hotelsearch', ['location' => $location]);
         }
     }
 
@@ -75,4 +80,5 @@ class DictController extends \yii\web\Controller
             );
         }
     }
+
 }

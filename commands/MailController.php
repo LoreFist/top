@@ -1,4 +1,5 @@
 <?php
+
 namespace app\commands;
 
 use app\models\MailSchedule;
@@ -9,19 +10,20 @@ use yii\console\Controller;
 
 class MailController extends Controller
 {
+
     public function actionIndex()
     {
         $mails = MailSchedule::find()
-            ->joinWith(['request','request.consultant'])
+            ->joinWith(['request', 'request.consultant'])
             ->where(['send' => 0])
             ->all();
 
-        foreach ($mails as $mail){
-            if(isset($mail->request->consultant)) {
+        foreach ($mails as $mail) {
+            if (isset($mail->request->consultant)) {
                 $date = new DateTime($mail->created_at);
                 $now  = new DateTime();
                 $min  = $date->diff($now)->format("%i");
-                if ($min >= Yii::$app->params['minute_delay_email']) {
+                if ($min >= Yii::$app->params['minute_delay_email']) {//количество ожидаемых минут после создания заявки
                     $mail->send = 1;
                     $mail->save();
 
@@ -31,7 +33,7 @@ class MailController extends Controller
                         [
                             'model'    => Request::findOne($mail->request_id),
                             'email_to' => $email_to,
-                            'name'=>$mail->request->consultant->name
+                            'name'     => $mail->request->consultant->name,
                         ]
                     )
                         ->setFrom(Yii::$app->params['admin_email'])
@@ -42,4 +44,5 @@ class MailController extends Controller
             }
         }
     }
+
 }

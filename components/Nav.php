@@ -7,8 +7,10 @@ use yii\helpers\Html;
 
 class Nav extends BaseNav
 {
+
     public function init()
     {
-        Html::addCssClass($this->options,[]);
+        Html::addCssClass($this->options, []);
     }
+
 }

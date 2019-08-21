@@ -7,23 +7,24 @@ use Yii;
 /**
  * This is the model class for table "dict_country".
  *
- * @property int $id
- * @property string $name
- * @property string $name_eng
- * @property string $nick
- * @property string $label
- * @property int $region
- * @property string $name_genitive
- * @property bool $active
- * @property bool $trash
- * @property string $date_create
- * @property int $phone_code
- * @property int $updated
- * @property int $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
+ * @property int          $id
+ * @property string       $name
+ * @property string       $name_eng
+ * @property string       $nick
+ * @property string       $label
+ * @property int          $region
+ * @property string       $name_genitive
+ * @property bool         $active
+ * @property bool         $trash
+ * @property string       $date_create
+ * @property int          $phone_code
+ * @property int          $updated
+ * @property int          $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
  * @property DictResort[] $dictResorts
  */
 class DictCountry extends \yii\db\ActiveRecord
 {
+
     public function getDictResorts()
     {
         return $this->hasMany(DictResort::className(), ['country' => 'id']);
@@ -69,19 +70,20 @@ class DictCountry extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'name_eng' => 'Name Eng',
-            'nick' => 'Nick',
-            'label' => 'Label',
-            'region' => 'Region',
+            'id'            => 'ID',
+            'name'          => 'Name',
+            'name_eng'      => 'Name Eng',
+            'nick'          => 'Nick',
+            'label'         => 'Label',
+            'region'        => 'Region',
             'name_genitive' => 'Name Genitive',
-            'active' => 'Active',
-            'trash' => 'Trash',
-            'date_create' => 'Date Create',
-            'phone_code' => 'Phone Code',
-            'updated' => 'Updated',
-            'th_updated' => 'признак обновления записи, используется для построения таблицы кэша отелей на ТХ',
+            'active'        => 'Active',
+            'trash'         => 'Trash',
+            'date_create'   => 'Date Create',
+            'phone_code'    => 'Phone Code',
+            'updated'       => 'Updated',
+            'th_updated'    => 'признак обновления записи, используется для построения таблицы кэша отелей на ТХ',
         ];
     }
+
 }

@@ -6,7 +6,6 @@ use yii\widgets\DetailView;
 AdminAsset::register($this);
 $this->title = 'Admin bootstrap | view';
 
-
 echo DetailView::widget(
     [
         'model'      => $model,

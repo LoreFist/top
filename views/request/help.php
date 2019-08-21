@@ -1,5 +1,7 @@
 <?php
+
 use lo\widgets\magnific\MagnificPopup;
+
 $this->title = 'Помощь в подборе';
 ?>
 <div class="tour-selection-box">
@@ -10,18 +12,18 @@ $this->title = 'Помощь в подборе';
             <div id="tabnostandard" class="line" style="overflow: hidden;left: 141.016px; width: 186.828px;"></div>
         </div>
 
-        <?php echo $this->context->renderPartial('partial/extend', ['model'=>$model, 'items_dict'=>$items_dict]); ?>
-        <?php echo $this->context->renderPartial('partial/nonstandard', ['model'=>$model]); ?>
+        <?php echo $this->context->renderPartial('partial/extend', ['model' => $model, 'items_dict' => $items_dict]); ?>
+        <?php echo $this->context->renderPartial('partial/nonstandard', ['model' => $model]); ?>
     </div>
 </div>
 
 <?php
 echo MagnificPopup::widget(
     [
-        'target' => '.p-agreement-pp',
-        'type'=>'inline',
+        'target'  => '.p-agreement-pp',
+        'type'    => 'inline',
         'options' => [
-            'modal'=> 'true',
+            'modal' => 'true',
         ],
     ]
 )

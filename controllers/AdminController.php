@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use app\models\consultant\Consultant;
 use app\models\Request;
-use yii\helpers\VarDumper;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
 
@@ -19,19 +18,23 @@ class AdminController extends \yii\web\Controller
     public function actionIndex()
     {
 
-        $query   = Request::find()
-            ->joinWith([
-                'currencyDecrypt','directs','directs.categorys',
-                'directs.foods.food','directs.palacevalues','directs.rating',
-                'directs.kids.kids','directs.others.other','locations','requestFoods as rf', 'requestFoods.food as rf_f',
-                'consultant'
-                ])
-            ->with([
-                'directs.dictcountry','directs.dictcity','directs.dictcitydeparture',
-                'directs.palacevalues.dictpalacevalue','directs.palacevalues.dictpalacevalue.type',
-                'city','locations.location','locations.location.resort0','locations.location.cat0',
-                'locations.location.resort0.country0','citydeparture'
-            ])
+        $query = Request::find()
+            ->joinWith(
+                [
+                    'currencyDecrypt', 'directs', 'directs.categorys',
+                    'directs.foods.food', 'directs.palacevalues', 'directs.rating',
+                    'directs.kids.kids', 'directs.others.other', 'locations', 'requestFoods as rf', 'requestFoods.food as rf_f',
+                    'consultant',
+                ]
+            )
+            ->with(
+                [
+                    'directs.dictcountry', 'directs.dictcity', 'directs.dictcitydeparture',
+                    'directs.palacevalues.dictpalacevalue', 'directs.palacevalues.dictpalacevalue.type',
+                    'city', 'locations.location', 'locations.location.resort0', 'locations.location.cat0',
+                    'locations.location.resort0.country0', 'citydeparture',
+                ]
+            )
             ->orderBy(['Request.id' => SORT_DESC]);
 
         $columns = [
@@ -46,79 +49,88 @@ class AdminController extends \yii\web\Controller
                 'format'    => ['date', 'php:Y-m-d H:i:s'],
             ],
             [
-                'header'    => 'Направление <br>(Страна | Курорт(город) | Отель | Город Вылета)',
-                'format'    => 'html',
-                'value'  => function ($model) {
+                'header' => 'Направление <br>(Страна | Курорт(город) | Отель | Город Вылета)',
+                'format' => 'html',
+                'value'  => function ($model) {//формирования отображения столбца
 
                     $view = '';
-                    if($model->type == 'type1' OR $model->type == ''){
+                    if ($model->type == 'type1' OR $model->type == '') { //если заявка создана из турпакета
                         foreach ($model->directs as $key => $direct) {
                             $view .= '<b>'.($key + 1).'.</b> ';
 
-                            if ($direct->country_id != '' AND isset($direct->dictcountry))
+                            if ($direct->country_id != '' AND isset($direct->dictcountry)) {
                                 $view .= $direct->dictcountry->name;
-                            else
+                            } else {
                                 $view .= ' - ';
+                            }
 
-                            if ($direct->city_id != '' AND isset($direct->dictcity))
+                            if ($direct->city_id != '' AND isset($direct->dictcity)) {
                                 $view .= ' | '.$direct->dictcity->name;
-                            else
+                            } else {
                                 $view .= ' | - ';
+                            }
 
 
-                            if ($direct->city_departure_id != '' AND isset($direct->dictcitydeparture))
+                            if ($direct->city_departure_id != '' AND isset($direct->dictcitydeparture)) {
                                 $view .= ' | '.$direct->dictcitydeparture->name;
-                            else
+                            } else {
                                 $view .= ' | - ';
+                            }
 
-                            if ($view != '')
+                            if ($view != '') {
                                 $view .= '<br>';
+                            }
                         }
-                    }elseif ($model->type == 'type2'){
-                        foreach($model->locations as $key => $locations){
+                    } elseif ($model->type == 'type2') { //если заявка создана из конкретного отеля
+                        foreach ($model->locations as $key => $locations) {
                             $view .= '<b>'.($key + 1).'.</b> ';
-                            if (isset($locations->location->resort0->country0))
+                            if (isset($locations->location->resort0->country0)) {
                                 $view .= $locations->location->resort0->country0->name;
-                            else
+                            } else {
                                 $view .= ' - ';
+                            }
 
 
-                            if (isset($locations->location->resort0))
+                            if (isset($locations->location->resort0)) {
                                 $view .= ' | '.$locations->location->resort0->name;
-                            else
+                            } else {
                                 $view .= ' | - ';
+                            }
 
-                            if (isset($locations->location))
+                            if (isset($locations->location)) {
                                 $view .= ' | '.$locations->location->name.' '.$locations->location->cat0->name;
-                            else
+                            } else {
                                 $view .= ' | - ';
+                            }
 
-                            if (isset($model->citydeparture))
+                            if (isset($model->citydeparture)) {
                                 $view .= ' | '.$model->citydeparture->name;
-                            else
+                            } else {
                                 $view .= ' | - ';
+                            }
 
-                            if ($view != '')
+                            if ($view != '') {
                                 $view .= '<br>';
+                            }
                         }
                     }
 
                     return $view;
-                }
+                },
             ],
             [
-                'header'    => 'Имя Телефон Еmail',
-                'format'    => 'html',
-                'value'=>function ($model){
+                'header' => 'Имя Телефон Еmail',
+                'format' => 'html',
+                'value'  => function ($model) {
                     return $model->name.'<br/>'.$model->phone.'<br/>'.$model->email;
-                }
+                },
             ],
             [
-                'header'    => 'Доп. пожелание',
-                'format'    => 'html',
+                'header' => 'Доп. пожелание',
+                'format' => 'html',
                 'value'  => function ($model) {
                     $view = '';
-                    if($model->type == 'type1' OR $model->type == '') {
+                    if ($model->type == 'type1' OR $model->type == '') {//если заявка создана из турпакета
                         foreach ($model->directs as $key => $direct) {
                             $view .= '<b>'.($key + 1).'.</b> <br/>';
                             if (count($direct->categorys) != 0) {
@@ -181,7 +193,7 @@ class AdminController extends \yii\web\Controller
                         }
 
                         return $view;
-                    }elseif ($model->type == 'type2'){
+                    } elseif ($model->type == 'type2') {//если заявка создана из конкретного отеля
                         if (count($model->requestFoods) != 0) {
                             $view .= '    <b>Питн:</b> ';
                             foreach ($model->requestFoods as $requestFood) {
@@ -194,9 +206,10 @@ class AdminController extends \yii\web\Controller
                         if ($model->optional != '') {
                             $view .= '<b>Комментарий:</b> '.$model->optional;
                         }
+
                         return $view;
                     }
-                }
+                },
             ],
             [
                 'header' => 'Дата вылета/Кол-во ночей',
@@ -236,11 +249,13 @@ class AdminController extends \yii\web\Controller
                                 $children .= ',';
                             }
                         }
-                        if($model->children > 1)
+                        if ($model->children > 1) {
                             $view .= ' + '.$model->children.' ребенокa ('.$children.' лет)';
-                        else
+                        } else {
                             $view .= ' + '.$model->children.' ребенок ('.$children.' лет)';
+                        }
                     }
+
                     return $view;
                 },
             ],
@@ -258,6 +273,7 @@ class AdminController extends \yii\web\Controller
                     if ($model->currency_id != '' AND $view != '') {
                         $view .= ' '.$model->currencyDecrypt->short_name;
                     }
+
                     return $view;
                 },
             ],
@@ -265,20 +281,22 @@ class AdminController extends \yii\web\Controller
                 'header' => 'Город туриста',
                 'format' => 'html',
                 'value'  => function ($model) {
-                    if($model->city_tour_id != 0 AND isset($model->city_tour_id) AND isset($model->city))
+                    if ($model->city_tour_id != 0 AND isset($model->city_tour_id) AND isset($model->city)) {
                         return $model->city->name;
+                    }
                 },
             ],
             [
-                'header'    => 'Консультант',
-                'format'    => 'html',
+                'header' => 'Консультант',
+                'format' => 'html',
                 'value'  => function ($model) {
-                    if(isset($model->consultant))
+                    if (isset($model->consultant)) {
                         return $model->consultant->name;
-                    else
+                    } else {
                         return 'нет распределения, <br/>так как нет направления';
-                }
-            ]
+                    }
+                },
+            ],
         ];
 
         $dataProvider = new ActiveDataProvider(
@@ -291,6 +309,7 @@ class AdminController extends \yii\web\Controller
         );
 
         $this->layout = 'admin';
+
         return $this->render(
             'index',
             ['dataProvider' => $dataProvider, 'columns' => $columns]
@@ -304,10 +323,9 @@ class AdminController extends \yii\web\Controller
      */
     public function actionConsultant()
     {
-        $query   = Consultant::find()
-            ->joinWith(['consultantcats','consultantcountries','consultantresorts'])
-            ->with(['consultantcats.dictcat','consultantcountries.dictcountry','consultantresorts.dictresort'])
-        ;
+        $query = Consultant::find()
+            ->joinWith(['consultantcats', 'consultantcountries', 'consultantresorts'])
+            ->with(['consultantcats.dictcat', 'consultantcountries.dictcountry', 'consultantresorts.dictresort']);
 
         $columns = [
             [
@@ -323,34 +341,40 @@ class AdminController extends \yii\web\Controller
                 'attribute' => 'email',
             ],
             [
-                'header'    => 'Категории отелей',
-                'value'=> function($model){
+                'header' => 'Категории отелей',
+                'value'  => function ($model) {
                     $view = '';
-                    foreach($model->consultantcats as $cats)
-                            $view .= ' '.$cats->dictcat->name.',';
+                    foreach ($model->consultantcats as $cats) {
+                        $view .= ' '.$cats->dictcat->name.',';
+                    }
                     $view = substr($view, 0, -1);
+
                     return $view;
-                }
+                },
             ],
             [
-                'header'    => 'Страны',
-                'value'=> function($model){
+                'header' => 'Страны',
+                'value'  => function ($model) {
                     $view = '';
-                    foreach($model->consultantcountries as $country)
+                    foreach ($model->consultantcountries as $country) {
                         $view .= ' '.$country->dictcountry->name.',';
+                    }
                     $view = substr($view, 0, -1);
+
                     return $view;
-                }
+                },
             ],
             [
-                'header'    => 'Курорт',
-                'value'=> function($model){
+                'header' => 'Курорт',
+                'value'  => function ($model) {
                     $view = '';
-                    foreach($model->consultantresorts as $resorn)
+                    foreach ($model->consultantresorts as $resorn) {
                         $view .= ' '.$resorn->dictresort->name.',';
+                    }
                     $view = substr($view, 0, -1);
+
                     return $view;
-                }
+                },
             ],
         ];
 
@@ -364,6 +388,7 @@ class AdminController extends \yii\web\Controller
         );
 
         $this->layout = 'admin';
+
         return $this->render(
             'index',
             ['dataProvider' => $dataProvider, 'columns' => $columns]
@@ -381,6 +406,7 @@ class AdminController extends \yii\web\Controller
     public function actionView($id)
     {
         $this->layout = 'admin';
+
         return $this->render(
             'view',
             [

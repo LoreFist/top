@@ -32,7 +32,6 @@ use app\models\dict\DictCity;
  * @property int               $created_at
  *
  * @property Direct[]          $directs
- * @property Direct            $id0
  * @property MailSchedule[]    $mailSchedules
  * @property RequestFood[]     $requestFoods
  * @property Food[]            $foods
@@ -89,14 +88,6 @@ class Request extends \yii\db\ActiveRecord
     public function getDirects()
     {
         return $this->hasMany(Direct::className(), ['request_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getId0()
-    {
-        return $this->hasOne(Direct::className(), ['request_id' => 'id']);
     }
 
     /**

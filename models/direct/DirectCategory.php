@@ -4,23 +4,24 @@ namespace app\models\direct;
 
 use app\models\dict\DictAlloccat;
 use app\models\Direct;
-use Yii;
 
 /**
  * This is the model class for table "direct_category".
  *
- * @property int $direct_id
- * @property int $category_id
+ * @property int          $direct_id
+ * @property int          $category_id
  * @property DictAlloccat $dictCat
  *
- * @property Direct $direct
+ * @property Direct       $direct
  */
 class DirectCategory extends \yii\db\ActiveRecord
 {
+
     public function getDictcat()
     {
         return $this->hasOne(DictAlloccat::className(), ['id' => 'category_id']);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -48,7 +49,7 @@ class DirectCategory extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'direct_id' => 'Direct ID',
+            'direct_id'   => 'Direct ID',
             'category_id' => 'Category ID',
         ];
     }
@@ -60,4 +61,5 @@ class DirectCategory extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Direct::className(), ['id' => 'direct_id']);
     }
+
 }

@@ -9,10 +9,12 @@ $this->title = 'Admin bootstrap';
 ?>
 <div class="container-fluid">
     <div class="row">
-        <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            'columns' => $columns,
-            'summary' => '',
-        ]); ?>
+        <?= GridView::widget(
+            [
+                'dataProvider' => $dataProvider,
+                'columns'      => $columns,
+                'summary'      => '',
+            ]
+        ); ?>
     </div>
 </div>

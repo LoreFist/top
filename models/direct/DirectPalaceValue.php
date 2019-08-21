@@ -9,18 +9,20 @@ use Yii;
 /**
  * This is the model class for table "direct_palace_type".
  *
- * @property int $direct_id
- * @property int $palacevalue_id
+ * @property int                 $direct_id
+ * @property int                 $palacevalue_id
  * @property DictAllocPlaceValue $dictPalaceValue
  *
- * @property Direct $direct
+ * @property Direct              $direct
  */
 class DirectPalaceValue extends \yii\db\ActiveRecord
 {
+
     public function getDictpalacevalue()
     {
         return $this->hasOne(DictAllocPlaceValue::className(), ['id' => 'palacevalue_id']);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -48,7 +50,7 @@ class DirectPalaceValue extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'direct_id' => 'Direct ID',
+            'direct_id'      => 'Direct ID',
             'palacevalue_id' => 'Palacetype ID',
         ];
     }
@@ -60,4 +62,5 @@ class DirectPalaceValue extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Direct::className(), ['id' => 'direct_id']);
     }
+
 }

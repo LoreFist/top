@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    //переходы по табам нестандартного запроса
+    //переходы по табам типов заявки
     $('#step1').click(function () {
         line($(this), '.tab');
 
-        if(!$('#step2Panel').is(":visible")) {
+        if (!$('#step2Panel').is(":visible")) {
             $('#step1Panel').slideDown();
             $('#step2Panel').hide();
             $('#formPanel').hide();
@@ -20,13 +20,15 @@ $(document).ready(function () {
         saveActiveTab(('#form'));
     });
 
-    function saveActiveTab(_tab){
+    //для сохрание активной табы
+    function saveActiveTab(_tab) {
         if (history.pushState)
             history.pushState(null, null, _tab);
         else
             location.hash = _tab;
     }
 
+    //установка активной табы
     if (window.location.hash)
         $(window.location.hash).click();
     else
@@ -48,7 +50,7 @@ $(document).ready(function () {
     $('#nonstandard_submit').on('click', function () {
         var valid = 0;
         var date = new Date();
-        $('#create_at_n').val(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
+        $('#create_at_n').val(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds());
 
         var $form = $('#form-nostadndatd');
         var data = $form.data("yiiActiveForm");
@@ -60,7 +62,7 @@ $(document).ready(function () {
 
         var _valid = $form.find('.has-error').length;
 
-        if(_valid == 0){
+        if (_valid == 0) {
             $(this).addClass('bth__loader--animate'); //анимация трех точек для кнопки
             $.ajax({
                     type: 'post',
@@ -69,11 +71,11 @@ $(document).ready(function () {
                     data: $('#form-nostadndatd').serializeArray()
                 }
             )
-            .done(function (data) {
-                if (data['code'] == 1) {
-                    $('#formPanel').html($('#thx').html());
-                }
-            })
+                .done(function (data) {
+                    if (data['code'] == 1) {
+                        $('#formPanel').html($('#thx').html());
+                    }
+                })
 
         }
     });
@@ -115,6 +117,7 @@ $(document).ready(function () {
         });
     });
 
+    //анимация для параметров заявки
     $('.bth__inp-block.long textarea').on('focus', function () {
         $(this).closest('.bth__inp-block.long').addClass('active');
     });

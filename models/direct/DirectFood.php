@@ -9,14 +9,15 @@ use Yii;
 /**
  * This is the model class for table "direct_food".
  *
- * @property int $direct_id
- * @property int $food_id
+ * @property int    $direct_id
+ * @property int    $food_id
  *
- * @property Food $food
+ * @property Food   $food
  * @property Direct $direct
  */
 class DirectFood extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -46,7 +47,7 @@ class DirectFood extends \yii\db\ActiveRecord
     {
         return [
             'direct_id' => 'Direct ID',
-            'food_id' => 'Food ID',
+            'food_id'   => 'Food ID',
         ];
     }
 
@@ -65,4 +66,5 @@ class DirectFood extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Direct::className(), ['id' => 'direct_id']);
     }
+
 }

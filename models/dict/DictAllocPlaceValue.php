@@ -7,25 +7,27 @@ use Yii;
 /**
  * This is the model class for table "dict_alloc_place_value".
  *
- * @property int $id
- * @property string $name
- * @property string $description
- * @property int $place
- * @property bool $active
- * @property string $date_create
- * @property bool $trash
- * @property int $updated
- * @property int $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
- * @property string $name_eng
- * @property string $description_eng
+ * @property int                $id
+ * @property string             $name
+ * @property string             $description
+ * @property int                $place
+ * @property bool               $active
+ * @property string             $date_create
+ * @property bool               $trash
+ * @property int                $updated
+ * @property int                $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
+ * @property string             $name_eng
+ * @property string             $description_eng
  * @property DictAllocPlaceType $type
  */
 class DictAllocPlaceValue extends \yii\db\ActiveRecord
 {
+
     public function getType()
     {
         return $this->hasOne(DictAllocPlaceType::className(), ['id' => 'place']);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -67,17 +69,18 @@ class DictAllocPlaceValue extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'place' => 'Place',
-            'active' => 'Active',
-            'date_create' => 'Date Create',
-            'trash' => 'Trash',
-            'updated' => 'Updated',
-            'th_updated' => 'признак обновления записи, используется для построения таблицы кэша отелей на ТХ',
-            'name_eng' => 'Name Eng',
+            'id'              => 'ID',
+            'name'            => 'Name',
+            'description'     => 'Description',
+            'place'           => 'Place',
+            'active'          => 'Active',
+            'date_create'     => 'Date Create',
+            'trash'           => 'Trash',
+            'updated'         => 'Updated',
+            'th_updated'      => 'признак обновления записи, используется для построения таблицы кэша отелей на ТХ',
+            'name_eng'        => 'Name Eng',
             'description_eng' => 'Description Eng',
         ];
     }
+
 }

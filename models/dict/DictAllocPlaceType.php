@@ -7,22 +7,24 @@ use Yii;
 /**
  * This is the model class for table "dict_alloc_place_type".
  *
- * @property int $id
- * @property string $name
- * @property bool $active
- * @property string $date_create
- * @property bool $trash
- * @property int $updated
- * @property int $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
- * @property string $name_eng
+ * @property int      $id
+ * @property string   $name
+ * @property bool     $active
+ * @property string   $date_create
+ * @property bool     $trash
+ * @property int      $updated
+ * @property int      $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
+ * @property string   $name_eng
  * @property Values[] $values
  */
 class DictAllocPlaceType extends \yii\db\ActiveRecord
 {
+
     public function getValues()
     {
         return $this->hasMany(DictAllocPlaceValue::className(), ['place' => 'id']);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -63,14 +65,15 @@ class DictAllocPlaceType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'active' => 'Active',
+            'id'          => 'ID',
+            'name'        => 'Name',
+            'active'      => 'Active',
             'date_create' => 'Date Create',
-            'trash' => 'Trash',
-            'updated' => 'Updated',
-            'th_updated' => 'признак обновления записи, используется для построения таблицы кэша отелей на ТХ',
-            'name_eng' => 'Name Eng',
+            'trash'       => 'Trash',
+            'updated'     => 'Updated',
+            'th_updated'  => 'признак обновления записи, используется для построения таблицы кэша отелей на ТХ',
+            'name_eng'    => 'Name Eng',
         ];
     }
+
 }
