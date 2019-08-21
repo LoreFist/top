@@ -74,7 +74,7 @@ class DictController extends \yii\web\Controller
             }
 
             return $this->renderPartial(
-                '@app/views/request/partial/extend_city_select_option', [
+                '@app/views/request/partial/extend/city_select_option', [
                     'items' => $items,
                 ]
             );

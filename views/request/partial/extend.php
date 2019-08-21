@@ -25,17 +25,17 @@ $this->registerJsFile(
         <div class="tour-selection-wrap-in tour-selection-wrap-flex">
 
             <?php echo $this->context->renderPartial(
-                'partial/extend_datepicker',
+                'partial/extend/datepicker',
                 ['model' => $model, 'form' => $form]
             ); ?>
             <?php echo $this->context->renderPartial(
-                'partial/extend_daystay', ['model' => $model, 'form' => $form]
+                'partial/extend/daystay', ['model' => $model, 'form' => $form]
             ); ?>
             <?php echo $this->context->renderPartial(
-                'partial/extend_guests', ['model' => $model, 'form' => $form]
+                'partial/extend/guests', ['model' => $model, 'form' => $form]
             ); ?>
             <?php echo $this->context->renderPartial(
-                'partial/extend_price', ['model' => $model, 'form' => $form]
+                'partial/extend/price', ['model' => $model, 'form' => $form]
             ); ?>
 
         </div>
@@ -61,22 +61,22 @@ $this->registerJsFile(
             <div class="tour-selection-wrap-in tour-selection-wrap-flex">
                 <?php $data_id = 0; ?>
                 <?php echo $this->context->renderPartial(
-                    'partial/extend_country',
+                    'partial/extend/country',
                     ['model'              => $model, 'form' => $form,
                      'items_dict_country' => $items_dict['country'],
                      'data_id'            => $data_id]
                 ); ?>
                 <?php echo $this->context->renderPartial(
-                    'partial/extend_city',
+                    'partial/extend/city',
                     ['model' => $model, 'form' => $form, 'data_id' => $data_id]
                 ); ?>
                 <?php echo $this->context->renderPartial(
-                    'partial/extend_departure',
+                    'partial/extend/departure',
                     ['model'            => $model, 'form' => $form,
                      'items_city_deprt' => $items_dict['city_deprt'],
                      'data_id'          => $data_id]
                 ); ?>
-                <?php echo $this->context->renderPartial('partial/extend_hotel',[
+                <?php echo $this->context->renderPartial('partial/extend/hotel',[
                     'model'    => $model,
                     'form'     => $form,
                     'items_dict' => $items_dict,
@@ -91,23 +91,23 @@ $this->registerJsFile(
             <div class="tour-selection-wrap-in tour-selection-wrap-flex js-show-added-field js-hide-dell-field-<?= $data_id ?>"
                  style="display: none">
                 <?php echo $this->context->renderPartial(
-                    'partial/extend_country',
+                    'partial/extend/country',
                     ['model'              => $model, 'form' => $form,
                      'items_dict_country' => $items_dict['country'],
                      'data_id'            => $data_id]
                 ); ?>
                 <?php echo $this->context->renderPartial(
-                    'partial/extend_city',
+                    'partial/extend/city',
                     ['model' => $model, 'form' => $form, 'data_id' => $data_id]
                 ); ?>
                 <?php echo $this->context->renderPartial(
-                    'partial/extend_departure',
+                    'partial/extend/departure',
                     ['model'            => $model, 'form' => $form,
                      'items_city_deprt' => $items_dict['city_deprt'],
                      'data_id'          => $data_id
                     ]
                 ); ?>
-                <?php echo $this->context->renderPartial('partial/extend_hotel',[
+                <?php echo $this->context->renderPartial('partial/extend/hotel',[
                     'model'    => $model,
                     'form'     => $form,
                     'items_dict' => $items_dict,
@@ -122,23 +122,23 @@ $this->registerJsFile(
             <div class="tour-selection-wrap-in tour-selection-wrap-flex js-show-added-field js-hide-dell-field-<?= $data_id ?>"
                  style="display: none">
                 <?php echo $this->context->renderPartial(
-                    'partial/extend_country',
+                    'partial/extend/country',
                     ['model'              => $model, 'form' => $form,
                      'items_dict_country' => $items_dict['country'],
                      'data_id'            => $data_id]
                 ); ?>
                 <?php echo $this->context->renderPartial(
-                    'partial/extend_city',
+                    'partial/extend/city',
                     ['model' => $model, 'form' => $form, 'data_id' => $data_id]
                 ); ?>
-                <?php echo $this->context->renderPartial('partial/extend_departure',[
+                <?php echo $this->context->renderPartial('partial/extend/departure',[
                     'model'            => $model,
                     'form'             => $form,
                     'items_city_deprt' => $items_dict['city_deprt'],
                     'data_id'          => $data_id,
                 ]); ?>
 
-                <?php echo $this->context->renderPartial('partial/extend_hotel',[
+                <?php echo $this->context->renderPartial('partial/extend/hotel',[
                     'model'    => $model,
                     'form'     => $form,
                     'items_dict' => $items_dict,
@@ -151,13 +151,13 @@ $this->registerJsFile(
         <div class=" js-types-search-hotel-blocks" style="display: none">
             <div class="tour-selection-wrap-in tour-selection-wrap-flex ">
                 <?php echo $this->context->renderPartial(
-                    'partial/extend_spechotel_city',
+                    'partial/extend/spechotel/city',
                     ['model'            => $model, 'form' => $form,
                      'items_city_deprt' => $items_dict['city_deprt'],
                      'data_id'          => 4]
                 ); ?>
                 <?php echo $this->context->renderPartial(
-                        'partial/extend_spechotel_food',
+                        'partial/extend/spechotel/food',
                         ['food' => $items_dict['food'], 'model' => $model,
                          'form' => $form,
                          'data_id' => $data_id]); ?>
@@ -166,7 +166,7 @@ $this->registerJsFile(
             <div class="tour-selection-wrap">
                 <?php $data_id = 0; ?>
                 <div data-tour-row="<?= $data_id ?>" class="tour-selection-wrap-in tour-selection-wrap-flex ">
-                    <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel',['data_id'=>$data_id]); ?>
+                    <?php echo $this->context->renderPartial('partial/extend/spechotel/addhotel',['data_id'=>$data_id]); ?>
                     <span class="tour-selection-plus hide-1023 js-add-spechotel" data_id=<?= $data_id ?>><i class="fas fa-plus"></i></span>
                 </div>
 
@@ -175,7 +175,7 @@ $this->registerJsFile(
                      class="tour-selection-wrap-in tour-selection-wrap-flex tour-selection-wrap-in--hidden js-show-added-spechotel js-hide-dell-spechotel-<?= $data_id ?>"
                      style="display:none;"
                 >
-                    <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel',['data_id'=>$data_id]); ?>
+                    <?php echo $this->context->renderPartial('partial/extend/spechotel/addhotel',['data_id'=>$data_id]); ?>
                     <span class=" tour-selection-plus js-del-spechotel" data_id=<?= $data_id ?>><i class="fas fa-minus"></i></span>
                 </div>
 
@@ -184,7 +184,7 @@ $this->registerJsFile(
                      class="tour-selection-wrap-in tour-selection-wrap-flex tour-selection-wrap-in--hidden js-show-added-spechotel js-hide-dell-spechotel-<?= $data_id ?>"
                      style="display:none;"
                 >
-                    <?php echo $this->context->renderPartial('partial/extend_spechotel_addhotel',['data_id'=>$data_id]); ?>
+                    <?php echo $this->context->renderPartial('partial/extend/spechotel/addhotel',['data_id'=>$data_id]); ?>
                     <span class=" tour-selection-plus js-del-spechotel" data_id=<?= $data_id ?>><i class="fas fa-minus"></i></span>
                 </div>
             </div>
