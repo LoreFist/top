@@ -8,7 +8,7 @@ use app\models\direct\DirectCategory;
 use app\models\direct\DirectFood;
 use app\models\direct\DirectKids;
 use app\models\direct\DirectOther;
-use app\models\direct\DirectplaceValue;
+use app\models\direct\DirectPlaceValue;
 use Yii;
 
 /**
@@ -77,7 +77,7 @@ class Direct extends \yii\db\ActiveRecord
 
     public function getplacevalues()
     {
-        return $this->hasMany(DirectplaceValue::className(), ['direct_id' => 'id']);
+        return $this->hasMany(DirectPlaceValue::className(), ['direct_id' => 'id']);
     }
 
     /**

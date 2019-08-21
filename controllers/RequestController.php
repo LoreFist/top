@@ -157,7 +157,7 @@ class RequestController extends \yii\web\Controller
                     $consultant = Consultant::findOne(Yii::$app->params['defaultConsultant']);
 
 
-                    if (count($dictCountry) != 0) {
+                    if (count($dictCountry) > 0) {
                         $model->consultant_id = $consultant->id;
                         $model->save(false);
 

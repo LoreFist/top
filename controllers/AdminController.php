@@ -10,14 +10,17 @@ use yii\data\ActiveDataProvider;
 class AdminController extends \yii\web\Controller
 {
 
+    public function actionView($id){
+        return $this->actionIndex($id);
+    }
+
     /**
      * Отображение в виде бутсрап таблицы всех заявок
      *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id=null)
     {
-
         $query = Request::find()
             ->joinWith(
                 [
@@ -36,6 +39,8 @@ class AdminController extends \yii\web\Controller
                 ]
             )
             ->orderBy(['Request.id' => SORT_DESC]);
+        if(isset($id) AND $id != null)
+            $query->andWhere('Request.id='.$id);
 
         $columns = [
             [
@@ -401,25 +406,4 @@ class AdminController extends \yii\web\Controller
             ['dataProvider' => $dataProvider, 'columns' => $columns]
         );
     }
-
-    /**
-     * Отоборажение конкретной заявки
-     *
-     * @param  string  $id
-     *
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        $this->layout = 'admin';
-
-        return $this->render(
-            'view',
-            [
-                'model' => Request::findOne($id),
-            ]
-        );
-    }
-
 }
