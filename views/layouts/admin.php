@@ -27,12 +27,12 @@ use yii\widgets\Breadcrumbs;
         Breadcrumbs::widget(
             [
                 'homeLink' => [
-                    'label' => Yii::t('yii', 'Admin'),
+                    'label' => Yii::t('yii', 'Все заявки'),
                     'url'   => Yii::$app->homeUrl.'admin',
                     'class' => 'breadcrumb-item',
                 ],
                 'links'    => [
-                    ['label' => Yii::t('yii', 'Consultant'), 'url' => Yii::$app->homeUrl.'admin/consultant', 'class' => 'breadcrumb-item'],
+                    ['label' => Yii::t('yii', 'Консультанты'), 'url' => Yii::$app->homeUrl.'admin/consultant', 'class' => 'breadcrumb-item'],
                 ],
             ]
         )
