@@ -57,7 +57,8 @@ class DictCity extends \yii\db\ActiveRecord
     }
 
     /**
-     * по ид получаем город
+     * по ид страны получаем названия Отеля
+     * условие выяснилось после первого теста, куратор сказал нужно в селекте "города" выводить информацию из "названий отелей"
      *
      * @param $id
      *
@@ -65,11 +66,12 @@ class DictCity extends \yii\db\ActiveRecord
      */
     public static function getDictCity($id)
     {
-        return DictCity::find()
+        return DictResort::find()
             ->select('id, name')
             ->where(['active' => true])
             ->andWhere(['trash' => false])
             ->andWhere(['country' => $id])
+            ->orderBy(['name' => SORT_ASC])
             ->all();
     }
 

@@ -11,7 +11,17 @@ $(document).ready(function () {
 
     function setLabelParamHotel(id) { //отображение кол-ва параметров отеля
         var _countParamHotel = $('input[name*="[paramhotel][' + id + ']"]input[type!="hidden"]').length;
-        var _countCheckedParamHotel = $('input[name*="[paramhotel][' + id + ']"]input[type!="hidden"]input:checked').length;
+        var _countCheckedParamHotel = $('input[name*="[paramhotel][' + id + ']"]' +
+            'input[value!="any"]' + //куратор сказал что дефолтные значения не должны учитываться, убираем категория "любая категория"
+            'input[value!="ALL"]'+ //убираем питание "любое"
+            'input[type!="hidden"]' +
+            'input:checked').length;
+
+        //убираем рейтинг "не важно"
+        var _checkRatingParamHotel = $('input[name*="[paramhotel][' + id + '][rating]"]'+'input[value="1"]'+'input:checked').length
+
+        _countCheckedParamHotel = _countCheckedParamHotel - _checkRatingParamHotel;
+
         $('.param-hotel-' + id).html(_countCheckedParamHotel + ' / ' + _countParamHotel + ' параметров');
         $('.param-hotel-lbl-' + id).addClass('active');
     }

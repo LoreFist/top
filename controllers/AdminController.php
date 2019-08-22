@@ -32,7 +32,7 @@ class AdminController extends \yii\web\Controller
             )
             ->with(
                 [
-                    'directs.dictcountry', 'directs.dictcity', 'directs.dictcitydeparture',
+                    'directs.dictcountry', 'directs.dictresort', 'directs.dictcitydeparture',
                     'directs.placevalues.dictplacevalue', 'directs.placevalues.dictplacevalue.type',
                     'city', 'locations.location', 'locations.location.resort0', 'locations.location.cat0',
                     'locations.location.resort0.country0', 'citydeparture',
@@ -69,8 +69,8 @@ class AdminController extends \yii\web\Controller
                                 $view .= ' - ';
                             }
 
-                            if ($direct->city_id != '' AND isset($direct->dictcity)) {
-                                $view .= ' | '.$direct->dictcity->name;
+                            if ($direct->city_id != '' AND isset($direct->dictresort)) {
+                                $view .= ' | '.$direct->dictresort->name;
                             } else {
                                 $view .= ' | - ';
                             }

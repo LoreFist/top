@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\models\dict\DictCity;
 use app\models\dict\DictCountry;
+use app\models\dict\DictResort;
 use app\models\direct\DirectCategory;
 use app\models\direct\DirectFood;
 use app\models\direct\DirectKids;
@@ -21,10 +22,10 @@ use Yii;
  * @property int                 $city_departure_id
  * @property int                 $hotel_rating_id
  * @property DictCountry         $dictCountry
- * @property DictCity            $dictCity
+ * @property DictResort          $dictresort
  * @property DirectCategory[]    $categorys
  * @property DirectFood[]        $foods
- * @property DirectplaceValue[] $placevalues
+ * @property DirectplaceValue[]  $placevalues
  * @property Rating              $rating
  * @property DirectKids[]        $kids
  * @property DirectOther[]       $other
@@ -60,9 +61,9 @@ class Direct extends \yii\db\ActiveRecord
         return $this->hasOne(DictCountry::className(), ['id' => 'country_id']);
     }
 
-    public function getDictcity()
+    public function getDictresort()
     {
-        return $this->hasOne(DictCity::className(), ['id' => 'city_id']);
+        return $this->hasOne(DictResort::className(), ['id' => 'city_id']);
     }
 
     public function getCategorys()
