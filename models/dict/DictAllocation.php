@@ -36,8 +36,8 @@ use Yii;
  * @property int                $rooms_kind_number Количество типов номеров
  * @property int                $blocks_number     Количество корпусов в отеле
  * @property DictAllocationType $type
- * @property DictResort         $resort0
- * @property DictAlloccat       $cat0
+ * @property DictResort         $dictresort
+ * @property DictAlloccat       $dictcat
  */
 class DictAllocation extends \yii\db\ActiveRecord
 {
@@ -47,13 +47,13 @@ class DictAllocation extends \yii\db\ActiveRecord
         return $this->hasOne(DictAllocationType::className(), ['id' => 'allocation_type']);
     }
 
-    public function getResort0()
+    public function getDictresort()
     {
         return $this->hasOne(DictResort::className(), ['id' => 'resort']);
 
     }
 
-    public function getCat0()
+    public function getDictcat()
     {
         return $this->hasOne(DictAlloccat::className(), ['id' => 'cat']);
     }

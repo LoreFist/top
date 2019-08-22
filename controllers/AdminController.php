@@ -34,8 +34,8 @@ class AdminController extends \yii\web\Controller
                 [
                     'directs.dictcountry', 'directs.dictresort', 'directs.dictcitydeparture',
                     'directs.placevalues.dictplacevalue', 'directs.placevalues.dictplacevalue.type',
-                    'city', 'locations.location', 'locations.location.resort0', 'locations.location.cat0',
-                    'locations.location.resort0.country0', 'citydeparture',
+                    'city', 'locations.location', 'locations.location.dictresort', 'locations.location.dictcat',
+                    'locations.location.dictresort.dictcountry', 'citydeparture',
                 ]
             )
             ->orderBy(['Request.id' => SORT_DESC]);
@@ -89,21 +89,21 @@ class AdminController extends \yii\web\Controller
                     } elseif ($model->type == 'type2') { //если заявка создана из конкретного отеля
                         foreach ($model->locations as $key => $locations) {
                             $view .= '<b>'.($key + 1).'.</b> ';
-                            if (isset($locations->location->resort0->country0)) {
-                                $view .= $locations->location->resort0->country0->name;
+                            if (isset($locations->location->dictresort->dictcountry)) {
+                                $view .= $locations->location->dictresort->dictcountry->name;
                             } else {
                                 $view .= ' - ';
                             }
 
 
-                            if (isset($locations->location->resort0)) {
-                                $view .= ' | '.$locations->location->resort0->name;
+                            if (isset($locations->location->dictresort)) {
+                                $view .= ' | '.$locations->location->dictresort->name;
                             } else {
                                 $view .= ' | - ';
                             }
 
                             if (isset($locations->location)) {
-                                $view .= ' | '.$locations->location->name.' '.$locations->location->cat0->name;
+                                $view .= ' | '.$locations->location->name.' '.$locations->location->dictcat->name;
                             } else {
                                 $view .= ' | - ';
                             }

@@ -368,12 +368,12 @@ class RequestController extends \yii\web\Controller
 
                                     $dictLocation = DictAllocation::find()
                                         ->where([DictAllocation::tableName().'.id'=>$location_id])
-                                        ->joinWith(['cat0','resort0','resort0.country0'])
+                                        ->joinWith(['dictcat','dictresort','dictresort.dictcountry'])
                                         ->one();
 
-                                    $dictCat = $dictLocation->cat0->id;
-                                    $dictCountry = $dictLocation->resort0->country0->id;
-                                    $dictResort = $dictLocation->resort0->id;
+                                    $dictCat = $dictLocation->dictcat->id;
+                                    $dictCountry = $dictLocation->dictresort->dictcountry->id;
+                                    $dictResort = $dictLocation->dictresort->id;
 
                                     $consultant = Consultant::find()
                                         ->joinWith(['consultantcountries','consultantcats'])

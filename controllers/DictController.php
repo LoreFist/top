@@ -39,13 +39,13 @@ class DictController extends \yii\web\Controller
                         'type'             => function ($q) {
                             $q->select(DictAllocationType::tableName().'.name');
                         },
-                        'resort0'          => function ($q) {
+                        'dictresort'          => function ($q) {
                             $q->select([DictResort::tableName().'.id', DictResort::tableName().'.name', DictResort::tableName().'.country']);
                         },
-                        'resort0.country0' => function ($q) {
+                        'dictresort.dictcountry' => function ($q) {
                             $q->select([DictCountry::tableName().'.id', DictCountry::tableName().'.name']);
                         },
-                        'cat0'             => function ($q) {
+                        'dictcat'             => function ($q) {
                             $q->select([DictAlloccat::tableName().'.id', DictAlloccat::tableName().'.name']);
                         },
                     ]

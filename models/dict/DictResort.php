@@ -18,7 +18,7 @@ use Yii;
  * @property int              $updated
  * @property int              $th_updated признак обновления записи, используется для построения таблицы кэша отелей на ТХ
  * @property DictAllocation[] $dictAllocations
- * @property DictCountry      $country0
+ * @property DictCountry      $dictcountry
  */
 class DictResort extends \yii\db\ActiveRecord
 {
@@ -34,7 +34,7 @@ class DictResort extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCountry0()
+    public function getDictcountry()
     {
         return $this->hasOne(DictCountry::className(), ['id' => 'country']);
     }
