@@ -104,6 +104,9 @@ $(document).ready(function () {
 
             buttonObj.addClass('bth__loader--animate'); //анимация трех точек для кнопки
 
+            if($('#departure_spechotel').html() == 'без перелета')
+                $('select[name*="city_departure_id"]').val('');
+
             var _form_data = $('#form-extend').serializeArray();
 
             for (var i = 0; i < _countTourPach; i++) {//добавляем в форму данных направления из турпакета

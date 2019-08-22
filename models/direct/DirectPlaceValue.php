@@ -15,7 +15,7 @@ use Yii;
  *
  * @property Direct              $direct
  */
-class DirectplaceValue extends \yii\db\ActiveRecord
+class DirectPlaceValue extends \yii\db\ActiveRecord
 {
 
     public function getDictplacevalue()

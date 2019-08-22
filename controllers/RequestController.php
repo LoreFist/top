@@ -17,7 +17,7 @@ use app\models\direct\DirectCategory;
 use app\models\direct\DirectFood;
 use app\models\direct\DirectKids;
 use app\models\direct\DirectOther;
-use app\models\direct\DirectplaceValue;
+use app\models\direct\DirectPlaceValue;
 use app\models\Food;
 use app\models\ForKids;
 use app\models\MailSchedule;
@@ -28,7 +28,6 @@ use app\models\RequestFood;
 use app\models\RequestLocation;
 use Yii;
 use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
@@ -351,7 +350,7 @@ class RequestController extends \yii\web\Controller
 
                             if ($paramsHotel[$i]['placetype'][0] != 'any') {
                                 foreach ($paramsHotel[$i]['placetype'] as $place) {
-                                    $newplace                 = new DirectplaceValue();
+                                    $newplace                 = new DirectPlaceValue();
                                     $newplace->placevalue_id = (int)$place;
                                     $newplace->direct_id      = $directModel[$i]->id;
                                     $newplace->save();
